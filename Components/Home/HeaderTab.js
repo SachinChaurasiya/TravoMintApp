@@ -17,7 +17,7 @@ import {
     import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
     import COLORS from '../../assets/consts/colors';
     import WelcomeSection from './Header/WelcomeSection'
-
+    import {DrawerActions} from '@react-navigation/native';
 
     // image
 // import flightlofo from '../../assets/Image/2T.png'
@@ -27,7 +27,7 @@ import Hotel from '../../assets/Image/Hotel.png'
 import Transfer from '../../assets/Image/Transfer.png'
 
 const {width} = Dimensions.get('screen');
-const HeaderTab = ({navigation}) => {
+const HeaderTab = (props) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white,}}>
@@ -42,7 +42,7 @@ const HeaderTab = ({navigation}) => {
             <View style={style.inputContainer}>
               
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress = {()=> props.navigation.navigate('FlightSearch')}>
               <View style={style.iconContainer}>
                  <View style={{backgroundColor:"#195fb9",width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Flight} style={{width:20, height: 20,}}/>
@@ -71,11 +71,13 @@ const HeaderTab = ({navigation}) => {
             </View>
           </View>
           <View style={{flexDirection: 'row',justifyContent: 'space-between',marginTop:25}}>
+            <TouchableOpacity  onPress={()=> props.navigation.dispatch(DrawerActions.openDrawer())}>
             <Icon name="sort" size={28} color={COLORS.primary} />
+            </TouchableOpacity>
               <Icon name="notifications-none" size={28} color={COLORS.primary} />
               </View>
         </ImageBackground>
-         <Text style={style.sectionTitle}><WelcomeSection/></Text>
+         {/* <Text style={style.sectionTitle}><WelcomeSection/></Text> */}
     </SafeAreaView>
   );
 };

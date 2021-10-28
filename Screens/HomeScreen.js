@@ -3,11 +3,16 @@ import {View, StyleSheet,ScrollView} from 'react-native';
 import HeaderTab from '../Components/Home/HeaderTab';
 import BestOffer from '../Components/Home/BestOffer';
 import Categories from "../Components/Home/Categories";
-const HomeScreen = () => {
+import WelcomeSection from '../Components/Home/Header/WelcomeSection';
+import Cards from '../CardsData'
+
+const HomeScreen = (props) => {
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-      <HeaderTab/>
+      <HeaderTab {...props}/>
+      <WelcomeSection {...props}/>
       <BestOffer/>
+      <Cards />
       <Categories/>
     </ScrollView>
   );

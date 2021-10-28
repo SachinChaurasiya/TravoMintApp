@@ -167,7 +167,7 @@ const Cards = () => {
         <>
        
            <View>
-               <View style= {{flexDirection:"row"}}>
+               <View style= {{flexDirection:"row",alignItems: 'center',}}>
                     <View>
                             <Text style = {styles.text}>
                                 POPULAR DEALS
@@ -175,8 +175,8 @@ const Cards = () => {
                     </View>
                <View style = {{marginTop:12 , marginLeft:4}}>
                     <Image
-                         source={require('./assets/Image/Flight1.png')}
-                         style = {{width:30 , height:30 , resizeMode:'contain'}} />
+                         source={require('./assets/Image/blueFlight.png')}
+                         style = {{width:30 , height:30 , resizeMode:'contain',marginLeft:10}} />
                </View>
                </View>
 
@@ -211,14 +211,15 @@ const Cards = () => {
 const styles =  StyleSheet.create({
     text:{
         marginTop:10,
-        marginLeft:16,
-        fontSize:25,
+        marginLeft:30,
+        fontSize:20,
         color:'#195FB9'
     },
     card:{
         justifyContent:'center',
         height:250,
         width:350,
+        elevation:2,
         margin:40,
         borderRadius:20,
         backgroundColor: 'whitesmoke',

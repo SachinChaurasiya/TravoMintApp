@@ -6,19 +6,38 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-import Tab from './Tabs/Tab'; 
+// Components
+import DrawerScreen from './Tabs/DrawerScreen'
+import Flightsearch from './Screens/FlightSearch';
+import Flightsearchresult from './Screens/FlightSearchResult';
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+             <StatusBar backgroundColor="#195fb9"/>
       <NavigationContainer>
        <Stack.Navigator>
-         <Stack.Screen name="Home" options={{
+         {/* <Stack.Screen name="Home" options={{
            headerShown:false,
-         }} component={Tab} />
+         }} component={Tab} /> */}
+
+         <Stack.Screen name="Root" options={{headerShown:false}} component={DrawerScreen}/>
+         <Stack.Screen name="FlightSearch" options={{headerTitle:"Book Your Flight",headerStyle: {
+            backgroundColor: '#195fb9',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },}} headerStyle={{backgroundColor:"black"}} component={Flightsearch}/>
+
+         <Stack.Screen name="FlightSearchResult" options={{headerTitle:"Flight Search" , headerStyle:{
+          backgroundColor:"#195fb9" 
+          },
+        headerTintColor:"#fff"}} component={Flightsearchresult}
+         />
       </Stack.Navigator>
       </NavigationContainer>
-      </View>
+      </SafeAreaView>
   );
 }
 

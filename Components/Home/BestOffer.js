@@ -43,12 +43,12 @@ const BestOffer = () => {
                      </Text>
                   </View>
                   <View style = {{
-                      marginTop:46,
+                      marginTop:6,
                       marginLeft:5
                   }}>
                       <Image 
                       source ={require('../../assets/Image/Offersblue.png')}
-                      style = {{resizeMode:"contain" , width:30 , height:30}}
+                      style = {{resizeMode:"contain" , width:30 , height:30,marginLeft:10 , marginTop:25}}
                       />
                   </View>
                 </View>
@@ -80,7 +80,7 @@ const BestOffer = () => {
                 style={{marginLeft:10}}
                 />
             </View>
-            <Cards/>
+            <Cards />
         </View>
     )
 }
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     text:{
         marginTop:40,
         marginLeft:30,
-        fontSize:25,
+        fontSize:20,
         color:'#195FB9'
     },
   

@@ -8,10 +8,10 @@ const Height=Dimensions.get('window').height
 
 
 
-const WelcomeSection = () => {
+const WelcomeSection = (props) => {
     return(
         <>
-          <View>
+          <View style={{marginVertical:80}}>
                <View>
                    <View style={styles.Background}>
                          <View style = {styles.textDiv}>
@@ -21,9 +21,9 @@ const WelcomeSection = () => {
                              </View>
                              <View style ={{marginTop:5 , flexDirection:'row'}}>
                                  <Text style = {{marginLeft:4 , color:"white"}}>
-                                     Use Code:
+                                     Use Code : 
                                  </Text>
-                                 <Text style = {{color:'#f15b2F', fontWeight:'bold'}}>
+                                 <Text style = {{color:'#f15b2F', fontWeight:'bold', marginLeft:5}}>
                                      Welcome
                                  </Text>
                              </View>
@@ -45,13 +45,13 @@ const WelcomeSection = () => {
                    <Text style = {{fontWeight:'bold'}}>
                        Flights
                    </Text>
-                 <View style ={{flexDirection:'row' , marginTop:5}}>
+                 <View style ={{flexDirection:'row' , marginTop:5,alignItems: 'center'}}>
                    <View >
                        <Text>
                            Upto 12% Off
                        </Text>
                    </View>
-                            <View>
+                            <View style={{marginLeft:5}}>
                                <FontAwesome5
                                  name="chevron-right"
                                  color="darkblue"
@@ -75,13 +75,13 @@ const WelcomeSection = () => {
                    <Text style = {{fontWeight:'bold'}}>
                        Hotel
                     </Text>
-                 <View style ={{flexDirection:'row' , marginTop:5}}>
+                 <View style ={{flexDirection:'row' , marginTop:5,alignItems: 'center'}}>
                    <View >
                        <Text>
                            Upto 10% Off
                        </Text>
                    </View>
-                            <View>
+                            <View style={{marginLeft:5}}>
                                <FontAwesome5
                                  name="chevron-right"
                                  color="darkblue"
@@ -106,13 +106,13 @@ const WelcomeSection = () => {
                    <Text style = {{fontWeight:'bold'}}>
                        Cars
                    </Text>
-                 <View style ={{flexDirection:'row' , marginTop:5}}>
+                 <View style ={{flexDirection:'row' , marginTop:5,alignItems: 'center'}}>
                    <View >
                        <Text>
                            Upto 5% Off
                        </Text>
                    </View>
-                            <View>
+                            <View style={{marginLeft:5}}>
                                <FontAwesome5
                                  name="chevron-right"
                                  color="darkblue"
@@ -126,7 +126,6 @@ const WelcomeSection = () => {
                
                
             </View>
-                       {/* <WelcomePromo/> */}
                    </View>
                </View>
           </View>

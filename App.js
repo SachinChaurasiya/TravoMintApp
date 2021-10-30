@@ -14,7 +14,7 @@ import Flightsearchresult from './Screens/FlightSearchResult';
 export default function App() {
   return (
     <SafeAreaView style={styles.container}>
-             <StatusBar backgroundColor="#195fb9"/>
+             <StatusBar backgroundColor="#fff"/>
       <NavigationContainer>
        <Stack.Navigator>
          {/* <Stack.Screen name="Home" options={{
@@ -31,7 +31,7 @@ export default function App() {
           },}} headerStyle={{backgroundColor:"black"}} component={Flightsearch}/>
 
          <Stack.Screen name="FlightSearchResult" options={{headerTitle:"Flight Search" , headerStyle:{
-          backgroundColor:"#195fb9" 
+          backgroundColor:"#f15b2f" 
           },
         headerTintColor:"#fff"}} component={Flightsearchresult}
          />

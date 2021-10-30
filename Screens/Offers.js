@@ -1,11 +1,11 @@
 import React from 'react';
-import {View, StyleSheet,Text,ScrollView} from 'react-native';
-
+import {View, StyleSheet,Text,ScrollView,Platform,Image} from 'react-native';
+import Offerheader from '../Components/Offers/Offerheader';
 const Offers = () => {
     return (
         <View style={styles.container}>
-            <Text>Offers</Text>
-        </View>
+            <Offerheader/>
+    </View>
     );
 }
 

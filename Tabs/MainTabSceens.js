@@ -1,12 +1,15 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import {ScrollView, View,Text,Pressable,TouchableOpacity} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import {DrawerActions} from '@react-navigation/native';
+
 
 // icons
 import Icons from 'react-native-vector-icons/Ionicons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import Octicons from 'react-native-vector-icons/Octicons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 // Components Screens
 import HomeScreen from '../Screens/HomeScreen';
 import NotificationsScreen from '../Screens/NotificationScreen';
@@ -20,7 +23,7 @@ const HomeStack = createStackNavigator();
 const HotelsStack = createStackNavigator();
 
 
-const MainTabScreens = () => (
+const MainTabScreens = (props) => (
     <Tab.Navigator
     activeColor="#fff"
     options={{
@@ -93,14 +96,26 @@ const HomeStackScreen = ({navigation}) => (
       </HotelsStack.Navigator> 
   )
 
-  const OfferStackScreen = ({navigation}) => (
+  const OfferStackScreen = ({navigation,props}) => (
     <HotelsStack.Navigator>
-        <HotelsStack.Screen name='Offer' options={{headerShown:false}} component={OfferScreen} />
+        <HotelsStack.Screen name='Offer' options={{
+          headerLeft:()=>(
+          <View>
+            <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
+            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}}/>
+            </TouchableOpacity>
+          </View>)}}component={OfferScreen} />
       </HotelsStack.Navigator> 
   )
 
   const MoreStackScreen = ({navigation}) => (
     <HotelsStack.Navigator>
-        <HotelsStack.Screen name='More' options={{headerShown:false}} component={MoreScreen} />
+        <HotelsStack.Screen name='More' options={{
+          headerLeft:()=>(
+          <View>
+            <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
+            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}}/>
+            </TouchableOpacity>
+          </View>)}} component={MoreScreen} />
       </HotelsStack.Navigator> 
   )

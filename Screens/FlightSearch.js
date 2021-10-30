@@ -276,7 +276,7 @@ const FlightForm = (props) =>{
 
             </View>
 
-            <View style={{flexDirection: 'row',justifyContent: 'space-between',margin:12}}>
+            {/* <View style={{flexDirection: 'row',justifyContent: 'space-between',margin:12}}>
                 <View style={{borderBottomWidth:1, borderBottomColor: '#ccc'}}>
             <Picker
               selectedValue={selectedValue}
@@ -301,7 +301,7 @@ const FlightForm = (props) =>{
              <Picker.Item label="First" value="First" />
           </Picker>
           </View>
-            </View>
+            </View> */}
                 <EBFClassbtnfunction/>
                 <AdultChildInfant/>
 
@@ -321,7 +321,7 @@ const EBFClassbtnfunction = () =>{
 
     return (
         <View>
-            <View>
+            <View style={{marginHorizontal:20,marginVertical:12}}>
                 <View style={styles.btn}>
                 <View>
             <Text><EBFClassbtn 
@@ -329,6 +329,14 @@ const EBFClassbtnfunction = () =>{
             btncolor="#195fb9" 
             textcolor="white"
             activetab={activetab}
+            setActiveTab={setActiveTab}/></Text>
+            </View>
+            <View>
+            <Text><EBFClassbtn
+             text="PremiumEconomy" 
+             btncolor="#195fb9" 
+             textcolor="white"
+             activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
             <View>
@@ -341,7 +349,7 @@ const EBFClassbtnfunction = () =>{
             </View>
             <View>
             <Text><EBFClassbtn
-             text="First Class" 
+             text="First" 
              btncolor="#195fb9" 
              textcolor="white"
              activetab={activetab}
@@ -364,7 +372,7 @@ const EBFClassbtn = (props) => {
         }}
         onPress={() => props.setActiveTab(props.text)}
         >
-            <Text style={{color: props.activetab === props.text?"white":"#195fb9",fontSize:15,fontWeight:'900'}}>{props.text}</Text>
+            <Text style={{color: props.activetab === props.text?"white":"#195fb9",fontSize:13,fontWeight:'900'}}>{props.text}</Text>
         </TouchableOpacity>
         </View>
     )
@@ -383,55 +391,55 @@ const AdultChildInfant = () =>{
                     <Text style={{marginBottom:10}}>Adult</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity activeOpacity={0.6}>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:10,marginRight:10,borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>1</Text>
+                    <View style={styles.adultNo}>
+                    <Text style={{paddingVertical:0}}>1</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:10, borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>2</Text>
+                    <View style={styles.adultNo}>
+                    <Text style={{paddingVertical:0}}>2</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center",marginLeft:10}}>
-                    <Text style={{padding:5}}>3</Text>
+                    <View style={styles.adultNo}>
+                    <Text style={{padding:0}}>3</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:10,paddingVertical:3}}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:5}}/>
+                    <View style={styles.AddNo}>
+                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:1}}/>
                     </View>
                     </TouchableOpacity>
                     </View>
                 </View>
 {/* child */}
-                <View style={{marginLeft:10}}>
+                <View style={{marginLeft:20}}>
                     <Text style={{marginBottom:10}}>Child</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:10,marginRight:10,borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>0</Text>
+                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:5,marginRight:10,borderRadius:8,justifyContent: "center"}}>
+                    <Text style={{paddingVertical:0}}>0</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:10, borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>1</Text>
+                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center"}}>
+                    <Text style={{paddingVertical:0}}>1</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
                     <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center",marginLeft:10}}>
-                    <Text style={{padding:5}}>2</Text>
+                    <Text style={{padding:0}}>2</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:10,paddingVertical:3}}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:5}}/>
+                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:5,paddingVertical:3}}>
+                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:1}}/>
                     </View>
                     </TouchableOpacity>
                     </View>
@@ -443,26 +451,26 @@ const AdultChildInfant = () =>{
                     <Text style={{marginBottom:10}}>Infant</Text>
                     <View style={{flexDirection:'row'}}>
                         <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:10,marginRight:10,borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>0</Text>
+                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:5,marginRight:10,borderRadius:8,justifyContent: "center"}}>
+                    <Text style={{paddingVertical:0}}>0</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:10, borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:5}}>1</Text>
+                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center"}}>
+                    <Text style={{paddingVertical:0}}>1</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
                     <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center",marginLeft:10}}>
-                    <Text style={{padding:5}}>2</Text>
+                    <Text style={{padding:0}}>2</Text>
                     </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:10,paddingVertical:3}}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:5}}/>
+                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:5,paddingVertical:3}}>
+                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:0}}/>
                     </View>
                     </TouchableOpacity>
                     </View>
@@ -507,6 +515,24 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:12,
         paddingLeft:20
+      },
+      adultNo:{
+        borderWidth:2,
+        alignItems: "center",
+         borderColor:'#195fb9',
+          paddingHorizontal:5,
+          marginRight:10,
+          borderRadius:8,
+          justifyContent: "center"
+      },
+      AddNo:{
+        borderWidth:2,
+        alignItems: "center",
+        justifyContent: "center",
+        borderColor:'#195fb9' ,
+         borderRadius:8,
+         paddingHorizontal:5,
+         paddingVertical:3
       }
 })
 

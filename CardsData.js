@@ -1,7 +1,7 @@
-import React from 'react'
-import { View , Text, StyleSheet,Dimensions , TouchableOpacity, Image , FlatList } from 'react-native'
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-
+import React from 'react';
+import { View , Text, StyleSheet,Dimensions , TouchableOpacity, Image , FlatList } from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import COLOR from './assets/consts/colors';
 
 
 const DATA = [
@@ -184,14 +184,14 @@ const Cards = () => {
                         marginLeft:20,
                         width: 220,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
                       <View style={{
                         marginTop:5,
                         marginLeft:20,
                         width: 160,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
             </View>
             <View>
@@ -213,7 +213,7 @@ const styles =  StyleSheet.create({
         marginTop:10,
         marginLeft:30,
         fontSize:20,
-        color:'#195FB9'
+        color:COLOR.secondary
     },
     card:{
         justifyContent:'center',
@@ -222,7 +222,7 @@ const styles =  StyleSheet.create({
         elevation:2,
         margin:40,
         borderRadius:20,
-        backgroundColor: 'whitesmoke',
+        backgroundColor: COLOR.whitesmoke,
         marginHorizontal:10,
     },
     separator: {

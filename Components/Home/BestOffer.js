@@ -1,6 +1,6 @@
 import React from'react'
 import { View, Text , Animated , FlatList, Image, StyleSheet,Dimensions } from 'react-native'
-import Cards from '../../CardsData';
+import COLOR from '../../assets/consts/colors'
 
 
 
@@ -21,7 +21,7 @@ const Data= [
 ]
 
 const Item =({ image }) => (
-    <View style = {{   shadowColor:'grey', shadowRadius:6  ,shadowOpacity:0.5 , justifyContent:'space-between' , paddingRight:20 , paddingLeft:10 ,borderRadius:10 }}>
+    <View style = {{   shadowColor:COLOR.grey, shadowRadius:6  ,shadowOpacity:0.5 , justifyContent:'space-between' , paddingRight:20 , paddingLeft:10 ,borderRadius:10 }}>
         <Image source={image} style = {{resizeMode:'contain',width:350 , height:200}} />
     </View>
 )
@@ -57,7 +57,7 @@ const BestOffer = () => {
                         marginLeft:20,
                         width: 200,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
                     <View>
                     <View style={{
@@ -65,7 +65,7 @@ const BestOffer = () => {
                         marginLeft:20,
                         width: 150,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
                     </View>
 
@@ -80,7 +80,6 @@ const BestOffer = () => {
                 style={{marginLeft:10}}
                 />
             </View>
-            <Cards />
         </View>
     )
 }
@@ -91,7 +90,7 @@ const styles = StyleSheet.create({
         marginTop:40,
         marginLeft:30,
         fontSize:20,
-        color:'#195FB9'
+        color:COLOR.secondary
     },
   
 })

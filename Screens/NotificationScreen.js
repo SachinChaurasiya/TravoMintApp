@@ -536,11 +536,13 @@
 
 import React from 'react';
 import {View, StyleSheet,Text} from 'react-native';
+import HotelForm from './Hotels';
 
 const Notificationscreen = () => {
   return (
-    <View>
-      <Text>Hello</Text>
+    <View style={{flex:1}}>
+      {/* <Text>Hello</Text> */}
+      <HotelForm/>
     </View>
   );
 }

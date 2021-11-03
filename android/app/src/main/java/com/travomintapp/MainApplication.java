@@ -28,6 +28,9 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 
+
+import com.BV.LinearGradient.LinearGradientPackage;
+
 public class MainApplication extends Application implements ReactApplication {
   private final ReactModuleRegistryProvider mModuleRegistryProvider = new ReactModuleRegistryProvider(
     new BasePackageList().getPackageList()
@@ -74,6 +77,15 @@ public class MainApplication extends Application implements ReactApplication {
       }
     }
   };
+
+
+  @Override
+protected List<ReactPackage> getPackages() {
+  return Arrays.<ReactPackage>asList(
+    new MainReactPackage(),
+    new LinearGradientPackage() // <---- and This! 
+  );
+}
 
   @Override
   public ReactNativeHost getReactNativeHost() {

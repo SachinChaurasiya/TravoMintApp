@@ -9,6 +9,7 @@ import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 import expo.modules.splashscreen.singletons.SplashScreen;
 import expo.modules.splashscreen.SplashScreenImageResizeMode;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainActivity extends ReactActivity {
   @Override
@@ -32,6 +33,14 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "main";
     }
+
+    @Override
+protected List<ReactPackage> getPackages() {
+  return Arrays.<ReactPackage>asList(
+    new MainReactPackage(),
+    new LinearGradientPackage() // <---- and This! 
+  );
+}
 
     @Override
     protected ReactActivityDelegate createReactActivityDelegate() {

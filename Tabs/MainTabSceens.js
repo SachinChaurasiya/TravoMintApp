@@ -43,11 +43,11 @@ const MainTabScreens = (props) => (
       }}
     />
     <Tab.Screen
-      name="Hotel"
+      name="Hotels"
       component={NotificationStackScreen}
       options={{
         headerShown:false,
-        tabBarLabel: 'Hotels',
+        tabBarLabel: 'Notification',
         // tabBarColor:"#f15b2f",
         tabBarIcon: ({ color }) => (
           <Octicons name="bell" color={color} size={26} />

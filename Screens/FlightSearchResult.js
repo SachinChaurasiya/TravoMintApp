@@ -1,25 +1,9 @@
-// import React from 'react';
-// import {View, StyleSheet,Text} from 'react-native';
-// import Notificationscreen from './NotificationScreen';
-
-// const Flightsearchresult = () => {
-//     return (
-//         <View style={styles.container}>
-//             <Notificationscreen/>
-//         </View>
-//     );
-// }
-
-// const styles = StyleSheet.create({container: {flex: 1,backgroundColor:"#fff"}});
-
-// export default Flightsearchresult;
-
-
 import React, { useState } from 'react'
 import { View , Text, FlatList , StyleSheet, Dimensions , Modal,Image ,  Alert , TouchableOpacity } from "react-native"
 import FlightData from '../FlightData'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-
+import * as Animatable from 'react-native-animatable';
+import Moment from 'moment';
 
 
 const WindowWidth = Dimensions.get('window').width
@@ -30,7 +14,7 @@ const WindowHeight = Dimensions.get('window').height
 
 const Cards = ( )=>{
 
-
+  const [activetab,setActiveTab] = useState("Go")
  
 
 const ConvertMinsToTime = ({data}) => {
@@ -39,7 +23,9 @@ const ConvertMinsToTime = ({data}) => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         return `${hours}h:${minutes}m`;
       }
-      const HeaderButtons = (props) =>{
+
+
+const HeaderButtons = (props) =>{
         return(
             <View>
             <TouchableOpacity activeOpacity={0.6} style={{
@@ -56,12 +42,13 @@ const ConvertMinsToTime = ({data}) => {
         )
     }
 
+    
 
 
     const Flight = ({Flight}) => {
     
         const [modalVisible, setModalVisible] = useState(false);
-    
+        const [date ,setDate ] = useState({name : Moment(Flight.inBound[0].depDate.split("T")[0])})
    
         return(
            <> 
@@ -69,11 +56,12 @@ const ConvertMinsToTime = ({data}) => {
                 <View style = {styles.card}>   
                          <View>
                             <Text style={{fontSize:15,marginLeft:4 , fontWeight:'bold'}}>{Flight.inBound[0].fromAirport}</Text>
-                            <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].depDate.split("T")[1]}</Text>
+                            <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].depDate.split("T")[1].substring(0, 5)}</Text>
                          </View>
                          <View style = {{flexDirection:'row' }}>
                              <Text style ={{fontWeight:'bold' , marginLeft:1 }}>
-                             {Flight.inBound[0].depDate.split("T")[0]}  
+                             {/* {Flight.inBound[0].depDate.split("T")[0]}   */}
+                             {/* {date.name.format('DD-MM-YYYY')} */}
                              </Text>
                          </View>
                        </View>
@@ -91,11 +79,12 @@ const ConvertMinsToTime = ({data}) => {
                     <View style ={styles.card}>
                                 <View>
                                 <Text style={{fontSize:15 , fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].toAirport}</Text>
-                                <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].reachDate.split("T")[1]}</Text>
+                                <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].reachDate.split("T")[1].substring(0, 5)}</Text>
                                </View>
                                <View style = {{flexDirection:'row' }}>
                                <Text style ={{fontWeight:'bold' }}>
-                             {Flight.inBound[0].depDate.split("T")[0]}
+                             {/* {Flight.inBound[0].depDate.split("T")[0]} */}
+                             {/* {date.name.format('DD-MM-YYYY')} */}
                              </Text>
                          </View>
                             </View>
@@ -103,15 +92,12 @@ const ConvertMinsToTime = ({data}) => {
             <View style = {styles.refundableDiv}>
                            <View style = {styles.shadowContainerStyle}>
                                <View style = {styles.InsideRefundable}>
-                                    <Text style= {{ fontWeight:"bold" , fontSize:15 }}>
-                                        Refundable
-                                    </Text>
                                     <View style= {{flexDirection:'row' , justifyContent:'space-between'  }}>
-                                    <Text style ={{  fontWeight:"bold" , fontSize:20 , marginTop:32}}>
+                                    <Text style ={{  fontWeight:"bold" , fontSize:20}}>
                                     {`₹ ${Flight.fare.grandTotal}`}0
                                     </Text>
                                     <TouchableOpacity onPress={() => setModalVisible(true)} style ={{flexDirection:'row'}} >
-                                         <Text  style ={{marginLeft:20 , color:"#f15b2f" , marginBottom:10, marginTop:32 ,fontWeight:"bold" , fontSize:15 , marginRight:5}}> Details
+                                         <Text  style ={{marginLeft:20 , color:"#f15b2f" , marginBottom:10 ,fontWeight:"bold" , fontSize:15 , marginRight:5}}> Details
                                         </Text>
                                         <View style ={styles.icon}>
                                             <FontAwesome5
@@ -123,6 +109,9 @@ const ConvertMinsToTime = ({data}) => {
                                         </TouchableOpacity>    
                                         </View>
                                </View>
+                               <Text style= {{ fontWeight:"bold" , fontSize:12,marginLeft:25,marginTop:10 }}>
+                                        Refundable
+                                    </Text>
                                {/* <View style ={{backgroundColor:'#195fb9' ,borderRadius:30 , marginLeft:100 , marginBottom:10, justifyContent:'center', alignItems:'center',height:40,width:150 , }}>
                                    <Text style = {{fontWeight:'bold', color:'white' , fontSize:20 }}>
                                        BOOK NOW
@@ -249,45 +238,29 @@ const ConvertMinsToTime = ({data}) => {
         )
     }
 
-    const [activetab,setActiveTab] = useState("Go")
-
-
     return(
         <View style = {styles.container}>
             <View style= {styles.contentDiv}>
-            <View style= {styles.btn}>
-            <View>
-            <Text><HeaderButtons 
-            text="Go"
-            btncolor="#195fb9" 
-            textcolor="white"
-            activetab={activetab}
-            setActiveTab={setActiveTab}/></Text>
-            </View>
-            <View>
-            <Text>
-              <HeaderButtons
-             text="Return" 
-             btncolor="white" 
-             textcolor="#195fb9"
-             activetab={activetab}
-            setActiveTab={setActiveTab}/></Text>
-            </View>
-                </View>
-                <View>
+            <Animatable.View 
+            animation="fadeInUpBig"
+            style={styles.footer}
+        >   
+              <View>             
                      <FlatList
                     data={FlightData.flightResult}
                     renderItem={({item}) => <Flight Flight={item} />}
                     ItemSeparatorComponent={(props) => {
-                      console.log('props', props);
                       return (<View style={{height: 1 , marginVertical:10 , marginHorizontal:5, backgroundColor: props.highlighted ? 'green' : 'rgb(199, 199, 204)'}} />);
                     }}
                     keyExtractor={(item,index) => index.toString()}
                     showHorizontalScrollIndicator={false}
                     />
                 </View> 
+                </Animatable.View>
             </View>
+            
         </View>
+       
     )
 }
 
@@ -315,7 +288,7 @@ const styles = StyleSheet.create({
         marginTop:10,
     },
     icon:{
-        marginTop:18,
+        // marginTop:18,
         justifyContent:'center',
     },
     refundableDiv:{
@@ -369,8 +342,18 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     textAlign: "center"
   },
+  footer: {
+    // flex: Platform.OS === 'ios' ? 3 : 5,
+    backgroundColor: '#fff',
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30
+},
   });
   
 
 
 export default Cards;
+
+

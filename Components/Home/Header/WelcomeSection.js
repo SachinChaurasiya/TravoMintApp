@@ -3,6 +3,9 @@ import { View  , Text, StyleSheet, Dimensions , SafeAreaView , Image , Touchable
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 // import WelcomePromo from './WelcomePromo';
 
+// colors
+import COLOR from '../../../assets/consts/colors'
+
 const Width=Dimensions.get('window').width
 const Height=Dimensions.get('window').height
 
@@ -17,13 +20,13 @@ const WelcomeSection = (props) => {
                          <View style = {styles.textDiv}>
                                <Text style= {styles.text}>Welcome To Travomint</Text>
                              <View style = {{marginTop:5 }}>
-                                 <Text style = {{color:"white"}}> Get These benefits on your first Booking!</Text>
+                                 <Text style = {{color:COLOR.white}}> Get These benefits on your first Booking!</Text>
                              </View>
                              <View style ={{marginTop:5 , flexDirection:'row'}}>
-                                 <Text style = {{marginLeft:4 , color:"white"}}>
+                                 <Text style = {{marginLeft:4 , color:COLOR.white}}>
                                      Use Code : 
                                  </Text>
-                                 <Text style = {{color:'#f15b2F', fontWeight:'bold', marginLeft:5}}>
+                                 <Text style = {{color:COLOR.primary, fontWeight:'bold', marginLeft:5}}>
                                      Welcome
                                  </Text>
                              </View>
@@ -34,13 +37,13 @@ const WelcomeSection = (props) => {
                
                        <View style = {{flexDirection:'row' , justifyContent:'space-between',margin:12, position:'absolute' , zIndex:99 , marginTop:100}}>
             <View style ={{justifyContent:'space-between'}}>
-                <View style = {{backgroundColor:'white' , height:30, width:30 , borderRadius:50,marginLeft:8  ,justifyContent:'center', marginTop:10 , position:'absolute',zIndex:99 ,alignItems:'center' ,shadowRadius:8 ,shadowOpacity:1 , shadowColor:'grey'}}>
+                <View style = {{backgroundColor:COLOR.white , height:30, width:30 , borderRadius:50,marginLeft:8  ,justifyContent:'center', marginTop:10 , position:'absolute',zIndex:99 ,alignItems:'center' ,shadowRadius:8 ,shadowOpacity:1 , shadowColor:COLOR.grey}}>
                    <Image 
                     source ={require('../../../assets/Image/FlightOrng.png')} 
                     style = {{resizeMode:"contain" , height:20 , width:20 }} />
                </View>
                <TouchableOpacity onPress = {()=>alert('this is button')}>
-               <View style = {{backgroundColor:"white" , borderRadius:5 , marginTop:30,shadowOpacity:1, width:110 , shadowColor:'grey', shadowRadius:8 }}>
+               <View style = {{backgroundColor:COLOR.white , borderRadius:5 , marginTop:30,shadowOpacity:1, width:110 , shadowColor:COLOR.grey, shadowRadius:8 }}>
                    <View style = {{marginRight:10 , marginTop:20 , marginLeft:5 , marginBottom:15}}>
                    <Text style = {{fontWeight:'bold'}}>
                        Flights
@@ -64,13 +67,13 @@ const WelcomeSection = (props) => {
                </View>
             
             <View>
-               <View style = {{backgroundColor:'white' , height:30, width:30 , borderRadius:50,marginLeft:25 , justifyContent:'center' , marginTop:10 , position:'absolute',zIndex:99 ,alignItems:'center' , shadowRadius:8 ,shadowOpacity:1 , shadowColor:'grey'}}>
+               <View style = {{backgroundColor:COLOR.white , height:30, width:30 , borderRadius:50,marginLeft:25 , justifyContent:'center' , marginTop:10 , position:'absolute',zIndex:99 ,alignItems:'center' , shadowRadius:8 ,shadowOpacity:1 , shadowColor:COLOR.grey}}>
                    <Image 
                     source ={require('../../../assets/Image/HotelYellow.png')} 
                     style = {{resizeMode:"contain" , height:20 , width:20 }} />
                </View>
             <TouchableOpacity onPress = {()=>alert('This is a btuuon')}>
-               <View style = {{backgroundColor:"white" , borderRadius:5 , marginTop:30 ,shadowOpacity:1,marginLeft:20,width:110 , shadowColor:'grey', shadowRadius:8,}}>
+               <View style = {{backgroundColor:COLOR.white , borderRadius:5 , marginTop:30 ,shadowOpacity:1,marginLeft:20,width:110 , shadowColor:COLOR.grey, shadowRadius:8,}}>
                    <View style = {{marginRight:10 , marginTop:20 , marginLeft:5 , marginBottom:15}}>
                    <Text style = {{fontWeight:'bold'}}>
                        Hotel
@@ -95,13 +98,13 @@ const WelcomeSection = (props) => {
 
                
                <View>
-               <View style = {{backgroundColor:'white' , height:30, width:30, marginTop:10 ,marginLeft:25 , borderRadius:50, justifyContent:'center' , position:'absolute',zIndex:99 ,shadowRadius:8 ,shadowOpacity:1 , shadowColor:'grey',alignItems:'center'}}>
+               <View style = {{backgroundColor:COLOR.white, height:30, width:30, marginTop:10 ,marginLeft:25 , borderRadius:50, justifyContent:'center' , position:'absolute',zIndex:99 ,shadowRadius:8 ,shadowOpacity:1 , shadowColor:COLOR.grey,alignItems:'center'}}>
                    <Image 
                     source ={require('../../../assets/Image/Cars.png')} 
                     style = {{resizeMode:"contain" , height:20 , width:20 }} />
                </View>
                <TouchableOpacity onPress ={()=>alert('This is a button')}>
-               <View style = {{backgroundColor:"white" , borderRadius:5 , marginTop:30 , shadowOpacity:1, width:110,marginLeft:16 , shadowColor:'grey', shadowRadius:8 }}>
+               <View style = {{backgroundColor:COLOR.white , borderRadius:5 , marginTop:30 , shadowOpacity:1, width:110,marginLeft:16 , shadowColor:COLOR.grey, shadowRadius:8 }}>
                    <View style = {{marginRight:10 , marginTop:20 , marginLeft:5 , marginBottom:15}}>
                    <Text style = {{fontWeight:'bold'}}>
                        Cars
@@ -140,7 +143,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius:20,
         width:Width,
         height: 200,
-        backgroundColor:"#195fb9"
+        backgroundColor:COLOR.primary
     },
     textDiv:{
         width: Width,
@@ -150,7 +153,7 @@ const styles = StyleSheet.create({
     },
     text:{
         fontSize:30,
-        color:"white",  
+        color:COLOR.white,  
     }   
 })
 

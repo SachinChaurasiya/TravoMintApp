@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity , Text ,Image,StyleSheet } from 'react-native'
-
+import COLOR from '../../assets/consts/colors';
 
 const Categories = () => {
     return(
@@ -24,7 +24,7 @@ const Categories = () => {
                         marginLeft:20,
                         width: 200,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
                     
                     <View style={{
@@ -32,12 +32,12 @@ const Categories = () => {
                         marginLeft:20,
                         width: 150,
                         height: 1,
-                        backgroundColor: '#195FB9',
+                        backgroundColor: COLOR.secondary,
                     }}></View>
                     </View>
                     </View>
 
-                <View style = {{backgroundColor: '#F3EDF6' }}>
+                <View style = {{backgroundColor: COLOR.lightpink}}>
                     <Text style= {{marginTop:30, color:'grey' , marginLeft:20}}>
                         Much  destinations here but don't be confused! It's
                     </Text>
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         marginTop:40,
         marginLeft:30,
         fontSize:20,
-        color:'#195FB9'
+        color:COLOR.secondary
     },
 })
 export default Categories;

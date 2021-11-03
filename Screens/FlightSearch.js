@@ -1,239 +1,56 @@
-// import React , {useState} from 'react'
-// import { StyleSheet ,TextInput,Button,ScrollView, View , Text , Platform }  from 'react-native'
-// import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
-// import { Picker } from "@react-native-picker/picker";
-// import BestOffer from '../Components/Home/BestOffer';
-
-// import Notificationscreen from './NotificationScreen';
-
-
-// const FlightSearch =(props)=>{
-
-//     const [selectedValue , setSelectedValue] = useState("Select")
-//     const [secondselectedValue , setSecondSelectedValue] = useState("Select Class")
-    
-
-//     // const [date, setDate] = useState(new Date(1598051730000));
-//     // const [mode, setMode] = useState('date');
-//     // const [show, setShow] = useState(false);
-
-//     // const onChange = (event, selectedDate) => {
-//     //     const currentDate = selectedDate || date;
-//     //     setShow(Platform.OS === 'ios');
-//     //     setDate(currentDate);
-//     //   };
-    
-//     //   const showMode = (currentMode) => {
-//     //     setShow(true);
-//     //     setMode(currentMode);
-//     //   };
-    
-//     //   const showDatepicker = () => {
-//     //     showMode('date');
-//     //   };
-    
-
-//     return(
-       
-//        <ScrollView>
-//        <>
-//         <View style={{flex:1,}}>
-//         <View style= {{padding:10 , borderWidth:1 , borderColor:'grey' , borderRadius:10,height:280 , margin:10 }}>
-//             <View>
-//                 <View style ={styles.btn}>
-//                     <View>
-//                        <Button
-//                        color="#195fb9"
-//                        title = "Round Trip" />
-//                     </View>
-//                     <View style = {{marginRight:30}}>
-//                        <Button
-//                        color="#195fb9"
-//                        title = "One Way" />
-//                     </View>
-//                 </View> 
-//             </View> 
-//            <View style = {styles.InputDiv}> 
-//             <View>
-//                 <TextInput
-//                 style={styles.placeholder}
-//                 keyBoard="alphabetic"
-//                 placeholder='From'
-//                 />
-//             </View>
-
-
-// <View style = {{marginTop:10 , height:40,width:40 }}>
-//     <FontAwesome5
-//     name="exchange-alt"
-//     color="#195fb9"
-//     size={30}
-//      />
-// </View>
-
-//             <View>
-//                 <TextInput
-//                 style={[styles.placeholder,{marginRight:20}]}
-//                 placeholder='To'
-//                 keyBoard="alphabetic"
-//                 />
-//             </View>
-
-//          </View>
-         
-//          <View style = {styles.InputDiv}>
-//           <View>
-//                 <TextInput
-//                 style={styles.placeholder}
-//                 placeholder='Departure'
-//                 keyBoard="alphabetic"
-//                 />
-//             </View>
-
-//             <View>
-//                 <TextInput
-//                 style={[styles.placeholder,{marginRight:20}]}
-//                 placeholder='Arrive'
-//                 keyBoard="alphabetic"
-//                 />
-//             </View>
-//          </View>
-       
-//        <View style = {{flexDirection:"row" , justifyContent:'space-between'}}>
-//        <View>  
-//              <Picker   
-//                  selectedValue={selectedValue}
-//                  style={{height:30,width:140,border:'none' ,marginTop:10}}
-//                  onValueChange={(itemValue,itemIndex) => setSelectedValue(itemValue)}
-//                  > 
-//                    <Picker.Item label = "Adult(18+)" value="Adutl"  />
-//                   <Picker.Item label = "Children(2-11YRS)" value="Children" />
-//                   <Picker.Item label = "Infant(On lap)" value="Infant(on lap)" />
-//               </Picker> 
-//       </View>
-
-//       <View>
-//         <Picker  
-//                  selectedValue={secondselectedValue}
-//                  style={{height:30,width:140,border:'none', marginTop:10}}
-//                  onValueChange={(itemValue,itemIndex) => setSecondSelectedValue(itemValue)}
-//                  > 
-//                     <Picker.Item label ="Economy" value="Economy" />
-//                     <Picker.Item label ="PremiumEconomy" value="Pe" />
-//                     <Picker.Item label ="Business" value="Business" />
-//                     <Picker.Item label ="First Class" value="Fc" />
-//               </Picker>
-//       </View>
-//       </View>
-//          <View>
-//              <View style={{ marginHorizontal:50 , marginTop:50 }} >
-//                  <Button
-//                  onPress={()=>props.navigation.navigate('FlightSearchResult')}
-//                  title ="Search"
-//                  color="#195fb9"
-//                  />
-//              </View>
-//          </View>
-         
-//         </View>
-//         <View style= {{marginTop:50}}>
-//         <BestOffer />
-//         </View>
-//         </View>
-//         </>
-//         </ScrollView>
-//     )
-// }
-
-
-
-// const styles= StyleSheet.create({
-//     InputDiv:{
-//         flexDirection:'row',
-//         justifyContent:'space-between',
-//     },
-//     placeholder:{
-//         borderBottomWidth:1,
-//         borderBottomColor:"grey",
-//         width:100,
-//         height:40,
-//         color:'black'
-//     },
-//     btn:{
-//         flexDirection:'row',
-//         justifyContent:'space-between',
-//     }
-
-// })
-// export default FlightSearch;
-
-
 import React,{useState} from 'react';
-import {View, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,Picker,Pressable} from 'react-native';
+import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,Picker,Pressable} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import * as Animatable from 'react-native-animatable';
+
+// color
+import COLOR from '../assets/consts/colors'
+
 const width = Dimensions.get("screen").width;
 
-const Flightsearch = (props) => {
+ export const Flightsearch = ({navigation}) => {
     const [activetab, setActiveTab] = useState('Round Trip');
+    const [text, onChangeText] = React.useState("Flight");
+    // const [selectedValue, setSelectedValue] = useState("Economy");
 
     return (
         <View style={styles.container}>
-            <View style={styles.flightpage}>
+          <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/>
+        <View style={styles.header}>
+            <Text style={styles.text_header}>Flight Search Now!</Text>
+        </View>
+        <Animatable.View 
+            animation="fadeInUpBig"
+            style={styles.footer}
+        >
+            <View>
                 <View style={styles.btn}>
                 <View>
             <Text><HeaderButtons 
             text="Round Trip" 
-            btncolor="#195fb9" 
-            textcolor="white"
+            btncolor={COLOR.primary}
+            textcolor={COLOR.white}
             activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
             <View>
             <Text><HeaderButtons
              text="One Way" 
-             btncolor="white" 
-             textcolor="#195fb9"
+             btncolor={COLOR.primary} 
+             textcolor={COLOR.primary}
              activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
                 </View>
-                <FlightForm {...props}/>
-            </View>
-        </View>
-    );
-}
-
-const HeaderButtons = (props) =>{
-    return(
-        <View>
-        <TouchableOpacity activeOpacity={0.6} style={{
-            backgroundColor: props.activetab === props.text ? "#195fb9" : "white",
-            borderRadius:30,
-            paddingVertical:6,
-            paddingHorizontal:16,
-        }}
-        onPress={() => props.setActiveTab(props.text)}
-        >
-            <Text style={{color: props.activetab === props.text?"white":"#195fb9",fontSize:15,fontWeight:'900'}}>{props.text}</Text>
-        </TouchableOpacity>
-        </View>
-    )
-}
-
-
-const FlightForm = (props) =>{
-    const [text, onChangeText] = React.useState("Flight");
-    const [selectedValue, setSelectedValue] = useState("Economy");
-
-    return (
-        <View style={styles.mainForm}>
+                {/* <FlightForm/> */}
+                <View>
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
             {/* <Text>Hello</Text> */}
             <View>
                 <Text style={styles.title}>Flying From</Text>
                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                <Fontisto name="plane" size={18} color="#195fb9"/>
+                <Fontisto name="plane" size={18} color={COLOR.primary}/>
             <TextInput
              style={styles.input}
              onChangeText={onChangeText}
@@ -257,7 +74,7 @@ const FlightForm = (props) =>{
                 <View>
             <Text style={styles.title}>Flying Date</Text>
             <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                <FontAwesome5 name="calendar-alt" size={18} color="#195fb9"/>
+                <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary}/>
             <TextInput
              style={styles.input}
              onChangeText={onChangeText}
@@ -275,47 +92,77 @@ const FlightForm = (props) =>{
             </View>
 
             </View>
-
-            {/* <View style={{flexDirection: 'row',justifyContent: 'space-between',margin:12}}>
-                <View style={{borderBottomWidth:1, borderBottomColor: '#ccc'}}>
-            <Picker
-              selectedValue={selectedValue}
-              style={{ height: 50, width: 150 }}
-              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-             >
-            <Picker.Item label="Java" value="java" />
-             <Picker.Item label="JavaScript" value="js" />
-          </Picker>
-          </View>
-
-          <View style={{borderBottomWidth:1, borderBottomColor: '#ccc'}}>
-            <Picker
-              selectedValue={selectedValue}
-              underlineColorAndroid={"#000"}
-              style={{ height: 50, width: 150,flex:1 }}
-              onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-             >
-            <Picker.Item label="Economy" value="Economy" />
-             <Picker.Item label="PremiumEconomy" value="PremiumEconomy" />
-             <Picker.Item label="Business" value="Business" />
-             <Picker.Item label="First" value="First" />
-          </Picker>
-          </View>
-            </View> */}
                 <EBFClassbtnfunction/>
-                <AdultChildInfant/>
-
+                <View style={{flexDirection: 'row'}}>
+                <Counter/>
+                <Counter/>
+                <Counter/>
+                </View>
+                
             <View>
-                <View style={{alignItems: 'center',justifyContent: 'center', marginTop:20,backgroundColor:"#195fb9",borderRadius:30}}>
-                    <Pressable onPress={()=>props.navigation.navigate("FlightSearchResult")} >
-                    <Text style={{color: 'white', fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
-                    </Pressable>
+                <View style={{alignItems: 'center',justifyContent: 'center', marginTop:20,backgroundColor:COLOR.secondary,borderRadius:30}}>
+                    <TouchableOpacity onPress={()=>navigation.navigate('FlightSearchResult')} >
+                    <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
+        </View>
+            </View>
+        </Animatable.View>
+      </View>
+    );
+}
+
+const HeaderButtons = (props) =>{
+    return(
+        <View>
+        <TouchableOpacity activeOpacity={0.6} style={{
+            backgroundColor: props.activetab === props.text ? COLOR.secondary: COLOR.white,
+            borderRadius:30,
+            paddingVertical:6,
+            paddingHorizontal:16,
+        }}
+        onPress={() => props.setActiveTab(props.text)}
+        >
+            <Text style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}}>{props.text}</Text>
+        </TouchableOpacity>
         </View>
     )
 }
 
+
+const Counter = () => {
+    const [count , setCount] = useState(0)
+
+    const Increment =() => (
+      setCount(prevCount => prevCount + 1 )
+    )
+
+    const Decrement =() => (
+      setCount( prevCount => prevCount - 1   )
+    )
+
+
+    return (
+        <View>
+            <View style = {styles.SignDiv}>
+                <View>
+               <TouchableOpacity onPress={Increment}>
+                  <Text style = {styles.IncrementSign}>+</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style= {{justifyContent:'center', alignItems:'center'}}>
+                  <Text style = {{fontSize:20, marginLeft:4, width:24  }}>{count}</Text>
+                </View>
+                <View>
+                <TouchableOpacity onPress={Decrement}>
+                  <Text style = {styles.DecrementSign}>-</Text>
+                  </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+    );
+}
 const EBFClassbtnfunction = () =>{
     const [activetab, setActiveTab] = useState('Business');
 
@@ -326,7 +173,7 @@ const EBFClassbtnfunction = () =>{
                 <View>
             <Text><EBFClassbtn 
             text="Economy" 
-            btncolor="#195fb9" 
+            btncolor={COLOR.secondary }
             textcolor="white"
             activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
@@ -334,24 +181,24 @@ const EBFClassbtnfunction = () =>{
             <View>
             <Text><EBFClassbtn
              text="PremiumEconomy" 
-             btncolor="#195fb9" 
-             textcolor="white"
+             btncolor={COLOR.secondary }
+             textcolor={COLOR.white}
              activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
             <View>
             <Text><EBFClassbtn
              text="Business" 
-             btncolor="white" 
-             textcolor="#195fb9"
+             btncolor={COLOR.white }
+             textcolor={COLOR.secondary}
              activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
             <View>
             <Text><EBFClassbtn
              text="First" 
-             btncolor="#195fb9" 
-             textcolor="white"
+             btncolor={COLOR.secondary}
+             textcolor={COLOR.white}
              activetab={activetab}
             setActiveTab={setActiveTab}/></Text>
             </View>
@@ -365,131 +212,62 @@ const EBFClassbtn = (props) => {
     return(
         <View>
         <TouchableOpacity style={{
-            backgroundColor: props.activetab === props.text ? "#195fb9" : "white",
+            backgroundColor: props.activetab === props.text ? COLOR.secondary : COLOR.white,
             borderRadius:30,
             paddingVertical:6,
             paddingHorizontal:16,
         }}
         onPress={() => props.setActiveTab(props.text)}
         >
-            <Text style={{color: props.activetab === props.text?"white":"#195fb9",fontSize:13,fontWeight:'900'}}>{props.text}</Text>
+            <Text style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:13,fontWeight:'900'}}>{props.text}</Text>
         </TouchableOpacity>
-        </View>
-    )
-}
-
-const AdultChildInfant = () =>{
-    return(
-        <View>
-            <View style={{flexDirection:'row',alignItems: 'center'}}>
-                <View style={{marginTop:25}}>
-                    <FontAwesome5 name="user" size={18} color="#195fb9"/>
-                </View>
-                <View style={{flexDirection:'row',alignItems:"center"}}>
-                <View style={{marginLeft:10}}>
-{/* Adult */}
-                    <Text style={{marginBottom:10}}>Adult</Text>
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity activeOpacity={0.6}>
-                    <View style={styles.adultNo}>
-                    <Text style={{paddingVertical:0}}>1</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={styles.adultNo}>
-                    <Text style={{paddingVertical:0}}>2</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={styles.adultNo}>
-                    <Text style={{padding:0}}>3</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={styles.AddNo}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:1}}/>
-                    </View>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-{/* child */}
-                <View style={{marginLeft:20}}>
-                    <Text style={{marginBottom:10}}>Child</Text>
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:5,marginRight:10,borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:0}}>0</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:0}}>1</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center",marginLeft:10}}>
-                    <Text style={{padding:0}}>2</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:5,paddingVertical:3}}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:1}}/>
-                    </View>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-                </View>
-            </View>
-{/* infants */}
-            <View style={{marginLeft:25,marginTop:20}}>
-                    <Text style={{marginBottom:10}}>Infant</Text>
-                    <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9', paddingHorizontal:5,marginRight:10,borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:0}}>0</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center"}}>
-                    <Text style={{paddingVertical:0}}>1</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center", borderColor:'#195fb9' , paddingHorizontal:5, borderRadius:8,justifyContent: "center",marginLeft:10}}>
-                    <Text style={{padding:0}}>2</Text>
-                    </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <View style={{borderWidth:2,alignItems: "center",justifyContent: "center",borderColor:'#195fb9' , borderRadius:8,marginHorizontal:10,paddingHorizontal:5,paddingVertical:3}}>
-                    <FontAwesome5 name="plus" size={12} color="#000" style={{paddingVertical:0}}/>
-                    </View>
-                    </TouchableOpacity>
-                    </View>
-                </View>
-
         </View>
     )
 }
 const styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor:"#195fb9"
+        backgroundColor:COLOR.primary,
     },
     flightpage:{
         flex:1,
         marginTop:100,
-        backgroundColor:"#fff",
+        backgroundColor:COLOR.white,
         borderTopEndRadius:30,
         borderTopStartRadius:30,
+    },
+    header: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        paddingHorizontal: 20,
+        paddingBottom: 50
+    },
+    SignDiv:{
+        flexDirection:'row' , 
+        margin:20 ,
+        borderWidth:1 ,
+        width:75 , 
+        justifyContent:'space-around', 
+        alignItems:'space-around', 
+        alignItems:'center', 
+        borderRadius:10,
+        borderColor:COLOR.secondary, 
+    },
+    IncrementSign:{
+        fontSize:15,
+        height:25,
+        marginTop:2 
+    },
+    DecrementSign:{
+        fontSize:15,
+        marginTop:2,  
+        height:25,
+        marginRight:10
+    },
+    text_header: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 30
     },
     btn:{
         flexDirection:'row',
@@ -497,10 +275,7 @@ const styles = StyleSheet.create({
         // padding:20,
         margin:20,
         borderWidth:1,
-        borderColor:"#195fb9", borderRadius:30,
-    },
-    mainForm:{
-        paddingHorizontal:12
+        borderColor:COLOR.secondary, borderRadius:30,
     },
     input: {
         width:width - 230,
@@ -508,10 +283,10 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         padding: 10,
         borderBottomWidth:1,
-        borderBottomColor: '#ccc',
+        borderBottomColor: COLOR.grey,
       },
       title:{
-        color:"#195fb9",
+        color:COLOR.primary,
         fontWeight:'bold',
         fontSize:12,
         paddingLeft:20
@@ -519,7 +294,7 @@ const styles = StyleSheet.create({
       adultNo:{
         borderWidth:2,
         alignItems: "center",
-         borderColor:'#195fb9',
+         borderColor:COLOR.primary,
           paddingHorizontal:5,
           marginRight:10,
           borderRadius:8,
@@ -529,11 +304,21 @@ const styles = StyleSheet.create({
         borderWidth:2,
         alignItems: "center",
         justifyContent: "center",
-        borderColor:'#195fb9' ,
+        borderColor:COLOR.primary ,
          borderRadius:8,
          paddingHorizontal:5,
          paddingVertical:3
-      }
+      },
+      footer: {
+        flex: Platform.OS === 'ios' ? 3 : 5,
+        backgroundColor: '#fff',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingHorizontal: 20,
+        paddingVertical: 30
+    },
 })
 
 export default Flightsearch;
+
+

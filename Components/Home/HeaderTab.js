@@ -27,7 +27,7 @@ import Hotel from '../../assets/Image/Hotel.png'
 import Transfer from '../../assets/Image/Transfer.png'
 
 const {width} = Dimensions.get('screen');
-const HeaderTab = (props) => {
+const HeaderTab = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white,}}>
@@ -42,17 +42,17 @@ const HeaderTab = (props) => {
             <View style={style.inputContainer}>
               
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
-            <TouchableOpacity onPress = {()=> props.navigation.navigate('FlightSearch')}>
+            <TouchableOpacity onPress = {()=> navigation.navigate('FlightSearch')}>
               <View style={style.iconContainer}>
-                 <View style={{backgroundColor:"#195fb9",width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
+                 <View style={{backgroundColor:COLORS.primary,width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Flight} style={{width:20, height: 20,}}/>
                  </View>
                  <Text style={{marginTop:10,fontWeight: 'bold'}}>Flights</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress = {()=> navigation.navigate('Hotel')}>
               <View style={style.iconContainer}>
-              <View style={{backgroundColor:"#195fb9",width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
+              <View style={{backgroundColor:COLORS.primary,width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Hotel} style={{width:20, height: 20,}}/>
                  </View>
               <Text style={{marginTop:10,fontWeight: 'bold'}}>Hotels</Text>
@@ -60,7 +60,7 @@ const HeaderTab = (props) => {
               </TouchableOpacity>
               <TouchableOpacity>  
               <View style={style.iconContainer}>
-              <View style={{backgroundColor:"#195fb9",width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
+              <View style={{backgroundColor:COLORS.primary,width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Transfer} resizeMode="contain"  style={{width:20, height: 20,}}/>
                  </View>
               <Text style={{marginTop:10,fontWeight: 'bold'}}>Transfer</Text>
@@ -72,9 +72,9 @@ const HeaderTab = (props) => {
           </View>
           <View style={{flexDirection: 'row',justifyContent: 'space-between',marginTop:25}}>
             <TouchableOpacity  onPress={()=> props.navigation.dispatch(DrawerActions.openDrawer())}>
-            <Icon name="sort" size={28} color={COLORS.primary} />
+            <Icon name="sort" size={28} color={COLORS.secondary} />
             </TouchableOpacity>
-              <Icon name="notifications-none" size={28} color={COLORS.primary} />
+              <Icon name="notifications-none" size={28} color={COLORS.secondary} />
               </View>
         </ImageBackground>
          {/* <Text style={style.sectionTitle}><WelcomeSection/></Text> */}
@@ -88,7 +88,7 @@ const style = StyleSheet.create({
     paddingHorizontal: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: COLORS.primary,
+    backgroundColor: COLORS.secondary,
   },
   inputContainer: {
     height: 100,

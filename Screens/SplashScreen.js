@@ -14,12 +14,14 @@ import * as Animatable from 'react-native-animatable';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useTheme } from '@react-navigation/native';
 
+import COLOR from '../assets/consts/colors'
+
 const SplashScreen = ({navigation}) => {
     const { colors } = useTheme();
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#f15b2f' barStyle="light-content"/>
+          {/* <StatusBar backgroundColor='#f15b2f' barStyle="light-content"/> */}
         <View style={styles.header}>
             <Animatable.Image 
                 animation="bounceIn"
@@ -31,12 +33,12 @@ const SplashScreen = ({navigation}) => {
         </View>
         <Animatable.View 
             style={[styles.footer, {
-                backgroundColor: colors.background
+                // backgroundColor: colors.background
             }]}
             animation="fadeInUpBig"
         >
             <Text style={[styles.title, {
-                color: colors.text
+                // color: colors.text
             }]}>Stay connected with everyone!</Text>
             <Text style={styles.text}>Sign in with account</Text>
             <View style={styles.button}>
@@ -76,7 +78,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
   container: {
     flex: 1, 
-    backgroundColor: '#195fb9'
+    backgroundColor: COLOR.white
   },
   header: {
       flex: 1,
@@ -85,7 +87,7 @@ const styles = StyleSheet.create({
   },
   footer: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: COLOR.primary,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
       paddingVertical: 50,
@@ -96,12 +98,12 @@ const styles = StyleSheet.create({
       height: height_logo,
   },
   title: {
-      color: '#05375a',
+      color: COLOR.white,
       fontSize: 30,
       fontWeight: 'bold'
   },
   text: {
-      color: 'grey',
+      color: COLOR.grey,
       marginTop:5
   },
   button: {
@@ -115,10 +117,10 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       borderRadius: 50,
       flexDirection: 'row',
-      backgroundColor: '#000'
+      backgroundColor: COLOR.secondary
   },
   textSign: {
-      color: 'white',
+      color: COLOR.white,
       fontWeight: 'bold'
   }
 });

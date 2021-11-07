@@ -1,7 +1,10 @@
 import React from 'react';
 import {View, StyleSheet,Text,Image} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { Avatar } from 'react-native-elements';
+
+// color
+
+import COLOR from '../../assets/consts/colors'
 
 
 const Separator = () => (
@@ -14,13 +17,13 @@ const Accordionlist = () => {
         <View style={styles.container}>
             <View style={{flexDirection:'row',justifyContent: 'space-between',alignItems: 'center',marginHorizontal:12}}>
             <View style={{flexDirection:'row',alignItems: 'center'}}>
-                <View style={{ backgroundColor:"#fff",borderRadius:50,marginTop:10}}>
+                <View style={{ backgroundColor:COLOR.white,borderRadius:50,marginTop:10}}>
                     <Text style={{color:"#000",padding:30,fontSize:20}}>MK</Text>
                 </View>
                 <View style={{marginLeft:10,marginTop:5}}>
-                    <Text style={{color:"#fff",fontSize:20}}>Mayank Kumar</Text>
-                    <Text style={{color:"#fff"}}>Test@gmail.com</Text>
-                    <Text style={{color:"#fff"}}>1234567890</Text>
+                    <Text style={{color:COLOR.white,fontSize:20}}>Mayank Kumar</Text>
+                    <Text style={{color:COLOR.white}}>Test@gmail.com</Text>
+                    <Text style={{color:COLOR.white}}>1234567890</Text>
                 </View>
             </View>
             <View>
@@ -135,11 +138,11 @@ const styles = StyleSheet.create({
     container: {
         flex:1,
         // marginTop:20,
-        backgroundColor: "#195fb9",
+        backgroundColor: COLOR.primary,
 
     },
     seccontainer:{
-        flex:1,backgroundColor:"#fff",marginTop:20,borderTopRightRadius:30,borderTopLeftRadius:30
+        flex:1,backgroundColor:COLOR.white,marginTop:20,borderTopRightRadius:30,borderTopLeftRadius:30
     },
     separator: {
         marginHorizontal:10,

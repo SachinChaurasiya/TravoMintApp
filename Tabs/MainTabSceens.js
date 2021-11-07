@@ -4,6 +4,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import {DrawerActions} from '@react-navigation/native';
 
+// color
+import COLOR from '../assets/consts/colors'
 
 // icons
 import Icons from 'react-native-vector-icons/Ionicons'
@@ -20,15 +22,15 @@ import MoreScreen from '../Screens/More';
 
 const Tab = createMaterialBottomTabNavigator();
 const HomeStack = createStackNavigator();
-const HotelsStack = createStackNavigator();
+const NotificationStack = createStackNavigator();
+const OfferStack = createStackNavigator();
+const MoreStack = createStackNavigator();
+
 
 
 const MainTabScreens = (props) => (
     <Tab.Navigator
     activeColor="#fff"
-    options={{
-      tabBarColor:"#000"
-    }}
      >
     <Tab.Screen
       name="Flight"
@@ -36,19 +38,19 @@ const MainTabScreens = (props) => (
       options={{
         headerShown:false,
         tabBarLabel: 'Homes',
-        // tabBarColor:"#195fb9",
+        tabBarColor:COLOR.primary,
         tabBarIcon: ({ color }) => (
           <Icons name="home" color={color} size={26} />
         ),
       }}
     />
     <Tab.Screen
-      name="Hotels"
+      name="Notifications"
       component={NotificationStackScreen}
       options={{
         headerShown:false,
         tabBarLabel: 'Notification',
-        // tabBarColor:"#f15b2f",
+        tabBarColor:COLOR.primary,
         tabBarIcon: ({ color }) => (
           <Octicons name="bell" color={color} size={26} />
         ),
@@ -60,7 +62,7 @@ const MainTabScreens = (props) => (
       options={{
         headerShown:false,
         tabBarLabel: 'Offers',
-        // tabBarColor:"#f15b2f",
+        tabBarColor:COLOR.primary,
         tabBarIcon: ({ color }) => (
           <MaterialIcons name="local-offer" color={color} size={26} />
         ),
@@ -72,7 +74,7 @@ const MainTabScreens = (props) => (
       options={{
         headerShown:false,
         tabBarLabel: 'More',
-        // tabBarColor:"#f15b2f",
+        tabBarColor:COLOR.primary,
         tabBarIcon: ({ color }) => (
           <Icons name="ios-aperture" color={color} size={26} />
         ),
@@ -91,31 +93,54 @@ const HomeStackScreen = ({navigation}) => (
   )
   
   const NotificationStackScreen = ({navigation}) => (
-    <HotelsStack.Navigator>
-        <HotelsStack.Screen name='Notification' options={{headerShown:false}} component={NotificationsScreen} />
-      </HotelsStack.Navigator> 
+    <NotificationStack.Navigator>
+        <NotificationStack.Screen name='Notification' 
+          options={{
+            headerTitle:"Notification" ,
+            headerStyle:{ backgroundColor:COLOR.secondary },
+            headerTintColor:COLOR.white,
+            headerLeft:()=>(
+            <View>
+              <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
+              <FontAwesome5 name="bars" size={20} style={{marginLeft:10}} color={COLOR.white}/>
+              </TouchableOpacity>
+            </View>)}}
+        component={NotificationsScreen} />
+      </NotificationStack.Navigator> 
   )
 
   const OfferStackScreen = ({navigation,props}) => (
-    <HotelsStack.Navigator>
-        <HotelsStack.Screen name='Offer' options={{
+    <OfferStack.Navigator>
+        <OfferStack.Screen name='Offer' options={{
+          headerTitle:"Offers" ,
+          headerStyle:{ backgroundColor:COLOR.secondary  },
+          headerTintColor:COLOR.white,
           headerLeft:()=>(
           <View>
             <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
-            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}}/>
+            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}} color={COLOR.white}/>
             </TouchableOpacity>
           </View>)}}component={OfferScreen} />
-      </HotelsStack.Navigator> 
+      </OfferStack.Navigator> 
   )
 
   const MoreStackScreen = ({navigation}) => (
-    <HotelsStack.Navigator>
-        <HotelsStack.Screen name='More' options={{
+    <MoreStack.Navigator>
+        <MoreStack.Screen name='More' options={{
+          headerTitle:"More" ,
+          headerStyle:{ backgroundColor:COLOR.secondary},
+          headerTintColor:COLOR.white,
           headerLeft:()=>(
           <View>
             <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
-            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}}/>
+            <FontAwesome5 name="bars" size={20} style={{marginLeft:10}} color={COLOR.white}/>
             </TouchableOpacity>
           </View>)}} component={MoreScreen} />
-      </HotelsStack.Navigator> 
+      </MoreStack.Navigator> 
   )
+
+
+  // options={{headerTitle:"Flight Search" , headerStyle:{
+  //   backgroundColor:"#f15b2f" 
+  //   },
+  // headerTintColor:COLOR.white}}

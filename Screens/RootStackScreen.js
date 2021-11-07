@@ -35,7 +35,10 @@ const RootStackScreen = ({navigation}) => (
            },
          headerTintColor:COLOR.white}} component={FlightSearchResult}
           />
-          <RootStack.Screen name="Hotel" component={HotelForm}/>
+          <RootStack.Screen name="Hotel" options={{headerTitle:"Hotel Form" , headerStyle:{
+           backgroundColor:COLOR.secondary 
+           },
+         headerTintColor:COLOR.white}} component={HotelForm}/>
     </RootStack.Navigator>
 );
 

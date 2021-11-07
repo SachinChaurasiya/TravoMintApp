@@ -118,7 +118,7 @@ const SignInScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#009387' barStyle="light-content"/>
+          {/* <StatusBar backgroundColor={COLOR.primary} barStyle="light-content"/> */}
         <View style={styles.header}>
             <Text style={styles.text_header}>Welcome!</Text>
         </View>
@@ -139,7 +139,7 @@ const SignInScreen = ({navigation}) => {
                 />
                 <TextInput 
                     placeholder="Your Username"
-                    placeholderTextColor="#666666"
+                    placeholderTextColor={COLOR.placeholderColor}
                     style={[styles.textInput, {
                         color: colors.text
                     }]}
@@ -178,7 +178,7 @@ const SignInScreen = ({navigation}) => {
                 />
                 <TextInput 
                     placeholder="Your Password"
-                    placeholderTextColor="#666666"
+                    placeholderTextColor={COLOR.placeholderColor}
                     secureTextEntry={data.secureTextEntry ? true : false}
                     style={[styles.textInput, {
                         color: colors.text
@@ -212,12 +212,12 @@ const SignInScreen = ({navigation}) => {
             
 
             <TouchableOpacity>
-                <Text style={{color: '#009387', marginTop:15}}>Forgot password?</Text>
+                <Text style={{color: COLOR.primary, marginTop:15}}>Forgot password?</Text>
             </TouchableOpacity>
             <View style={styles.button}>
                 <TouchableOpacity
                     style={[styles.signIn, {
-                      borderColor: '#009387',
+                      borderColor: COLOR.primary,
                       borderWidth: 1,
                       marginTop: 15
                   }]}
@@ -234,7 +234,7 @@ const SignInScreen = ({navigation}) => {
                 </LinearGradient> */}
                 <View style={styles.signIn}>
                 <Text style={[styles.textSign, {
-                        color:'#009387'
+                        color:COLOR.primary
                     }]}>Sign In</Text>
                 </View>
                 </TouchableOpacity>
@@ -242,13 +242,13 @@ const SignInScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('SignUpScreen')}
                     style={[styles.signIn, {
-                        borderColor: '#009387',
+                        borderColor: COLOR.primary,
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: COLOR.primary
                     }]}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
@@ -262,7 +262,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#009387'
+      backgroundColor: COLOR.primary
     },
     header: {
         flex: 1,
@@ -291,24 +291,24 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
+        borderBottomColor: COLOR.grey,
         paddingBottom: 5
     },
     actionError: {
         flexDirection: 'row',
         marginTop: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#FF0000',
+        borderBottomColor: COLOR.error,
         paddingBottom: 5
     },
     textInput: {
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
         paddingLeft: 10,
-        color: '#05375a',
+        color: COLOR.input,
     },
     errorMsg: {
-        color: '#FF0000',
+        color: COLOR.error,
         fontSize: 14,
     },
     button: {

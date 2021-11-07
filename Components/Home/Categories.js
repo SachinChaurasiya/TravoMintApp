@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
         marginTop:40,
         marginLeft:30,
         fontSize:20,
-        color:COLOR.secondary
+        color:COLOR.primary
     },
 })
 export default Categories;

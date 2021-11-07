@@ -175,7 +175,7 @@ const Cards = () => {
                     </View>
                <View style = {{marginTop:12 , marginLeft:4}}>
                     <Image
-                         source={require('./assets/Image/blueFlight.png')}
+                         source={require('./assets/Image/OrangeFlight.png')}
                          style = {{width:30 , height:30 , resizeMode:'contain',marginLeft:10}} />
                </View>
                </View>
@@ -213,7 +213,7 @@ const styles =  StyleSheet.create({
         marginTop:10,
         marginLeft:30,
         fontSize:20,
-        color:COLOR.secondary
+        color:COLOR.primary
     },
     card:{
         justifyContent:'center',

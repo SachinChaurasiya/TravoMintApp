@@ -1,8 +1,11 @@
 import React,{useState} from 'react';
 import { View ,Text , StyleSheet , TextInput , Button , ScrollView , TouchableOpacity  } from "react-native"
+import * as Animatable from 'react-native-animatable';
 // import Counter from '../Components/Counter';
 // import Cards from '../Screens/FlightSearchResult';
 // import BestOffer from '../Components/Home/BestOffer';
+
+// color
 import COLOR  from '../assets/consts/colors'
 
 
@@ -21,9 +24,11 @@ const HotelForm = () => {
       setCount( prevcount => prevcount - 1 )
     )
     return(
-      <ScrollView>
-        <View style= {styles.Main}>
-          <View style ={styles.ContentDiv} >
+        <View style= {styles.container}>
+          <View style ={styles.header} >
+            {/* <Text>HLO</Text> */}
+            <Animatable.View animation="fadeInUpBig"
+            style={styles.footer}>
             <View style = {styles.Form}>
                <View> 
                      <Text style = {styles.Text}>
@@ -208,11 +213,12 @@ const HotelForm = () => {
                     
                 </View>
                 </TouchableOpacity>
+
+                </Animatable.View>
               
           </View>
           
         </View>
-       </ScrollView> 
     )
 }
 
@@ -220,19 +226,26 @@ const HotelForm = () => {
 
 
 const styles  = StyleSheet.create({
-  Main:{
+  container:{
     flex:1,
     backgroundColor:COLOR.primary
   },
-  ContentDiv:{
-    flex:1,
-    backgroundColor:COLOR.white,
+  header:{
     marginTop:150,
-    borderTopLeftRadius:20,
-    borderTopRightRadius:20,
+    flex: 1,
+        justifyContent: 'flex-end',
+        // paddingBottom: 50
+  },
+  footer:{
+    flex: Platform.OS === 'ios' ? 3 : 2,
+        backgroundColor: COLOR.white,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        paddingHorizontal: 20,
+        paddingVertical: 30
   },
   Form:{
-    justifyContent:"center",
+    // justifyContent:"center",
     margin:20
   },
   DestinationInput :{

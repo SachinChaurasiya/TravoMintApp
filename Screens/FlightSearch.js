@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,Picker,Pressable} from 'react-native';
+import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,Button} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
@@ -9,14 +9,30 @@ import COLOR from '../assets/consts/colors'
 
 const width = Dimensions.get("screen").width;
 
- export const Flightsearch = ({navigation}) => {
+ export const Flightsearch = ({navigation,props}) => {
     const [activetab, setActiveTab] = useState('Round Trip');
-    const [text, onChangeText] = React.useState("Flight");
+    // Input text controller
+    const [flyingfromtext, flyingfromText] = React.useState("");
+    const [totext, flyingtoText] = React.useState("");
+    const [flyingdatetext, flyingdateText] = React.useState("");
+    const [returndatetext, returndateText] = React.useState("");
+
+    // hide and unhide
+    const [isVisible, setIsVisible] = useState(true);
     // const [selectedValue, setSelectedValue] = useState("Economy");
+
+
+
+    const toggleFunction = (props) => {
+        {!isVisible ? setIsVisible(!isVisible) : setIsVisible(isVisible)}
+      };
+      const toggleFunctionvisible = (props) => {
+        {!isVisible ? setIsVisible(isVisible) : setIsVisible(!isVisible)}
+      }
 
     return (
         <View style={styles.container}>
-          <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/>
+          {/* <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/> */}
         <View style={styles.header}>
             <Text style={styles.text_header}>Flight Search Now!</Text>
         </View>
@@ -29,6 +45,7 @@ const width = Dimensions.get("screen").width;
                 <View>
             <Text><HeaderButtons 
             text="Round Trip" 
+            onPress={toggleFunction}
             btncolor={COLOR.primary}
             textcolor={COLOR.white}
             activetab={activetab}
@@ -37,6 +54,7 @@ const width = Dimensions.get("screen").width;
             <View>
             <Text><HeaderButtons
              text="One Way" 
+             onPress={toggleFunctionvisible}
              btncolor={COLOR.primary} 
              textcolor={COLOR.primary}
              activetab={activetab}
@@ -45,6 +63,8 @@ const width = Dimensions.get("screen").width;
                 </View>
                 {/* <FlightForm/> */}
                 <View>
+                {/* <Button title="Toggle Visibility" onPress={toggleFunction} />
+      <Button title="Toggle Visibility" onPress={toggleFunctionvisible} /> */}
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
             {/* <Text>Hello</Text> */}
             <View>
@@ -52,18 +72,20 @@ const width = Dimensions.get("screen").width;
                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
                 <Fontisto name="plane" size={18} color={COLOR.primary}/>
             <TextInput
+            placeholder="Flying From"
              style={styles.input}
-             onChangeText={onChangeText}
-             value={text}
+             onChangeText={flyingfromText}
+             value={flyingfromtext}
             />
             </View>
             </View>
             <View>
             <Text style={[styles.title,{paddingLeft:-20}]}>Flying To</Text>
             <TextInput
+            placeholder="Flying To"
              style={styles.input}
-             onChangeText={onChangeText}
-             value={text}
+             onChangeText={flyingtoText}
+             value={totext}
              underlineColorAndroid="transparent"
             />
             </View>
@@ -76,20 +98,30 @@ const width = Dimensions.get("screen").width;
             <View style={{flexDirection: 'row',alignItems: 'center'}}>
                 <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary}/>
             <TextInput
-             style={styles.input}
-             onChangeText={onChangeText}
-             value={text}
+            placeholder="Flying Date"
+             style={[styles.input,{width: isVisible ? width-230: width-55}]}
+             onChangeText={flyingdateText}
+             value={flyingdatetext}
             />
             </View>
             </View>
-            <View>
+            { isVisible ? <Animatable.View animation="lightSpeedIn">
+                <Text style={[styles.title,{paddingLeft:-20}]}>Return Form</Text>
+            <TextInput
+            placeholder="Return"
+             style={styles.input}
+             onChangeText={returndateText}
+             value={returndatetext}
+            />
+            </Animatable.View>:null}
+            {/* <View>
                 <Text style={[styles.title,{paddingLeft:-20}]}>Return Form</Text>
             <TextInput
              style={styles.input}
              onChangeText={onChangeText}
              value={text}
             />
-            </View>
+            </View> */}
 
             </View>
                 <EBFClassbtnfunction/>
@@ -100,11 +132,11 @@ const width = Dimensions.get("screen").width;
                 </View>
                 
             <View>
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate('FlightSearchResult')} >
                 <View style={{alignItems: 'center',justifyContent: 'center', marginTop:20,backgroundColor:COLOR.secondary,borderRadius:30}}>
-                    <TouchableOpacity onPress={()=>navigation.navigate('FlightSearchResult')} >
                     <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
-                    </TouchableOpacity>
                 </View>
+                </TouchableOpacity>
             </View>
         </View>
             </View>
@@ -122,9 +154,12 @@ const HeaderButtons = (props) =>{
             paddingVertical:6,
             paddingHorizontal:16,
         }}
-        onPress={() => props.setActiveTab(props.text)}
+        onPressIn={() =>{ props.setActiveTab(props.text)}}
+        onPress={props.onPress}
+        // onPress={()=>ffFun()}
         >
             <Text style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}}>{props.text}</Text>
+            {/* <Button style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}} title={props.text}/> */}
         </TouchableOpacity>
         </View>
     )
@@ -132,14 +167,16 @@ const HeaderButtons = (props) =>{
 
 
 const Counter = () => {
-    const [count , setCount] = useState(0)
+    const [count , setCount] = useState(1)
 
     const Increment =() => (
       setCount(prevCount => prevCount + 1 )
     )
 
     const Decrement =() => (
-      setCount( prevCount => prevCount - 1   )
+        <View>
+      {count > 1 ? setCount( prevCount => prevCount - 1   ): setCount(1)}
+      </View>
     )
 
 
@@ -147,16 +184,16 @@ const Counter = () => {
         <View>
             <View style = {styles.SignDiv}>
                 <View>
-               <TouchableOpacity onPress={Increment}>
-                  <Text style = {styles.IncrementSign}>+</Text>
+               <TouchableOpacity onPress={Decrement}>
+               <Text style = {styles.DecrementSign}>-</Text>
                   </TouchableOpacity>
                 </View>
                 <View style= {{justifyContent:'center', alignItems:'center'}}>
-                  <Text style = {{fontSize:20, marginLeft:4, width:24  }}>{count}</Text>
+                  <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{count}</Text>
                 </View>
                 <View>
-                <TouchableOpacity onPress={Decrement}>
-                  <Text style = {styles.DecrementSign}>-</Text>
+                <TouchableOpacity onPress={Increment}>
+                  <Text style = {styles.IncrementSign}>+</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -254,15 +291,15 @@ const styles = StyleSheet.create({
         borderColor:COLOR.secondary, 
     },
     IncrementSign:{
-        fontSize:15,
+        fontSize:20,
         height:25,
-        marginTop:2 
+        marginBottom:5,marginRight:5
     },
     DecrementSign:{
-        fontSize:15,
-        marginTop:2,  
+        fontSize:20, 
         height:25,
-        marginRight:10
+        marginLeft:5,
+        marginBottom:5
     },
     text_header: {
         color: '#fff',

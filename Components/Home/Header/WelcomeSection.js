@@ -11,7 +11,7 @@ const Height=Dimensions.get('window').height
 
 
 
-const WelcomeSection = (props) => {
+const WelcomeSection = ({navigation}) => {
     return(
         <>
           <View style={{marginVertical:80}}>
@@ -26,7 +26,7 @@ const WelcomeSection = (props) => {
                                  <Text style = {{marginLeft:4 , color:COLOR.white}}>
                                      Use Code : 
                                  </Text>
-                                 <Text style = {{color:COLOR.primary, fontWeight:'bold', marginLeft:5}}>
+                                 <Text style = {{color:COLOR.whitesmoke, fontWeight:'bold', marginLeft:5}}>
                                      Welcome
                                  </Text>
                              </View>
@@ -42,7 +42,7 @@ const WelcomeSection = (props) => {
                     source ={require('../../../assets/Image/FlightOrng.png')} 
                     style = {{resizeMode:"contain" , height:20 , width:20 }} />
                </View>
-               <TouchableOpacity onPress = {()=>alert('this is button')}>
+               <TouchableOpacity onPress = {()=>navigation.navigate("FlightSearch")}>
                <View style = {{backgroundColor:COLOR.white , borderRadius:5 , marginTop:30,shadowOpacity:1, width:110 , shadowColor:COLOR.grey, shadowRadius:8 }}>
                    <View style = {{marginRight:10 , marginTop:20 , marginLeft:5 , marginBottom:15}}>
                    <Text style = {{fontWeight:'bold'}}>
@@ -69,10 +69,10 @@ const WelcomeSection = (props) => {
             <View>
                <View style = {{backgroundColor:COLOR.white , height:30, width:30 , borderRadius:50,marginLeft:25 , justifyContent:'center' , marginTop:10 , position:'absolute',zIndex:99 ,alignItems:'center' , shadowRadius:8 ,shadowOpacity:1 , shadowColor:COLOR.grey}}>
                    <Image 
-                    source ={require('../../../assets/Image/HotelYellow.png')} 
+                    source ={require('../../../assets/Image/OrangeHotel.png')} 
                     style = {{resizeMode:"contain" , height:20 , width:20 }} />
                </View>
-            <TouchableOpacity onPress = {()=>alert('This is a btuuon')}>
+            <TouchableOpacity onPress = {()=>navigation.navigate("Hotel")}>
                <View style = {{backgroundColor:COLOR.white , borderRadius:5 , marginTop:30 ,shadowOpacity:1,marginLeft:20,width:110 , shadowColor:COLOR.grey, shadowRadius:8,}}>
                    <View style = {{marginRight:10 , marginTop:20 , marginLeft:5 , marginBottom:15}}>
                    <Text style = {{fontWeight:'bold'}}>
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius:20,
         width:Width,
         height: 200,
-        backgroundColor:COLOR.primary
+        backgroundColor:COLOR.secondary
     },
     textDiv:{
         width: Width,

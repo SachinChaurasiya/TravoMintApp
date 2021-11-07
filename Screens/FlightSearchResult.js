@@ -14,7 +14,54 @@ const WindowHeight = Dimensions.get('window').height
 
 const Cards = ( )=>{
 
-  const [activetab,setActiveTab] = useState("Go")
+  // const [activetab,setActiveTab] = useState("Go")
+
+  const RoundOneWayBtn =(props)=>{
+    
+    const [activetab, setActiveTab] =useState('Go to')
+    return(
+             <View style= {styles.btn}>
+            <View>
+            <Text><HeaderButtons 
+            text="Go to"
+            btncolor="#f15b2f" 
+            textcolor="white"
+            activetab={activetab}
+            setActiveTab={setActiveTab}
+           /></Text>
+            </View>
+            <View>
+            <Text>
+              <HeaderButtons
+             text="Return" 
+             btncolor="white" 
+             textcolor="#195fb9"
+             activetab={activetab}
+            setActiveTab={setActiveTab}/></Text>
+            </View>
+                </View> 
+    )
+}
+
+
+
+  const HeaderButtons = (props ) =>{
+    return(
+        <View>
+        <TouchableOpacity activeOpacity={0.6} style={{
+            backgroundColor: props.activetab === props.text ? "#f15b2f" : "white",
+            borderRadius:30,
+            paddingVertical:6,
+            paddingHorizontal:16,
+        }}
+        onPress={() => props.setActiveTab(props.text)}
+        >
+
+            <Text style={{color: props.activetab === props.text?"white":"#000",fontSize:15,fontWeight:'900'}}>{props.text}</Text>
+        </TouchableOpacity>
+        </View>
+    )
+}
  
 
 const ConvertMinsToTime = ({data}) => {
@@ -23,26 +70,6 @@ const ConvertMinsToTime = ({data}) => {
         minutes = minutes < 10 ? '0' + minutes : minutes;
         return `${hours}h:${minutes}m`;
       }
-
-
-const HeaderButtons = (props) =>{
-        return(
-            <View>
-            <TouchableOpacity activeOpacity={0.6} style={{
-                backgroundColor: props.activetab === props.text ? "#f15b2f" : "white",
-                borderRadius:30,
-                paddingVertical:6,
-                paddingHorizontal:16,
-            }}
-            onPress={() => props.setActiveTab(props.text)}
-            >
-                <Text style={{color: props.activetab === props.text?"white":"#000",fontSize:15,fontWeight:'900'}}>{props.text}</Text>
-            </TouchableOpacity>
-            </View>
-        )
-    }
-
-    
 
 
     const Flight = ({Flight}) => {
@@ -240,11 +267,12 @@ const HeaderButtons = (props) =>{
 
     return(
         <View style = {styles.container}>
-            <View style= {styles.contentDiv}>
-            <Animatable.View 
+          <Animatable.View 
             animation="fadeInUpBig"
             style={styles.footer}
         >   
+            <View>
+              <RoundOneWayBtn/>
               <View>             
                      <FlatList
                     data={FlightData.flightResult}
@@ -253,12 +281,11 @@ const HeaderButtons = (props) =>{
                       return (<View style={{height: 1 , marginVertical:10 , marginHorizontal:5, backgroundColor: props.highlighted ? 'green' : 'rgb(199, 199, 204)'}} />);
                     }}
                     keyExtractor={(item,index) => index.toString()}
-                    showHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     />
                 </View> 
-                </Animatable.View>
             </View>
-            
+            </Animatable.View>
         </View>
        
     )
@@ -269,20 +296,20 @@ const styles = StyleSheet.create({
       flex: 1,
       backgroundColor:'#f15b2f'
     },
-    contentDiv:{
-        flex:1,
-        backgroundColor:'white',
-        marginTop:150,
-        borderTopLeftRadius:30,
-        borderTopRightRadius:30
-    },
+    // contentDiv:{
+    //     flex:1,
+    //     backgroundColor:'white',
+    //     marginTop:150,
+    //     borderTopLeftRadius:30,
+    //     borderTopRightRadius:30
+    // },
     btn:{
         flexDirection:'row',
         alignSelf: 'center',
-        margin:20,
         borderWidth:1,
         borderColor:"#f15b2f", 
-        borderRadius:30
+        borderRadius:30,
+        marginBottom:10
     },
     card:{
         marginTop:10,
@@ -343,12 +370,13 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   footer: {
-    // flex: Platform.OS === 'ios' ? 3 : 5,
+    flex: Platform.OS === 'ios' ? 3 : 5,
     backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
-    paddingVertical: 30
+    paddingVertical: 30,
+    marginTop:150
 },
   });
   

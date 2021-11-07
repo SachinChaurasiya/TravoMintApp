@@ -5,10 +5,11 @@ const COLORS = {
   secondary: '#bf1212',
   light: '#f9f9f9',
   grey: '#dddedd',
-  red: 'red',
-  orange: '#f5a623',
   whitesmoke : "#F5F5F5",
-  lightpink : '#F3EDF6'
+  lightpink : '#F3EDF6',
+  input : '#05375a',
+  error: '#FF0000',
+  placeholderColor: "#666666"
 };
 
 export default COLORS;

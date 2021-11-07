@@ -16,6 +16,9 @@ import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
+// color
+import COLOR from '../assets/consts/colors'
+
 const SignInScreen = ({navigation}) => {
 
     const [data, setData] = React.useState({
@@ -73,7 +76,7 @@ const SignInScreen = ({navigation}) => {
 
     return (
       <View style={styles.container}>
-          <StatusBar backgroundColor='#009387' barStyle="light-content"/>
+          {/* <StatusBar backgroundColor={COLOR.primary} barStyle="light-content"/> */}
         <View style={styles.header}>
             <Text style={styles.text_header}>Register Now!</Text>
         </View>
@@ -86,7 +89,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.action}>
                 <FontAwesome 
                     name="user-o"
-                    color="#05375a"
+                    color={COLOR.input}
                     size={20}
                 />
                 <TextInput 
@@ -101,7 +104,7 @@ const SignInScreen = ({navigation}) => {
                 >
                     <Feather 
                         name="check-circle"
-                        color="green"
+                        color={COLOR.primary}
                         size={20}
                     />
                 </Animatable.View>
@@ -149,7 +152,7 @@ const SignInScreen = ({navigation}) => {
             <View style={styles.action}>
                 <Feather 
                     name="lock"
-                    color="#05375a"
+                    color={COLOR.input}
                     size={20}
                 />
                 <TextInput 
@@ -200,7 +203,7 @@ const SignInScreen = ({navigation}) => {
                 </LinearGradient> */}
                 <View style={styles.signIn}>
                 <Text style={[styles.textSign, {
-                        color:'#fff'
+                        color:COLOR.primary
                     }]}>Sign Up</Text>
                 </View>
                 </TouchableOpacity>
@@ -208,13 +211,13 @@ const SignInScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.goBack()}
                     style={[styles.signIn, {
-                        borderColor: '#009387',
+                        borderColor: COLOR.primary,
                         borderWidth: 1,
                         marginTop: 15
                     }]}
                 >
                     <Text style={[styles.textSign, {
-                        color: '#009387'
+                        color: COLOR.primary
                     }]}>Sign In</Text>
                 </TouchableOpacity>
             </View>
@@ -229,7 +232,7 @@ export default SignInScreen;
 const styles = StyleSheet.create({
     container: {
       flex: 1, 
-      backgroundColor: '#009387'
+      backgroundColor: COLOR.primary
     },
     header: {
         flex: 1,
@@ -239,14 +242,14 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
-        backgroundColor: '#fff',
+        backgroundColor: COLOR.white,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingHorizontal: 20,
         paddingVertical: 30
     },
     text_header: {
-        color: '#fff',
+        color: COLOR.white,
         fontWeight: 'bold',
         fontSize: 30
     },
@@ -258,14 +261,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#f2f2f2',
+        borderBottomColor: COLOR.grey,
         paddingBottom: 5
     },
     textInput: {
         flex: 1,
         marginTop: Platform.OS === 'ios' ? 0 : -12,
         paddingLeft: 10,
-        color: '#05375a',
+        color: COLOR.input,
     },
     button: {
         alignItems: 'center',
@@ -276,7 +279,9 @@ const styles = StyleSheet.create({
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        borderRadius: 10,
+        borderWidth:1,
+        borderColor:COLOR.primary
     },
     textSign: {
         fontSize: 18,

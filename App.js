@@ -5,6 +5,8 @@ import { SafeAreaView, StyleSheet, Text, View,ActivityIndicator } from 'react-na
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import COLOR from './assets/consts/colors'
+
 const Stack = createStackNavigator();
 
 
@@ -61,7 +63,7 @@ if(isloading) {
 
   return (
     <SafeAreaView style={styles.container}>
-             <StatusBar backgroundColor="#fff"/>
+             <StatusBar backgroundColor={COLOR.secondary}  barStyle="light-content"/>
              <AuthContext.Provider value={authContext}>
       <NavigationContainer>
         {userToken ===! null ?(

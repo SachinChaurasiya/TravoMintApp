@@ -47,7 +47,7 @@ const BestOffer = () => {
                       marginLeft:5
                   }}>
                       <Image 
-                      source ={require('../../assets/Image/Offersblue.png')}
+                      source ={require('../../assets/Image/OrangeOffer.png')}
                       style = {{resizeMode:"contain" , width:30 , height:30,marginLeft:10 , marginTop:25}}
                       />
                   </View>
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         marginTop:40,
         marginLeft:30,
         fontSize:20,
-        color:COLOR.secondary
+        color:COLOR.primary
     },
   
 })

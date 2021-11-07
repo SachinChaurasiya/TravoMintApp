@@ -71,7 +71,7 @@ const HeaderTab = ({navigation}) => {
             </View>
           </View>
           <View style={{flexDirection: 'row',justifyContent: 'space-between',marginTop:25}}>
-            <TouchableOpacity  onPress={()=> props.navigation.dispatch(DrawerActions.openDrawer())}>
+            <TouchableOpacity  onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
             <Icon name="sort" size={28} color={COLORS.secondary} />
             </TouchableOpacity>
               <Icon name="notifications-none" size={28} color={COLORS.secondary} />

@@ -34,8 +34,8 @@ const BestOffer = () => {
         </View>
     )
     return(
-        <View style={{marginTop:-80}}>
-            <View>
+        <View style={{marginTop:-100}}>
+            <View>  
                 <View style= {{flexDirection:'row' , alignItems:'center'}}>
                     <View style= {{marginBottom:4}}>
                       <Text style ={styles.text}>
@@ -54,7 +54,7 @@ const BestOffer = () => {
                 </View>
                 
                 <View style={{
-                        marginLeft:20,
+                        marginLeft:15,
                         width: 200,
                         height: 1,
                         backgroundColor: COLOR.secondary,
@@ -62,7 +62,7 @@ const BestOffer = () => {
                     <View>
                     <View style={{
                         marginTop:5,
-                        marginLeft:20,
+                        marginLeft:15,
                         width: 150,
                         height: 1,
                         backgroundColor: COLOR.secondary,
@@ -88,8 +88,8 @@ const BestOffer = () => {
 const styles = StyleSheet.create({
     text:{
         marginTop:40,
-        marginLeft:30,
-        fontSize:20,
+        marginLeft:15,
+        fontSize:15,
         color:COLOR.primary
     },
   

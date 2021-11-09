@@ -95,7 +95,7 @@ const Separator = () => (
                
                  <View style = {{justifyContent:"center" , paddingLeft:50}}>
                     <View style = {{flexDirection:'row'}}>
-                     <Text style = {{fontSize:25 , color:"#195fb9"}}>{From} </Text>
+                     <Text style = {{fontSize:25 , color:COLOR.primary}}>{From} </Text>
                      <Text style = {{marginTop:8}}>{Place1}</Text>
                      </View>
 
@@ -103,12 +103,12 @@ const Separator = () => (
                      <FontAwesome5 
                      style={{marginLeft:40}}
                      name="exchange-alt"
-                     color='#195FB9'
+                     color={COLOR.primary}
                      size={20} />
                      </View>
                     
                     <View style= {{flexDirection:'row'}}>
-                        <Text style = {{fontSize:25 , color:"#195fb9"}}>{To}</Text>
+                        <Text style = {{fontSize:25 , color:COLOR.primary}}>{To}</Text>
                         <Text style = {{marginTop:8 , marginLeft:3}}>{Place2}</Text>
                     </View>
                  </View>
@@ -127,7 +127,7 @@ const Separator = () => (
                     <Text style = {{fontSize:30 ,marginTop:2}}>{price}</Text>
                     </View>
                
-                   <View style= {{ marginTop:5 , backgroundColor:"darkblue" ,height:30 , width:30 , borderRadius:50 , justifyContent:'center' , flexDirection:"row" , marginLeft:5 }}>
+                   <View style= {{ marginTop:5 , backgroundColor:COLOR.primary ,height:30 , width:30 , borderRadius:50 , justifyContent:'center' , flexDirection:"row" , marginLeft:5 }}>
                     <FontAwesome5
                     style = {{marginTop:5}}
                     onPress ={() =>alert('This is button')}
@@ -173,7 +173,7 @@ const Cards = () => {
                                 POPULAR DEALS
                            </Text>
                     </View>
-               <View style = {{marginTop:12 , marginLeft:4}}>
+               <View style = {{marginTop:-10 , marginLeft:4}}>
                     <Image
                          source={require('./assets/Image/OrangeFlight.png')}
                          style = {{width:30 , height:30 , resizeMode:'contain',marginLeft:10}} />
@@ -181,14 +181,14 @@ const Cards = () => {
                </View>
 
                <View style={{
-                        marginLeft:20,
+                        marginLeft:15,
                         width: 220,
                         height: 1,
                         backgroundColor: COLOR.secondary,
                     }}></View>
                       <View style={{
                         marginTop:5,
-                        marginLeft:20,
+                        marginLeft:15,
                         width: 160,
                         height: 1,
                         backgroundColor: COLOR.secondary,
@@ -210,9 +210,9 @@ const Cards = () => {
 
 const styles =  StyleSheet.create({
     text:{
-        marginTop:10,
-        marginLeft:30,
-        fontSize:20,
+        marginTop:-16,
+        marginLeft:15,
+        fontSize:15,
         color:COLOR.primary
     },
     card:{
@@ -220,7 +220,7 @@ const styles =  StyleSheet.create({
         height:250,
         width:350,
         elevation:2,
-        margin:40,
+         marginVertical:20,
         borderRadius:20,
         backgroundColor: COLOR.whitesmoke,
         marginHorizontal:10,

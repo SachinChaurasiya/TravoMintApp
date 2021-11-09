@@ -1,5 +1,5 @@
-import React,{useState} from 'react';
-import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,Button} from 'react-native';
+import React,{useState,useEffect} from 'react';
+import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,FlatList,ScrollView} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
@@ -10,6 +10,48 @@ import COLOR from '../assets/consts/colors'
 const width = Dimensions.get("screen").width;
 
  export const Flightsearch = ({navigation,props}) => {
+
+    const [text, setText] = useState('');
+    const [state, setState] = useState({ data: [], loading: false }); // only one data source
+    const { data, loading } = state;
+
+    const fetchAPI = () => {
+        //setState({data:[], loading: true});
+        return fetch('https://api.covid19api.com/countries')
+          .then(response => response.json())
+          .then(data => {
+            // console.log(data);
+            setState({ data, loading: false }); // set only data
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
+      useEffect(() => {
+        fetchAPI();
+      }, []);
+
+      const filterdData = text // based on text, filter data and use filtered data
+    ? data.filter(item => {
+        const itemData = item.Country.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      })
+    : null; // on on text, u can return all data
+//   console.log(data);
+  const itemSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: '#000',
+        }}
+      />
+    );
+  };
+
+
     const [activetab, setActiveTab] = useState('Round Trip');
     // Input text controller
     const [flyingfromtext, flyingfromText] = React.useState("");
@@ -61,33 +103,106 @@ const width = Dimensions.get("screen").width;
             setActiveTab={setActiveTab}/></Text>
             </View>
                 </View>
-                {/* <FlightForm/> */}
+
+            <ScrollView showsVerticalScrollIndicator={false}>
                 <View>
-                {/* <Button title="Toggle Visibility" onPress={toggleFunction} />
-      <Button title="Toggle Visibility" onPress={toggleFunctionvisible} /> */}
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
-            {/* <Text>Hello</Text> */}
             <View>
+
                 <Text style={styles.title}>Flying From</Text>
+
                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
                 <Fontisto name="plane" size={18} color={COLOR.primary}/>
-            <TextInput
+               
+<View>
+      {/* {loading === false ? (
+      <View>
+          <View style={{flexDirection: 'row',alignItems: 'center'}}>
+          <Fontisto name="plane" size={18} color={COLOR.primary}/>
+      <TextInput
+            placeholder="Flying From"
+             style={styles.input}
+            //  onChangeText={flyingfromText}
+             onChangeText={text => setText(text)}
+             value={text}
+            />
+            </View>
+            
+            <FlatList
+            data={filterdData}
+            vertical={true}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={itemSeparator}
+            renderItem={({ item }) => (
+                <ScrollView>
+              <Text>{item.Country}</Text>
+              </ScrollView>
+            )}
+            style={{ marginTop: 10,width:width-210 }}
+          />  
+          
+          
+          </View>  ):
+          <Text>loading</Text>} */}
+          <View>
+          <Text style={[styles.flightDest,{marginTop: 10}]} onPress={()=> navigation.navigate("FlightSearchtwo")}>DEL</Text>
+          </View>
+          <View style={{marginLeft:0,
+          // marginTop:18,
+                        width: width-240,
+                        height: 1,
+                        backgroundColor: COLOR.grey,}}/>
+
+          </View>
+          {/* <TextInput
             placeholder="Flying From"
              style={styles.input}
              onChangeText={flyingfromText}
              value={flyingfromtext}
-            />
+            /> */}
+
+
             </View>
             </View>
             <View>
             <Text style={[styles.title,{paddingLeft:-20}]}>Flying To</Text>
-            <TextInput
+            {/* <TextInput
             placeholder="Flying To"
              style={styles.input}
              onChangeText={flyingtoText}
              value={totext}
              underlineColorAndroid="transparent"
+            /> */}
+            <View>
+      {loading === false ? (
+      <View>
+      <TextInput
+            placeholder="Flying To"
+             style={styles.input}
+            //  onChangeText={flyingfromText}
+             onChangeText={text => setText(text)}
+             value={text}
             />
+            
+            <FlatList
+            data={filterdData}
+            vertical={true}
+            keyExtractor={(item, index) => index.toString()}
+            ItemSeparatorComponent={itemSeparator}
+            renderItem={({ item }) => (
+                <ScrollView>
+              <Text>{item.Country}</Text>
+              </ScrollView>
+            )}
+            // style={{ marginTop: 10,width:width-210 }}
+          />  
+          
+          
+          </View>  ):
+          <Text>loading</Text>}
+          {/* <Text onPress={()=>navigation.navigate("FlightSearchtwo")}>Del</Text> */}
+
+          </View>
             </View>
             </View>
 
@@ -95,8 +210,8 @@ const width = Dimensions.get("screen").width;
             <View style={{flexDirection: 'row',justifyContent: 'space-between',marginTop:20}}>
                 <View>
             <Text style={styles.title}>Flying Date</Text>
-            <View style={{flexDirection: 'row',alignItems: 'center'}}>
-                <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary}/>
+            <View style={{flexDirection: 'row',alignItems: 'center'}}  >
+                <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary} onPress={()=>navigation.navigate("calendar")}/>
             <TextInput
             placeholder="Flying Date"
              style={[styles.input,{width: isVisible ? width-230: width-55}]}
@@ -133,12 +248,14 @@ const width = Dimensions.get("screen").width;
                 
             <View>
             <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate('FlightSearchResult')} >
-                <View style={{alignItems: 'center',justifyContent: 'center', marginTop:20,backgroundColor:COLOR.secondary,borderRadius:30}}>
+                <View style={{alignItems: 'center',justifyContent: 'center', marginBottom:50,backgroundColor:COLOR.secondary,borderRadius:30}}>
                     <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
                 </View>
                 </TouchableOpacity>
             </View>
         </View>
+
+        </ScrollView>
             </View>
         </Animatable.View>
       </View>
@@ -354,6 +471,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 30
     },
+    flightDest:{
+      marginLeft:20,
+      marginBottom:10,
+    }
 })
 
 export default Flightsearch;

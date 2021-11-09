@@ -18,7 +18,7 @@ const NotificationScreen = () =>{
     <View style = {{backgroundColor:COLOR.white , flex:1}}>
     {/* <StatusBar backgroundColor={COLOR.secondary}/> */}
         <ScrollView>
-          <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+          <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -53,7 +53,7 @@ const NotificationScreen = () =>{
             <Separator />
 
 
-            <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+            <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -87,7 +87,7 @@ const NotificationScreen = () =>{
                 <Separator />
 
 
-                <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+                <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -121,7 +121,7 @@ const NotificationScreen = () =>{
                 <Separator />
 
 
-                <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+                <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -154,7 +154,7 @@ const NotificationScreen = () =>{
                 </View>
                 <Separator />
 
-                <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+                <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -188,7 +188,7 @@ const NotificationScreen = () =>{
                 </View>
                 <Separator />
 
-                <View style= {{flexDirection:'row' , backgroundColor:COLOR.secondary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
+                <View style= {{flexDirection:'row' , backgroundColor:COLOR.primary , borderRadius:10 , marginTop:10 , marginHorizontal:10}}> 
             <View style = {styles.Logo}>
               <View>
                 {/* <Image
@@ -252,3 +252,4 @@ const styles = StyleSheet.create({
 
 
 export default NotificationScreen;
+

@@ -13,6 +13,9 @@ import FlightSearchResult from './FlightSearchResult'
 // color
 import COLOR from '../assets/consts/colors'
 import HotelForm from './Hotels';
+import Transferscreen from './TransferScreen';
+import calendar from '../Components/Calendar/Calendar';
+import FlightSearchtwo from './FlightSearchtwo';
 
 const RootStack = createStackNavigator();
 
@@ -22,13 +25,20 @@ const RootStackScreen = ({navigation}) => (
         <RootStack.Screen name="SignInScreen" options={{headerShown:false}} component={SignInScreen}/>
         <RootStack.Screen name="SignUpScreen" options={{headerShown:false}}component={SignUpScreen}/>
         <RootStack.Screen name="MainTabScreens" options={{headerShown:false}} component={DrawerScreen}/>
+        <RootStack.Screen name="transfer"  options={{headerTitle:"Transfer",headerStyle: {
+             backgroundColor: COLOR.secondary,
+           },
+           headerTintColor: COLOR.white,
+           headerTitleStyle: {
+             fontWeight: 'bold',
+           },}} component={Transferscreen}/>
         <RootStack.Screen name="FlightSearch" options={{headerTitle:"Book Your Flight",headerStyle: {
              backgroundColor: COLOR.secondary,
            },
            headerTintColor: COLOR.white,
            headerTitleStyle: {
              fontWeight: 'bold',
-           },}} headerStyle={{backgroundColor:"black"}} component={Flightsearch}/>
+           },}} component={Flightsearch}/>
  
           <RootStack.Screen name="FlightSearchResult" options={{headerTitle:"Flight Search" , headerStyle:{
            backgroundColor:"#f15b2f" 
@@ -39,6 +49,8 @@ const RootStackScreen = ({navigation}) => (
            backgroundColor:COLOR.secondary 
            },
          headerTintColor:COLOR.white}} component={HotelForm}/>
+         <RootStack.Screen name="calendar" component={calendar} />
+         <RootStack.Screen name="FlightSearchtwo" component={FlightSearchtwo}/>
     </RootStack.Navigator>
 );
 

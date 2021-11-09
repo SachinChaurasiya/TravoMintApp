@@ -18,7 +18,9 @@ const WelcomeSection = ({navigation}) => {
                <View>
                    <View style={styles.Background}>
                          <View style = {styles.textDiv}>
-                               <Text style= {styles.text}>Welcome To Travomint</Text>
+                             <View style={{flexDirection:'row',alignItems: 'center'}}>
+                               <Text style= {[styles.text,{fontSize:15}]}>Welcome To </Text><Text  style= {[styles.text,{color:COLOR.white}]}>Travomint</Text>
+                               </View>
                              <View style = {{marginTop:5 }}>
                                  <Text style = {{color:COLOR.white}}> Get These benefits on your first Booking!</Text>
                              </View>
@@ -146,6 +148,7 @@ const styles = StyleSheet.create({
         backgroundColor:COLOR.secondary
     },
     textDiv:{
+        // flexDirection:'row',
         width: Width,
         marginTop:20,
         marginLeft:10,

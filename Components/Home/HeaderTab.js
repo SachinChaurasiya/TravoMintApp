@@ -42,12 +42,14 @@ const HeaderTab = ({navigation}) => {
             <View style={style.inputContainer}>
               
             <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
-            <TouchableOpacity onPress = {()=> navigation.navigate('FlightSearch')}>
+            <TouchableOpacity onPress = {()=> navigation.navigate('FlightSearch')} > 
               <View style={style.iconContainer}>
                  <View style={{backgroundColor:COLORS.primary,width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Flight} style={{width:20, height: 20,}}/>
                  </View>
+                 <View>
                  <Text style={{marginTop:10,fontWeight: 'bold'}}>Flights</Text>
+                 </View>
               </View>
               </TouchableOpacity>
               <TouchableOpacity onPress = {()=> navigation.navigate('Hotel')}>
@@ -58,7 +60,7 @@ const HeaderTab = ({navigation}) => {
               <Text style={{marginTop:10,fontWeight: 'bold'}}>Hotels</Text>
               </View>
               </TouchableOpacity>
-              <TouchableOpacity>  
+              <TouchableOpacity onPress={()=> navigation.navigate('transfer')}>  
               <View style={style.iconContainer}>
               <View style={{backgroundColor:COLORS.primary,width:40,height:40,alignItems:"center",justifyContent:"center",borderRadius:30}}>
                  <Image source={Transfer} resizeMode="contain"  style={{width:20, height: 20,}}/>

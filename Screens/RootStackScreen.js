@@ -40,7 +40,10 @@ const RootStackScreen = ({navigation}) => (
              fontWeight: 'bold',
            },}} component={Flightsearch}/>
 
-<RootStack.Screen name="FlightSearchtwo" component={FlightSearchtwo}/>
+          <RootStack.Screen name="FlightSearchtwo" options={{headerTitle:"Flight Result", headerStyle:{backgroundColor: COLOR.secondary},headerTintColor: COLOR.white,
+           headerTitleStyle: {
+             fontWeight: 'bold',
+           }}} component={FlightSearchtwo}/>
           <RootStack.Screen name="FlightSearchResult" options={{headerTitle:"Flight Search" , headerStyle:{
            backgroundColor:"#f15b2f" 
            },

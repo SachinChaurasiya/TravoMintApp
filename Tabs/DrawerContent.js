@@ -7,6 +7,7 @@ import {DrawerActions} from '@react-navigation/native';
 import {FontAwesome5} from 'react-native-vector-icons';
 import {Fontisto} from 'react-native-vector-icons';
 import { Title,Text,TouchableRipple,Switch,Drawer } from 'react-native-paper';  
+import COLOR from "../assets/consts/colors"
 
 
 
@@ -37,7 +38,7 @@ import Logo from '../assets/Image/Travomint.png'
                <TouchableOpacity>
                      <FontAwesome5
                      onPress={()=> props.navigation.dispatch(DrawerActions.closeDrawer())}
-                     name='bars' size={28} color='#195fb9'/>
+                     name='bars' size={28} color={COLOR.primary}/>
                </TouchableOpacity>
             </View>
       </View>
@@ -46,7 +47,7 @@ import Logo from '../assets/Image/Travomint.png'
             <DrawerItem
             style={{marginLeft:10}}
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <Fontisto name='plane' size={14} color="#fff"/>
                 </View>
             )}
@@ -56,7 +57,7 @@ import Logo from '../assets/Image/Travomint.png'
 
            <DrawerItem
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <FontAwesome5 name='hotel' size={14} color="#fff"/>
                 </View>
             )}
@@ -66,7 +67,7 @@ import Logo from '../assets/Image/Travomint.png'
 
            <DrawerItem
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <FontAwesome5 name='exchange-alt' size={14} color="#fff"/>
                 </View>
             )}
@@ -79,7 +80,7 @@ import Logo from '../assets/Image/Travomint.png'
 
                     <DrawerItem
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <FontAwesome5 name='sign-in-alt' size={14} color="#fff"/>
                 </View>
             )}
@@ -89,7 +90,7 @@ import Logo from '../assets/Image/Travomint.png'
 
             <DrawerItem
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <FontAwesome5 name='user-plus' size={14} color="#fff"/>
                 </View>
             )}
@@ -102,7 +103,7 @@ import Logo from '../assets/Image/Travomint.png'
             <DrawerItem
             // style={{marginLeft:13}}
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:12,borderRadius:50}}>
+                <View style={{backgroundColor:COLOR.primary,padding:12,borderRadius:50}}>
                 <FontAwesome5 name='clipboard' size={14} color="#fff"/>
                 </View>
             )}
@@ -112,7 +113,7 @@ import Logo from '../assets/Image/Travomint.png'
 
            <DrawerItem
             icon={({color,size})=>(
-                <View style={{backgroundColor:"#195fb9",padding:10,borderRadius:30}}>
+                <View style={{backgroundColor:COLOR.primary,padding:10,borderRadius:30}}>
                 <FontAwesome5 name='headset' size={14} color="#fff"/>
                 </View>
             )}

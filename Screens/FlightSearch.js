@@ -351,7 +351,7 @@ const height = Dimensions.get("screen").height;
           </View>  ):
           <Text>loading</Text>}
             <Button
-            title= "close"
+            title= "Ok"
             onPress={()=>setFlyingDate(!FlyingDate)}
             />
           </View>
@@ -399,25 +399,47 @@ const height = Dimensions.get("screen").height;
 
             </View>
                 <EBFClassbtnfunction/>
-                <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
-                  <View style={{alignItems: 'center',justifyContent: 'center'}}> 
-                    <Text>Adult</Text>
-                <Counter/>
-                </View>
-                  
-                <View style={{alignItems: 'center',justifyContent: 'center'}}> 
-                    <Text>Childern</Text>
-                <Counter/>
-                </View>
-                <View style={{alignItems: 'center',justifyContent: 'center'}}> 
-                    <Text>AA</Text>
-                <Counter/>
-                </View>
-                </View>
+                            <View style= {{flexDirection:'row' , justifyContent:'space-around'}}>
+             
+             <View>
+             <View>
+               <Text style = {{marginTop:10 ,color:COLOR.secondary, marginLeft:14 }}>
+                 Adult(+18)
+               </Text>
+             </View>  
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
+             </View>
+
+            
+             <View>
+             <View>
+               <Text style = {{marginTop:10 , marginLeft:5 ,color:COLOR.secondary}}>
+                 Childern(0-12)
+               </Text>
+             </View>
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
+             </View>
+
+            
+             <View>
+             <View>
+               <Text style = {{marginTop:10 ,color:COLOR.secondary ,marginRight:5}}>
+                 Infant(on Lap)
+               </Text>
+             </View>
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
+             </View>
+             </View>
                 
             <View>
             <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate('FlightSearchtwo')} >
-                <View style={{alignItems: 'center',justifyContent: 'center', marginBottom:50,backgroundColor:"blue",borderRadius:30}}>
+                <View style={{alignItems: 'center',justifyContent: 'center', marginBottom:50,backgroundColor:"#195fb9",borderRadius:30,marginTop:20}}>
                     <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
                 </View>
                 </TouchableOpacity>
@@ -468,21 +490,21 @@ const Counter = () => {
 
     return (
         <View>
-            <View style = {styles.SignDiv}>
-                <View>
-               <TouchableOpacity onPress={Decrement}>
-               <Text style = {styles.DecrementSign}>-</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style= {{justifyContent:'center', alignItems:'center'}}>
-                  <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{count}</Text>
-                </View>
-                <View>
-                <TouchableOpacity onPress={Increment}>
-                  <Text style = {styles.IncrementSign}>+</Text>
-                  </TouchableOpacity>
-                </View>
-            </View>
+           <View style = {styles.SignDiv}>
+              <View>
+             <TouchableOpacity onPress={Decrement}>
+             <Text style = {styles.DecrementSign}>-</Text>
+                </TouchableOpacity>
+              </View>
+              <View style= {{justifyContent:'center', alignItems:'center'}}>
+                <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{count}</Text>
+              </View>
+              <View>
+              <TouchableOpacity onPress={Increment}>
+                <Text style = {styles.IncrementSign}>+</Text>
+                </TouchableOpacity>
+              </View>
+          </View>
         </View>
     );
 }
@@ -566,27 +588,25 @@ const styles = StyleSheet.create({
         paddingBottom: 50
     },
     SignDiv:{
-        flexDirection:'row' , 
-        margin:20 ,
-        borderWidth:1 ,
-        width:75 , 
-        justifyContent:'space-around', 
-        alignItems:'space-around', 
-        alignItems:'center', 
-        borderRadius:10,
-        borderColor:COLOR.secondary, 
-    },
-    IncrementSign:{
-        fontSize:20,
-        height:25,
-        marginBottom:5,marginRight:5
-    },
-    DecrementSign:{
-        fontSize:20, 
-        height:25,
-        marginLeft:5,
-        marginBottom:5
-    },
+      flexDirection:'row',
+      borderWidth:1,
+      borderColor:COLOR.secondary,     
+      alignItems:"center",
+      height:30,
+      width:80,
+      marginLeft:5,
+      borderRadius:10
+  },
+  IncrementSign:{
+     fontSize:25,
+     paddingLeft:1,
+     color:COLOR.secondary
+  },
+  DecrementSign:{
+     fontSize:25,
+     paddingLeft:10,
+     color:COLOR.secondary
+   },
     text_header: {
         color: '#fff',
         fontWeight: 'bold',

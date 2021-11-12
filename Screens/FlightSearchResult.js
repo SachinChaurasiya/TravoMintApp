@@ -8,8 +8,8 @@ import Moment from 'moment';
 import COLOR from '../assets/consts/colors'
 
 
-const WindowWidth = Dimensions.get('window').width
-const WindowHeight = Dimensions.get('window').height
+const width = Dimensions.get('screen').width
+const height = Dimensions.get('screen').height
 
 
 
@@ -80,9 +80,10 @@ const ConvertMinsToTime = ({data}) => {
       var round= (Flight.fare.grandTotal)
       round=round.toFixed(2)
         const [modalVisible, setModalVisible] = useState(false);
+        const [checkVisible, setCheckVisible] = useState(false);
         const [date ,setDate ] = useState({name : Moment(Flight.inBound[0].depDate.split("T")[0])})
         // const [setSelected , isSelection]  = useState(false)
-        const [check1, setCheck1] = useState(false);
+        const [check, setCheck] = useState(false);
    
         return(
            <> 
@@ -170,7 +171,7 @@ const ConvertMinsToTime = ({data}) => {
                                      
                                       <View>
                                         <Text>
-                                            ({count}-Stop )
+                                            ({count}-Stop)
                                         </Text>
                                       </View>
                                      
@@ -185,11 +186,17 @@ const ConvertMinsToTime = ({data}) => {
                                         <View>
                                         <CheckBox
                                               center
-                                              checked={check1}
+                                              checked={check}
                                               checkedColor={COLOR.primary}
-                                              onPress={() => setCheck1(!check1)}
+                                              onPress={() => setCheck(!check)}
                                             />
                                       </View>
+                                      {check ? (
+                                      <View style={{position: 'absolute', width:width,justifyContent: "flex-end",bottom:0,left:0}}>
+                                        <Text>Check</Text>
+                                      </View>
+                                      
+                                      ):null}
 
                                       
                                          <TouchableOpacity onPress ={()=> setModalVisible(true)}>
@@ -212,7 +219,7 @@ const ConvertMinsToTime = ({data}) => {
 
 
                     <View>
-                    <View style={styles.centeredView}>
+    <View style={styles.centeredView}>
        <Modal
         animationType="slide"
         transparent={true}
@@ -323,7 +330,7 @@ const ConvertMinsToTime = ({data}) => {
        </View>
         </View>
       </Modal>
-      </View>
+    </View>
                     </View>
            </> 
         )

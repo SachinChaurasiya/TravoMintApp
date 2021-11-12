@@ -16,8 +16,8 @@ const calendar = ( props ) => {
           }}
           blockSingleDateSelection={true}
           responseFormat="DD-MM-YYYY"
-          maxDate={moment().add(730, "days")}
-          minDate={moment().subtract(730, "days")}
+          maxDate={moment().add(90, "days")}
+          minDate={moment().subtract(90, "days")}
           selectedDateContainerStyle={styles.selectedDateContainerStyle}
           selectedDateStyle={styles.selectedDateStyle}
         />

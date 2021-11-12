@@ -39,7 +39,8 @@ const RootStackScreen = ({navigation}) => (
            headerTitleStyle: {
              fontWeight: 'bold',
            },}} component={Flightsearch}/>
- 
+
+<RootStack.Screen name="FlightSearchtwo" component={FlightSearchtwo}/>
           <RootStack.Screen name="FlightSearchResult" options={{headerTitle:"Flight Search" , headerStyle:{
            backgroundColor:"#f15b2f" 
            },
@@ -50,7 +51,7 @@ const RootStackScreen = ({navigation}) => (
            },
          headerTintColor:COLOR.white}} component={HotelForm}/>
          <RootStack.Screen name="calendar" component={calendar} />
-         <RootStack.Screen name="FlightSearchtwo" component={FlightSearchtwo}/>
+         
     </RootStack.Navigator>
 );
 

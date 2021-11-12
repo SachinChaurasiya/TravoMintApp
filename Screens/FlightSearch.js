@@ -1,23 +1,27 @@
 import React,{useState,useEffect} from 'react';
-import {View,StatusBar, StyleSheet,Text,TouchableOpacity,TextInput,Dimensions,FlatList,ScrollView} from 'react-native';
+import {View,StatusBar, StyleSheet,Text,TouchableOpacity,Dimensions,FlatList,ScrollView ,Button, Modal,TextInput} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
+import DateRangePicker from "rn-select-date-range";
+import moment from 'moment';
+// import { useRoute } from '@react-navigation/native';
 
 // color
 import COLOR from '../assets/consts/colors'
 
 const width = Dimensions.get("screen").width;
+const height = Dimensions.get("screen").height;
 
- export const Flightsearch = ({navigation,props}) => {
-
-    const [text, setText] = useState('');
+ export const Flightsearch = ({route,navigation}) => {
+    const [text, setText] = useState('DEL');
+    const [SecText, setSecText] = useState('BLR')
     const [state, setState] = useState({ data: [], loading: false }); // only one data source
     const { data, loading } = state;
 
     const fetchAPI = () => {
         //setState({data:[], loading: true});
-        return fetch('https://api.covid19api.com/countries')
+        return fetch('http://34.221.84.222/Flights/GetAirport?authcode=Trav3103s987876&data=del')
           .then(response => response.json())
           .then(data => {
             // console.log(data);
@@ -33,12 +37,22 @@ const width = Dimensions.get("screen").width;
 
       const filterdData = text // based on text, filter data and use filtered data
     ? data.filter(item => {
-        const itemData = item.Country.toUpperCase();
+        const itemData = item.airportName.toUpperCase();
+        const airportCode = item.airportCode.toUpperCase();
         const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
+        return itemData.indexOf(textData) > -1,
+        airportCode.indexOf(textData) > -1;
       })
     : null; // on on text, u can return all data
-//   console.log(data);
+
+    const filterdDatas = SecText // based on text, filter data and use filtered data
+    ? data.filter(item => {
+        const itemDatas = item.airportCode.toUpperCase();
+        const textDatas= SecText.toUpperCase();
+        return itemDatas.indexOf(textDatas) > -1;
+      })
+    : null; // on on text, u can return all data
+  // console.log(data);
   const itemSeparator = () => {
     return (
       <View
@@ -58,11 +72,15 @@ const width = Dimensions.get("screen").width;
     const [totext, flyingtoText] = React.useState("");
     const [flyingdatetext, flyingdateText] = React.useState("");
     const [returndatetext, returndateText] = React.useState("");
+    const [selectedRange, setRange] = React.useState('Date');
 
     // hide and unhide
     const [isVisible, setIsVisible] = useState(true);
-    // const [selectedValue, setSelectedValue] = useState("Economy");
+    const [selectedValue, setSelectedValue] = useState("Economy");
 
+    const [modalVisible,setModalVisible] = useState(false)
+    const [modalVisibles,setModalVisibles] = useState(false)
+    const [FlyingDate,setFlyingDate] = useState(false)
 
 
     const toggleFunction = (props) => {
@@ -106,27 +124,53 @@ const width = Dimensions.get("screen").width;
 
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View>
-            <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
-            <View>
-
-                <Text style={styles.title}>Flying From</Text>
+                  <View style={{flexDirection: 'row',justifyContent: 'space-between'}}>
+                 <View>
+                   <Text style={styles.title}>Flying From</Text>
 
                 <View style={{flexDirection: 'row',alignItems: 'center'}}>
                 <Fontisto name="plane" size={18} color={COLOR.primary}/>
                
 <View>
-      {/* {loading === false ? (
+          <TouchableOpacity onPress={()=> setModalVisible(true)} activeOpacity={.6}>
+          <View>
+          <Text style={[styles.flightDest,{marginTop: 10}]} >{text}</Text>
+          {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
+          </View>
+          </TouchableOpacity>
+          <View style={{marginLeft:0,
+          // marginTop:18,
+                        width: width-240,
+                        height: 1,
+                        backgroundColor: COLOR.grey,}}/>
+
+          </View>
+
+{/* modal */}
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+
+<View style= {styles.centeredView}>
+  <View style = {styles.modalView}>
+        {/* <Text>cnscjbdjcbbkdsddvdvdsdsz</Text> */}
+          <View>
+          {loading === false ? (
       <View>
-          <View style={{flexDirection: 'row',alignItems: 'center'}}>
-          <Fontisto name="plane" size={18} color={COLOR.primary}/>
       <TextInput
-            placeholder="Flying From"
-             style={styles.input}
+            placeholder="Flying To"
+             style={[styles.input,{width:width,paddingHorizontal:12}]}
             //  onChangeText={flyingfromText}
              onChangeText={text => setText(text)}
              value={text}
             />
-            </View>
+            
             
             <FlatList
             data={filterdData}
@@ -135,35 +179,31 @@ const width = Dimensions.get("screen").width;
             ItemSeparatorComponent={itemSeparator}
             renderItem={({ item }) => (
                 <ScrollView>
-              <Text>{item.Country}</Text>
+                  <View >
+              <Text onPress={()=>(setText(item.airportCode),setModalVisible(!modalVisible))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
+              </View>
               </ScrollView>
             )}
-            style={{ marginTop: 10,width:width-210 }}
+            style={{ marginTop: 10,height:height-360 }}
           />  
           
           
           </View>  ):
-          <Text>loading</Text>} */}
-          <View>
-          <Text style={[styles.flightDest,{marginTop: 10}]} onPress={()=> navigation.navigate("FlightSearchtwo")}>DEL</Text>
+          <Text>loading</Text>}
+            <Button
+            title= "close"
+            onPress={()=>setModalVisible(!modalVisible)}
+            />
           </View>
-          <View style={{marginLeft:0,
-          // marginTop:18,
-                        width: width-240,
-                        height: 1,
-                        backgroundColor: COLOR.grey,}}/>
+  </View> 
+</View>
 
-          </View>
-          {/* <TextInput
-            placeholder="Flying From"
-             style={styles.input}
-             onChangeText={flyingfromText}
-             value={flyingfromtext}
-            /> */}
-
+</Modal>
 
             </View>
             </View>
+
+
             <View>
             <Text style={[styles.title,{paddingLeft:-20}]}>Flying To</Text>
             {/* <TextInput
@@ -173,43 +213,76 @@ const width = Dimensions.get("screen").width;
              value={totext}
              underlineColorAndroid="transparent"
             /> */}
+            <TouchableOpacity  onPress={()=> setModalVisibles(true)}>
             <View>
-      {loading === false ? (
+          <Text style={[styles.flightDest,{marginTop: 10}]}>{SecText}</Text>
+          {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
+          </View>
+          </TouchableOpacity>
+          <View style={{marginLeft:0,
+          // marginTop:18,
+                        width: width-240,
+                        height: 1,
+                        backgroundColor: COLOR.grey,}}/>
+  <Modal  
+  animationType="slide"
+        transparent={true}
+        visible={modalVisibles}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+          setModalVisibles(!modalVisibles);
+        }}>   
+        <View style= {styles.centeredView}>
+  <View style = {styles.modalView}>
+        {/* <Text>cnscjbdjcbbkdsddvdvdsdsz</Text> */}
+          <View>
+          {loading === false ? (
       <View>
       <TextInput
             placeholder="Flying To"
-             style={styles.input}
+             style={[styles.input,{width:width,paddingHorizontal:12}]}
             //  onChangeText={flyingfromText}
-             onChangeText={text => setText(text)}
-             value={text}
+             onChangeText={SecText => setSecText(SecText)}
+             value={SecText}
             />
             
+            
             <FlatList
-            data={filterdData}
+            data={filterdDatas}
             vertical={true}
             keyExtractor={(item, index) => index.toString()}
             ItemSeparatorComponent={itemSeparator}
             renderItem={({ item }) => (
                 <ScrollView>
-              <Text>{item.Country}</Text>
+                  <View >
+              <Text onPress={()=>(setSecText(item.airportCode),setModalVisibles(!modalVisibles))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
+              </View>
               </ScrollView>
             )}
-            // style={{ marginTop: 10,width:width-210 }}
+            style={{ marginTop: 10,height:height-360 }}
           />  
           
           
           </View>  ):
           <Text>loading</Text>}
-          {/* <Text onPress={()=>navigation.navigate("FlightSearchtwo")}>Del</Text> */}
-
+            <Button
+            title= "close"
+            onPress={()=>setModalVisibles(!modalVisibles)}
+            />
           </View>
+  </View> 
+</View>
+          </Modal>
+
+
             </View>
+            
             </View>
 
 
             <View style={{flexDirection: 'row',justifyContent: 'space-between',marginTop:20}}>
                 <View>
-            <Text style={styles.title}>Flying Date</Text>
+            {/* <Text style={styles.title}>Flying Date</Text>
             <View style={{flexDirection: 'row',alignItems: 'center'}}  >
                 <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary} onPress={()=>navigation.navigate("calendar")}/>
             <TextInput
@@ -218,9 +291,103 @@ const width = Dimensions.get("screen").width;
              onChangeText={flyingdateText}
              value={flyingdatetext}
             />
+            </View> */}
+
+
+            {/* -------------------------------------------------------------------------------------------------- */}
+            <View>
+                   <Text style={styles.title}>Flying Date</Text>
+
+                <View style={{flexDirection: 'row',alignItems: 'center'}}>
+                <Fontisto name="calendar" size={18} color={COLOR.primary}/>
+               
+<View>
+          <TouchableOpacity onPress={()=> setFlyingDate(true)} activeOpacity={.6}>
+          <View>
+          <Text style={[styles.flightDest,{marginTop: 10}]} >{selectedRange.firstDate}</Text>
+          {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
+          </View>
+          </TouchableOpacity>
+          <View style={{marginLeft:0,
+          // marginTop:18,
+          // style={[styles.input,{width: isVisible ? width-230: width-55}]}
+                        width: isVisible ? width-240: width-50,
+                        height: 1,
+                        backgroundColor: COLOR.grey,}}/>
+
+          </View>
+
+{/* modal */}
+<Modal
+        animationType="slide"
+        transparent={true}
+        visible={FlyingDate}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+          setFlyingDate(!FlyingDate);
+        }}
+      >
+
+<View style= {styles.centeredView}>
+  <View style = {styles.modalView}>
+        {/* <Text>cnscjbdjcbbkdsddvdvdsdsz</Text> */}
+          <View>
+          {loading === false ? (
+      <View style={{marginTop:20,marginHorizontal:10}}>
+      <DateRangePicker
+          onSelectDateRange={(range) => {
+            setRange(range);
+          }}
+          
+          blockSingleDateSelection={false}
+          responseFormat="DD-MM-YYYY"
+          maxDate={moment().add(90, "days")}
+          minDate={moment().subtract(90, "days")}
+          selectedDateContainerStyle={styles.selectedDateContainerStyle}
+          selectedDateStyle={styles.selectedDateStyle}
+        />
+          
+          
+          </View>  ):
+          <Text>loading</Text>}
+            <Button
+            title= "close"
+            onPress={()=>setFlyingDate(!FlyingDate)}
+            />
+          </View>
+  </View> 
+</View>
+
+</Modal>
+{ isVisible ? <Animatable.View animation="lightSpeedIn">
+<View>
+          <Text style={{position: "absolute",bottom:30,fontSize:12,color:COLOR.primary,fontWeight:"bold"}}>Flying Date</Text>
+          <TouchableOpacity onPress={()=> setFlyingDate(true)} activeOpacity={.6}>
+          <View>
+          <Text style={{marginTop:0}}>{selectedRange.secondDate}</Text>
+          {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
+          </View>
+          </TouchableOpacity>
+          <View style={{marginLeft:0,
+          position: "absolute",
+          top:28,
+          // marginTop:30,
+                        width: width-240,
+                        height: 1,
+                        backgroundColor: COLOR.grey,}}/>
+
+          </View>
+            </Animatable.View>:null}
+
             </View>
             </View>
-            { isVisible ? <Animatable.View animation="lightSpeedIn">
+
+            {/* --------------------------------------------------------------------------------------------------------- */}
+
+
+
+            </View>
+            {/* { isVisible ? <Animatable.View animation="lightSpeedIn">
                 <Text style={[styles.title,{paddingLeft:-20}]}>Return Form</Text>
             <TextInput
             placeholder="Return"
@@ -228,27 +395,29 @@ const width = Dimensions.get("screen").width;
              onChangeText={returndateText}
              value={returndatetext}
             />
-            </Animatable.View>:null}
-            {/* <View>
-                <Text style={[styles.title,{paddingLeft:-20}]}>Return Form</Text>
-            <TextInput
-             style={styles.input}
-             onChangeText={onChangeText}
-             value={text}
-            />
-            </View> */}
+            </Animatable.View>:null} */}
 
             </View>
                 <EBFClassbtnfunction/>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
+                  <View style={{alignItems: 'center',justifyContent: 'center'}}> 
+                    <Text>Adult</Text>
                 <Counter/>
+                </View>
+                  
+                <View style={{alignItems: 'center',justifyContent: 'center'}}> 
+                    <Text>Childern</Text>
                 <Counter/>
+                </View>
+                <View style={{alignItems: 'center',justifyContent: 'center'}}> 
+                    <Text>AA</Text>
                 <Counter/>
+                </View>
                 </View>
                 
             <View>
-            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate('FlightSearchResult')} >
-                <View style={{alignItems: 'center',justifyContent: 'center', marginBottom:50,backgroundColor:COLOR.secondary,borderRadius:30}}>
+            <TouchableOpacity activeOpacity={0.8} onPress={()=>navigation.navigate('FlightSearchtwo')} >
+                <View style={{alignItems: 'center',justifyContent: 'center', marginBottom:50,backgroundColor:"blue",borderRadius:30}}>
                     <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search</Text>
                 </View>
                 </TouchableOpacity>
@@ -318,11 +487,11 @@ const Counter = () => {
     );
 }
 const EBFClassbtnfunction = () =>{
-    const [activetab, setActiveTab] = useState('Business');
+    const [activetab, setActiveTab] = useState('Economy');
 
     return (
         <View>
-            <View style={{marginHorizontal:20,marginVertical:12}}>
+            <View style={{width:width/1.1 ,marginVertical:12}}>
                 <View style={styles.btn}>
                 <View>
             <Text><EBFClassbtn 
@@ -373,7 +542,7 @@ const EBFClassbtn = (props) => {
         }}
         onPress={() => props.setActiveTab(props.text)}
         >
-            <Text style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:13,fontWeight:'900'}}>{props.text}</Text>
+            <Text style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:11.5,fontWeight:'900'}}>{props.text}</Text>
         </TouchableOpacity>
         </View>
     )
@@ -472,9 +641,32 @@ const styles = StyleSheet.create({
         paddingVertical: 30
     },
     flightDest:{
-      marginLeft:20,
+      marginLeft:5,
       marginBottom:10,
-    }
+      width:160,
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: "flex-start",
+      marginTop: 210,
+      backgroundColor:COLOR.white,
+      borderTopEndRadius:30,
+      borderTopStartRadius:30,
+    },
+    modalView:{
+        marginVertical:20
+    },
+    selectedDateContainerStyle: {
+      height: 35,
+      width: "100%",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "blue",
+    },
+    selectedDateStyle: {
+      fontWeight: "bold",
+      color: "white",
+    },
 })
 
 export default Flightsearch;

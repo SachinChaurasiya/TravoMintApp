@@ -11,18 +11,51 @@ import COLOR  from '../assets/consts/colors'
 
 
 
+
+const Counter = () => {
+  const [count , setCount] = useState(1)
+
+  const Increment =() => (
+    setCount(prevCount => prevCount + 1 )
+  )
+
+  const Decrement =() => (
+      <View>
+    {count > 1 ? setCount( prevCount => prevCount - 1   ): setCount(1)}
+    </View>
+  )
+
+
+  return (
+      <View>
+          <View style = {styles.SignDiv}>
+              <View>
+             <TouchableOpacity onPress={Decrement}>
+             <Text style = {styles.DecrementSign}>-</Text>
+                </TouchableOpacity>
+              </View>
+              <View style= {{justifyContent:'center', alignItems:'center'}}>
+                <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{count}</Text>
+              </View>
+              <View>
+              <TouchableOpacity onPress={Increment}>
+                <Text style = {styles.IncrementSign}>+</Text>
+                </TouchableOpacity>
+              </View>
+          </View>
+      </View>
+  );
+}
+
+
+
+
+
+
+
 const HotelForm = () => {
 
 
-    const [count , setCount] = useState(0)
-
-    const Increment =() => (
-      setCount(prevCount => prevCount + 1 )
-    )
-
-    const Decrement =() => (
-      setCount( prevcount => prevcount - 1 )
-    )
     return(
         <View style= {styles.container}>
           <View style ={styles.header} >
@@ -90,127 +123,47 @@ const HotelForm = () => {
 
             <View style= {{flexDirection:'row' , justifyContent:'space-around'}}>
              
-              <View>
-              <View>
-                <Text style = {{marginTop:10 ,color:COLOR.secondary, marginLeft:14 }}>
-                  Adult(+18)
-                </Text>
-              </View>   
-              <View style= {{marginTop:10}}>
+             <View>
+             <View>
+               <Text style = {{marginTop:10 ,color:COLOR.secondary, marginLeft:14 }}>
+                 Adult(+18)
+               </Text>
+             </View>  
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
+             </View>
 
-              <View>
-            <View>
-                <View style = {styles.SignDiv}>
-                  <View>
-                    <TouchableOpacity onPress={Decrement}>
-                    <Text style={styles.DecrementSign}>
-                      -
-                    </Text>
-                  </TouchableOpacity>
-                  </View>
-                  <View>
-                    <Text style= {{paddingLeft:10  ,fontSize:20}}>
-                      {count}
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity onPress={Increment}>
-                    <Text style = {styles.IncrementSign}>
-                      +
-                    </Text>
-                 </TouchableOpacity>
-                  </View>
-           
-                </View>
-            </View>
-        </View>
+            
+             <View>
+             <View>
+               <Text style = {{marginTop:10 , marginLeft:5 ,color:COLOR.secondary}}>
+                 Childern(0-12)
+               </Text>
+             </View>
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
+             </View>
 
-                </View>
-              </View>
-
+            
+             <View>
+             <View>
+               <Text style = {{marginTop:10 ,color:COLOR.secondary ,marginRight:5}}>
+                 Infant(on Lap)
+               </Text>
+             </View>
+             <View style = {{marginTop:4}}>
+             <Counter/>
+             </View>
              
-              <View>
-              <View>
-                <Text style = {{marginTop:10 , marginLeft:5 ,color:COLOR.secondary}}>
-                  Childern(0-12)
-                </Text>
-              </View>
-      <View style= {{marginTop:10}}>
-              
-      <View>
-            <View>
-                <View style = {styles.SignDiv}>
-                  <View>
-                    <TouchableOpacity onPress={Decrement}>
-                    <Text style={styles.DecrementSign}>
-                      -
-                    </Text>
-                  </TouchableOpacity>
-                  </View>
-                  <View>
-                    <Text style= {{paddingLeft:10  ,fontSize:20}}>
-                      {count}
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity onPress={Increment}>
-                    <Text style = {styles.IncrementSign}>
-                      +
-                    </Text>
-                 </TouchableOpacity>
-                  </View>
-                </View>
-            </View>
-        </View>
-
-                </View>
-              </View>
-
-             
-              <View>
-              <View>
-                <Text style = {{marginTop:10 ,color:COLOR.secondary ,marginRight:5}}>
-                  Infant(on Lap)
-                </Text>
-              </View>
-                <View style= {{marginTop:10}}>
-                
-                <View>
-            <View>
-                <View style = {styles.SignDiv}>
-                  <View>
-                    <TouchableOpacity onPress={Decrement}>
-                    <Text style={styles.DecrementSign}>
-                      -
-                    </Text>
-                  </TouchableOpacity>
-                  </View>
-                  <View>
-                    <Text style= {{paddingLeft:10  ,fontSize:20}}>
-                      {count}
-                    </Text>
-                  </View>
-                  <View>
-                    <TouchableOpacity onPress={Increment}>
-                    <Text style = {styles.IncrementSign}>
-                      +
-                    </Text>
-                 </TouchableOpacity>
-                  </View>
-           
-                </View>
-            </View>
-        </View>
+             </View>
 
 
-                </View>
-              </View>
-            </View>
+           </View>
             <TouchableOpacity onPress={()=>alert('This is a button')}>
             <View style={{alignItems: 'center',justifyContent: 'center', marginTop:30,backgroundColor:COLOR.secondary, marginLeft:10 , marginRight:10,borderRadius:30}}>
-
-                    <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search Hotels</Text>
-                    
+                    <Text style={{color:COLOR.white, fontSize:20,padding:10,fontWeight:'bold'}}>Search Hotels</Text>  
                 </View>
                 </TouchableOpacity>
 
@@ -279,7 +232,7 @@ const styles  = StyleSheet.create({
 },
 IncrementSign:{
    fontSize:25,
-   paddingLeft:12,
+   paddingLeft:1,
    color:COLOR.secondary
 },
 DecrementSign:{

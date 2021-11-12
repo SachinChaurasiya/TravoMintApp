@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { View , Text, FlatList , StyleSheet, Dimensions , Modal,Image ,  Alert , TouchableOpacity } from "react-native"
+import { View , Text, FlatList , StyleSheet, Dimensions , Modal,Image ,  Alert , TouchableOpacity  } from "react-native"
 import FlightData from '../FlightData'
+import { CheckBox } from 'react-native-elements'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import * as Animatable from 'react-native-animatable';
 import Moment from 'moment';
+import COLOR from '../assets/consts/colors'
 
 
 const WindowWidth = Dimensions.get('window').width
@@ -72,10 +74,15 @@ const ConvertMinsToTime = ({data}) => {
       }
 
 
-    const Flight = ({Flight}) => {
-    
+    const Flight = ({Flight,Flights}) => {
+
+      var count=Object.keys(Flight.inBound).length
+      var round= (Flight.fare.grandTotal)
+      round=round.toFixed(2)
         const [modalVisible, setModalVisible] = useState(false);
         const [date ,setDate ] = useState({name : Moment(Flight.inBound[0].depDate.split("T")[0])})
+        // const [setSelected , isSelection]  = useState(false)
+        const [check1, setCheck1] = useState(false);
    
         return(
            <> 
@@ -84,6 +91,7 @@ const ConvertMinsToTime = ({data}) => {
                          <View>
                             <Text style={{fontSize:15,marginLeft:4 , fontWeight:'bold'}}>{Flight.inBound[0].fromAirport}</Text>
                             <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].depDate.split("T")[1].substring(0, 5)}</Text>
+                            {/* <Text>{Flights[0].depDate}</Text> */}
                          </View>
                          <View style = {{flexDirection:'row' }}>
                              <Text style ={{fontWeight:'bold' , marginLeft:1 }}>
@@ -92,14 +100,15 @@ const ConvertMinsToTime = ({data}) => {
                              </Text>
                          </View>
                        </View>
-                       <View style= {styles.icon}>
-                                    <FontAwesome5
-                                    name="plane" 
-                                    style= {{marginLeft:14}}
-                                    color="#f15b2f"
-                                    size={24} /> 
+                       <View style = {{ alignItems: 'center',justifyContent:'center'}}>
+                                <View >
+                                    <Image
+                                      source ={require('../assets/Image/INDIGO.png')}
+                                      style={{width:40  , height:40 , resizeMode:'contain'}}
+                                   /> 
+                                </View>
                             <View style ={styles.iconText}>
-                             <Text style={{fontSize:14 ,marginLeft:5, fontWeight:"bold"}}> <ConvertMinsToTime data = {Flight.inBound[0].eft}/></Text>
+                             <Text style={{fontSize:14 , fontWeight:"bold"}}> <ConvertMinsToTime data = {Flight.inBound[0].eft}/></Text>
                           </View> 
                     </View>
 
@@ -107,6 +116,7 @@ const ConvertMinsToTime = ({data}) => {
                                 <View>
                                 <Text style={{fontSize:15 , fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].toAirport}</Text>
                                 <Text  style= {{fontWeight:'bold' , marginLeft:2}}>{Flight.inBound[0].reachDate.split("T")[1].substring(0, 5)}</Text>
+                                {/* <Text>{Flight.airport[0].airportName}</Text> */}
                                </View>
                                <View style = {{flexDirection:'row' }}>
                                <Text style ={{fontWeight:'bold' }}>
@@ -116,7 +126,7 @@ const ConvertMinsToTime = ({data}) => {
                          </View>
                             </View>
             </View>
-            <View style = {styles.refundableDiv}>
+            {/* <View style = {styles.refundableDiv}>
                            <View style = {styles.shadowContainerStyle}>
                                <View style = {styles.InsideRefundable}>
                                     <View style= {{flexDirection:'row' , justifyContent:'space-between'  }}>
@@ -139,13 +149,67 @@ const ConvertMinsToTime = ({data}) => {
                                <Text style= {{ fontWeight:"bold" , fontSize:12,marginLeft:25,marginTop:10 }}>
                                         Refundable
                                     </Text>
-                               {/* <View style ={{backgroundColor:'#195fb9' ,borderRadius:30 , marginLeft:100 , marginBottom:10, justifyContent:'center', alignItems:'center',height:40,width:150 , }}>
+                               <View style ={{backgroundColor:'#195fb9' ,borderRadius:30 , marginLeft:100 , marginBottom:10, justifyContent:'center', alignItems:'center',height:40,width:150 , }}>
                                    <Text style = {{fontWeight:'bold', color:'white' , fontSize:20 }}>
                                        BOOK NOW
                                    </Text>
-                                   </View> */}
+                                   </View>
                            </View>
-                       </View>
+                       </View> */}
+
+
+<View style = {styles.refundableDiv}>
+                           <View style = {styles.shadowContainerStyle}>
+                               <View style = {styles.InsideRefundable}>
+                                    <View style= {{flexDirection:'column' , justifyContent:'space-between'  }}>
+                                      <View>
+                                        <Text style = {{fontWeight:'bold' , fontSize:22}}>
+                                        ₹{round}
+                                        </Text>
+                                      </View>
+                                     
+                                      <View>
+                                        <Text>
+                                            ({count}-Stop )
+                                        </Text>
+                                      </View>
+                                     
+                                      </View>
+                                      <View style = {{ flexDirection:"row" , justifyContent:'space-between' , alignItems:"flex-end"}}>
+                                          <View>
+                                            <Text style = {{fontWeight:"bold",marginBottom:20 }}>
+                                              Refundable
+                                           </Text>
+                                         </View>
+
+                                        <View>
+                                        <CheckBox
+                                              center
+                                              checked={check1}
+                                              checkedColor={COLOR.primary}
+                                              onPress={() => setCheck1(!check1)}
+                                            />
+                                      </View>
+
+                                      
+                                         <TouchableOpacity onPress ={()=> setModalVisible(true)}>
+                                         <View style = {{flexDirection:'row' , marginBottom:20 }}>
+                                             <Text style= {{marginTop:10 , fontWeight:'bold' }}>
+                                              Details 
+                                            </Text>
+                                              <FontAwesome5
+                                              style={{marginTop:10}}
+                                              name="info-circle"
+                                              size={20}
+                                              color={COLOR.primary}
+                                              />
+                                         </View>
+                                         </TouchableOpacity> 
+                                      </View>
+                               </View>
+                               </View>
+                               </View>
+
 
                     <View>
                     <View style={styles.centeredView}>
@@ -283,6 +347,16 @@ const ConvertMinsToTime = ({data}) => {
                     keyExtractor={(item,index) => index.toString()}
                     showsVerticalScrollIndicator={false}
                     />
+                    <FlatList
+                    data={FlightData.flightResult.inBound}
+                    renderItem={({item}) => <Flight Flights={item} />}
+                    ItemSeparatorComponent={(props) => {
+                      return (<View style={{height: 1 , marginVertical:10 , marginHorizontal:5, backgroundColor: props.highlighted ? 'green' : 'rgb(199, 199, 204)'}} />);
+                    }}
+                    keyExtractor={(item,index) => index.toString()}
+                    showsVerticalScrollIndicator={false}
+                    />
+
                 </View> 
             </View>
             </Animatable.View>
@@ -377,7 +451,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 30,
     marginTop:150
-},
+  },
+    checkbox:{
+      
+    }
+    
   });
   
 

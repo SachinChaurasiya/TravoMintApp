@@ -7,6 +7,7 @@ import * as Animatable from 'react-native-animatable';
 import Moment from 'moment';
 import COLOR from '../assets/consts/colors'
 import { CheckBox } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native';
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
@@ -14,7 +15,7 @@ const height = Dimensions.get('screen').height
 
 
 
-const FlightSearchtwo = (props)=>{
+const FlightSearchtwo = ({navigation})=>{
 
   const ConvertMinsToTime = ({data}) => {
     let hours = Math.floor(data / 60);
@@ -25,7 +26,8 @@ const FlightSearchtwo = (props)=>{
 
   // const [activetab,setActiveTab] = useState("Go to")
 
-  const Flight =({Flight,props})=>{
+  const Flight =({Flight})=>{
+    const navigation = useNavigation();
 
     var count=Object.keys(Flight.inBound).length
 
@@ -174,9 +176,13 @@ const FlightSearchtwo = (props)=>{
                                       </View>
                                       <View style = {{ flexDirection:"row" , justifyContent:'space-between' , alignItems:"flex-end"}}>
                                           <View>
+                                          <TouchableOpacity>
                                             <Text style = {{fontWeight:"bold",marginBottom:20 }}>
-                                              Refundable
+                                            
+                                             Refundable
+                                              
                                            </Text>
+                                           </TouchableOpacity>
                                          </View>
 
                                         <View>
@@ -185,11 +191,12 @@ const FlightSearchtwo = (props)=>{
                                               checked={check}
                                               checkedColor={COLOR.primary}
                                               onPress={() => setCheck(!check)}
+                                              onPressIn={()=> console.log(Flight.inBound)}
                                             />
                                       </View>
                                       {check ? (
                                       <View style={{position: 'absolute', width:width,justifyContent: "flex-end",bottom:65,left:160}}>
-                                        <Button style={{width: 100}} color={COLOR.primary} mode="contained" onPress={() => console.log('Pressed')}>Book</Button>
+                                        <Button style={{width: 100}} color={COLOR.primary} mode="contained" onPress={()=>navigation.navigate('Book')}>Book</Button>
                                       </View>
                                       
                                       ):null}
@@ -212,15 +219,8 @@ const FlightSearchtwo = (props)=>{
                                </View>
                                </View>
                                </View>
-
-      
-      
-      
                     <View>
-
-                   
                     <View>
-                      
                     <Modal
         animationType="slide"
         transparent={true}

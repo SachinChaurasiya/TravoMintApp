@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View,Text,Pressable,TouchableOpacity} from 'react-native';
+import {ScrollView, View,Text,Pressable,TouchableOpacity,Button} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import {DrawerActions} from '@react-navigation/native';
@@ -135,7 +135,13 @@ const HomeStackScreen = ({navigation}) => (
             <TouchableOpacity onPress={()=> navigation.dispatch(DrawerActions.openDrawer())}>
             <FontAwesome5 name="bars" size={20} style={{marginLeft:10}} color={COLOR.white}/>
             </TouchableOpacity>
-          </View>)}} component={MoreScreen} />
+          </View>),
+        headerRight: () => (
+          <TouchableOpacity onPress={()=>navigation.navigate("UserEdit")}>
+          <FontAwesome5 name="user-edit" size={20} style={{marginRight:10}} color={COLOR.white}/>
+          </TouchableOpacity>
+        ),
+        }} component={MoreScreen} />
       </MoreStack.Navigator> 
   )
 

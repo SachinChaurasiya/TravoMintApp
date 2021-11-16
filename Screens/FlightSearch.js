@@ -7,6 +7,11 @@ import DateRangePicker from "rn-select-date-range";
 import moment from 'moment';
 // import { useRoute } from '@react-navigation/native';
 
+import {
+  useSelector,
+  useDispatch
+} from 'react-redux';
+
 // color
 import COLOR from '../assets/consts/colors'
 
@@ -19,9 +24,10 @@ const height = Dimensions.get("screen").height;
     const [state, setState] = useState({ data: [], loading: false }); // only one data source
     const { data, loading } = state;
 
+
     const fetchAPI = () => {
         //setState({data:[], loading: true});
-        return fetch('http://34.221.84.222/Flights/GetAirport?authcode=Trav3103s987876&data=del')
+        return fetch('http://34.221.84.222/Flights/GetAirport?authcode=Trav3103s987876&data')
           .then(response => response.json())
           .then(data => {
             // console.log(data);
@@ -83,6 +89,7 @@ const height = Dimensions.get("screen").height;
     const [FlyingDate,setFlyingDate] = useState(false)
 
 
+
     const toggleFunction = (props) => {
         {!isVisible ? setIsVisible(!isVisible) : setIsVisible(isVisible)}
       };
@@ -134,7 +141,7 @@ const height = Dimensions.get("screen").height;
 <View>
           <TouchableOpacity onPress={()=> setModalVisible(true)} activeOpacity={.6}>
           <View>
-          <Text style={[styles.flightDest,{marginTop: 10}]} >{text}</Text>
+          <Text style={[styles.flightDest,{marginTop: 10}]} numberOfLines={1} >{text}</Text>
           {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
           </View>
           </TouchableOpacity>
@@ -180,7 +187,7 @@ const height = Dimensions.get("screen").height;
             renderItem={({ item }) => (
                 <ScrollView>
                   <View >
-              <Text onPress={()=>(setText(item.airportCode),setModalVisible(!modalVisible))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
+              <Text onPress={()=>(setText(item.airportName),setModalVisible(!modalVisible))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
               </View>
               </ScrollView>
             )}
@@ -215,7 +222,7 @@ const height = Dimensions.get("screen").height;
             /> */}
             <TouchableOpacity  onPress={()=> setModalVisibles(true)}>
             <View>
-          <Text style={[styles.flightDest,{marginTop: 10}]}>{SecText}</Text>
+          <Text style={[styles.flightDest,{marginTop: 10}]} numberOfLines={1}>{SecText}</Text>
           {/* <Text style={{color:"black"}}>{route.params.myData}</Text> */}
           </View>
           </TouchableOpacity>
@@ -255,7 +262,7 @@ const height = Dimensions.get("screen").height;
             renderItem={({ item }) => (
                 <ScrollView>
                   <View >
-              <Text onPress={()=>(setSecText(item.airportCode),setModalVisibles(!modalVisibles))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
+              <Text onPress={()=>(setSecText(item.airportName),setModalVisibles(!modalVisibles))} style={{marginVertical:10,marginLeft:10}}>{`${item.airportName} (${item.airportCode})`}</Text>
               </View>
               </ScrollView>
             )}
@@ -474,33 +481,28 @@ const HeaderButtons = (props) =>{
 }
 
 
+import {
+  increment,
+  decrement
+} from '../Components/Reducer';
 const Counter = () => {
-    const [count , setCount] = useState(1)
-
-    const Increment =() => (
-      setCount(prevCount => prevCount + 1 )
-    )
-
-    const Decrement =() => (
-        <View>
-      {count > 1 ? setCount( prevCount => prevCount - 1   ): setCount(1)}
-      </View>
-    )
+  const { counter } = useSelector(state => state?.counter);
+  const dispatch = useDispatch();
 
 
     return (
         <View>
            <View style = {styles.SignDiv}>
               <View>
-             <TouchableOpacity onPress={Decrement}>
+             <TouchableOpacity onPress={() => dispatch(decrement())}>
              <Text style = {styles.DecrementSign}>-</Text>
                 </TouchableOpacity>
               </View>
               <View style= {{justifyContent:'center', alignItems:'center'}}>
-                <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{count}</Text>
+                <Text style = {{fontSize:13, marginLeft:15, width:24  }}>{counter}</Text>
               </View>
               <View>
-              <TouchableOpacity onPress={Increment}>
+              <TouchableOpacity onPress={() => dispatch(increment())}>
                 <Text style = {styles.IncrementSign}>+</Text>
                 </TouchableOpacity>
               </View>

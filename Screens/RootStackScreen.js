@@ -16,6 +16,8 @@ import HotelForm from './Hotels';
 import Transferscreen from './TransferScreen';
 import calendar from '../Components/Calendar/Calendar';
 import FlightSearchtwo from './FlightSearchtwo';
+import UserEditScreen from '../Components/More/UserEditScreen';
+import BookNow from './BookNow';
 
 const RootStack = createStackNavigator();
 
@@ -54,6 +56,11 @@ const RootStackScreen = ({navigation}) => (
            },
          headerTintColor:COLOR.white}} component={HotelForm}/>
          <RootStack.Screen name="calendar" component={calendar} />
+         <RootStack.Screen name="UserEdit" component={UserEditScreen}/>
+         <RootStack.Screen options={{headerTitle:"Flight Details", headerStyle:{backgroundColor: COLOR.secondary},headerTintColor: COLOR.white,
+           headerTitleStyle: {
+             fontWeight: 'bold',
+           }}} name="Book" component={BookNow}/>
          
     </RootStack.Navigator>
 );

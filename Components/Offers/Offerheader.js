@@ -123,7 +123,7 @@ const OfferHeader = () => {
                 <FlatList 
                 data={Data}
                 renderItem={renderItem}
-                keyExtractor={item => item.id}
+                keyExtractor={(item, index) => index.toString()}
                 // style={{marginLeft:10}}
                 />
             </View>

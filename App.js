@@ -5,6 +5,20 @@ import { SafeAreaView, StyleSheet, Text, View,ActivityIndicator } from 'react-na
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import counterReducer from './Components/Reducer'
+import {Provider} from 'react-redux'
+import {
+  createStore,
+  combineReducers
+} from 'redux';
+
+const rootReducer = combineReducers({
+  counter: counterReducer
+});
+
+
+let store = createStore(rootReducer)
+
 import COLOR from './assets/consts/colors'
 
 const Stack = createStackNavigator();
@@ -62,6 +76,7 @@ if(isloading) {
 
 
   return (
+    <Provider store={store}>
     <SafeAreaView style={styles.container}>
              <StatusBar backgroundColor={COLOR.secondary}  barStyle="light-content"/>
              <AuthContext.Provider value={authContext}>
@@ -76,7 +91,7 @@ if(isloading) {
         }       
       </NavigationContainer>
       </AuthContext.Provider>
-      </SafeAreaView>
+      </SafeAreaView></Provider>
   );
 }
 

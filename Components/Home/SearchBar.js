@@ -1,25 +1,23 @@
 import React from 'react';
-import {View, StyleSheet,TextInput,Text} from 'react-native';
+import { View, StyleSheet, TextInput, Text } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
 
 const Searchbar = () => {
     return (
-        <View style={{marginTop:5,backgroundColor:"#FFFFFF",}}>
+        <View style={{ marginTop: 5, backgroundColor: '#FFFFFF' }}>
             <View>
                 <View style={styles.SectionStyle}>
-              
-              <TextInput
-                style={{ flex: 1,padding:10 }}
-                placeholder="Enter Information to search"
-                underlineColorAndroid="transparent"
-              />
-              <FontAwesome5 name="search" style={styles.ImageStyle}/>
-            </View>
+                    <TextInput
+                        style={{ flex: 1, padding: 10 }}
+                        placeholder="Enter Information to search"
+                        underlineColorAndroid="transparent"
+                    />
+                    <FontAwesome5 name="search" style={styles.ImageStyle} />
+                </View>
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     SectionStyle: {
@@ -32,17 +30,17 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 30,
         margin: 10,
-      },
-    
-      ImageStyle: {
+    },
+
+    ImageStyle: {
         // padding: 10,
-        marginLeft:20,
+        marginLeft: 20,
         margin: 5,
         height: 15,
         width: 20,
         // resizeMode: 'stretch',
         alignItems: 'center',
-      },
-})
+    },
+});
 
 export default Searchbar;

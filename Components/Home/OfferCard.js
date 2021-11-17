@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet,Text,Image} from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import offerlogo from '../../assets/Image/discount.png';
 import OffersItem from './OffersItem';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -20,17 +20,17 @@ const Offercard = () => {
                 </View>
             </View> */}
             <View>
-                <OffersItem/>
+                <OffersItem />
             </View>
         </View>
     );
-}
+};
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor:"#FFFFFF",
-        marginTop:30
-    }
-})
+        backgroundColor: '#FFFFFF',
+        marginTop: 30,
+    },
+});
 
 export default Offercard;

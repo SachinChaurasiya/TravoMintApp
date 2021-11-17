@@ -8,9 +8,7 @@
 // import OfferScreen from '../Screens/Offers';
 // import MoreScreen from '../Screens/More';
 
-
 // const Tabs = createBottomTabNavigator();
-
 
 // const Tab = () => {
 //     return (
@@ -19,8 +17,8 @@
 //                 headerShown:false,
 //                 tabBarIcon:({focused})=>(
 //                   <View style={{alignItems: 'center',justifyContent: 'center'}}>
-//                     <Image source={require("../assets/Image/home.png")} 
-//                     resizeMode="contain" 
+//                     <Image source={require("../assets/Image/home.png")}
+//                     resizeMode="contain"
 //                     style={{
 //                       width:20,
 //                       height:20,
@@ -38,8 +36,8 @@
 //                 headerShown:false,
 //                 tabBarIcon:({focused})=>(
 //                   <View style={{alignItems: 'center',justifyContent: 'center'}}>
-//                     <Image source={require("../assets/Image/bell.png")} 
-//                     resizeMode="contain" 
+//                     <Image source={require("../assets/Image/bell.png")}
+//                     resizeMode="contain"
 //                     style={{
 //                       width:20,
 //                       height:20,
@@ -57,8 +55,8 @@
 //                 headerShown:false,
 //                 tabBarIcon:({focused})=>(
 //                   <View style={{alignItems: 'center',justifyContent: 'center'}}>
-//                     <Image source={require("../assets/Image/discount.png")} 
-//                     resizeMode="contain" 
+//                     <Image source={require("../assets/Image/discount.png")}
+//                     resizeMode="contain"
 //                     style={{
 //                       width:20,
 //                       height:20,
@@ -76,8 +74,8 @@
 //                 headerShown:false,
 //                 tabBarIcon:({focused})=>(
 //                   <View style={{alignItems: 'center',justifyContent: 'center'}}>
-//                     <Image source={require("../assets/Image/more.png")} 
-//                     resizeMode="contain" 
+//                     <Image source={require("../assets/Image/more.png")}
+//                     resizeMode="contain"
 //                     style={{
 //                       width:20,
 //                       height:20,
@@ -97,15 +95,15 @@
 // const styles = StyleSheet.create({})
 
 // export default Tab;
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from 'react';
+import { View, Text } from 'react-native';
 
 const Tab = () => {
-  return (
-    <View>
-      <Text>Tab</Text>
-    </View>
-  )
-}
+    return (
+        <View>
+            <Text>Tab</Text>
+        </View>
+    );
+};
 
-export default Tab
+export default Tab;

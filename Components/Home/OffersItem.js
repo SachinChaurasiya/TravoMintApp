@@ -26,7 +26,7 @@
 // const Tab = React.forwardRef(({item},ref) => {
 //   return(
 //     <View ref={ref}>
-//       <Text style={{color: COLORS.primary,fontSize: 84 / data.length ,fontWeight: 'bold'}}>{item.title}</Text> 
+//       <Text style={{color: COLORS.primary,fontSize: 84 / data.length ,fontWeight: 'bold'}}>{item.title}</Text>
 //     </View>
 //   )
 // });
@@ -44,7 +44,7 @@
 //   })
 
 //   return (
-//     <Animated.View style={{ 
+//     <Animated.View style={{
 //       height:5,
 //       width: indicatorWidth,
 //       left:0,
@@ -79,7 +79,7 @@
 
 //   return (
 //     <View style={{width, marginTop:10,marginBottom:10}}>
-//       <View 
+//       <View
 //       ref={containerRef}
 //       style={{flexDirection:'row',justifyContent:"space-evenly",}}>
 //         {data.map((item) =>{
@@ -152,7 +152,7 @@
 //           )
 //       }}
 //       />
-      
+
 //     </View>
 //   );
 // }
@@ -171,77 +171,115 @@
 //   }
 // });
 
-
-
 import React from 'react';
-import {View, StyleSheet,Text,FlatList,Dimensions,ImageBackground,Image} from 'react-native';
+import {
+    View,
+    StyleSheet,
+    Text,
+    FlatList,
+    Dimensions,
+    ImageBackground,
+    Image,
+} from 'react-native';
 import COLORS from '../../assets/consts/colors';
 import places from '../../assets/consts/places';
 import offers from '../../assets/consts/Offers';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import offerlogo from '../../assets/Image/discount.png';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-const {width} = Dimensions.get('screen');
+const { width } = Dimensions.get('screen');
 
-
-const RecommendedCard = ({place}) => {
-  return (
-    <View style={style.rmCardImage} >
-      <Image source={place.image} style={style.logoImage}/>
-    </View>
-  );
+const RecommendedCard = ({ place }) => {
+    return (
+        <View style={style.rmCardImage}>
+            <Image source={place.image} style={style.logoImage} />
+        </View>
+    );
 };
 
 const Offersitem = () => {
-  return (
-    <View>
-      <View>
-        <View style={{flexDirection: 'row',alignItems: 'center', justifyContent: 'space-between'}}>
-          <View style={{flexDirection: 'row',alignItems: 'center',}}>
-          <Text style={style.sectionTitle}>Offers</Text>
-          <Image source={offerlogo} style={{width:20,height:20}} color="blue"/>
-          </View>
-          <View style={{flexDirection:'row',alignItems: 'center',paddingRight: 20}}>
-            <Text style={{color:COLORS.primary,fontSize:16,paddingRight:5}}>View More</Text>
+    return (
+        <View>
             <View>
-                <FontAwesome5 name="chevron-right" color={COLORS.primary} size={18}/>
+                <View
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <View
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                        <Text style={style.sectionTitle}>Offers</Text>
+                        <Image
+                            source={offerlogo}
+                            style={{ width: 20, height: 20 }}
+                            color="blue"
+                        />
+                    </View>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            paddingRight: 20,
+                        }}
+                    >
+                        <Text
+                            style={{
+                                color: COLORS.primary,
+                                fontSize: 16,
+                                paddingRight: 5,
+                            }}
+                        >
+                            View More
+                        </Text>
+                        <View>
+                            <FontAwesome5
+                                name="chevron-right"
+                                color={COLORS.primary}
+                                size={18}
+                            />
+                        </View>
+                    </View>
+                </View>
+                <FlatList
+                    snapToInterval={width - 20}
+                    contentContainerStyle={{
+                        paddingLeft: 20,
+                        paddingBottom: 20,
+                    }}
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={offers}
+                    renderItem={({ item }) => <RecommendedCard place={item} />}
+                />
             </View>
-          </View>
-          </View>
-          <FlatList
-            snapToInterval={width - 20}
-            contentContainerStyle={{paddingLeft: 20, paddingBottom: 20}}
-            showsHorizontalScrollIndicator={false}
-            horizontal
-            data={offers}
-            renderItem={({item}) => <RecommendedCard place={item} />}
-          />
         </View>
-    </View>
-  );
-}
+    );
+};
 
 const style = StyleSheet.create({
-  logoImage: {
-    width:"100%",
-    resizeMode:"contain",
-    height: 200,
-  },
-  rmCardImage: {
-    width: width -40,
-    height: 200,
-    marginRight: 20,
-    borderRadius: 10,
-    overflow: 'hidden',
-    padding: 10,
-  },
-  sectionTitle: {
-    marginHorizontal: 20,
-    // marginVertical: 20,
-    fontWeight: 'bold',
-    fontSize: 20,
-    color:COLORS.primary
-  },
-})
+    logoImage: {
+        width: '100%',
+        resizeMode: 'contain',
+        height: 200,
+    },
+    rmCardImage: {
+        width: width - 40,
+        height: 200,
+        marginRight: 20,
+        borderRadius: 10,
+        overflow: 'hidden',
+        padding: 10,
+    },
+    sectionTitle: {
+        marginHorizontal: 20,
+        // marginVertical: 20,
+        fontWeight: 'bold',
+        fontSize: 20,
+        color: COLORS.primary,
+    },
+});
 
 export default Offersitem;

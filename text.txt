@@ -1,0 +1,186 @@
+<View style={styles.header}>
+                <View
+                    style={{
+                        position: 'absolute',
+                        left: 50,
+                        top: 30,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}
+                >
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            Go TO
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            width: 60,
+                            height: 3,
+                            backgroundColor: COLOR.secondary,
+                        }}
+                    />
+                    <View
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                        <View style={{}}>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                DEL
+                            </Text>
+                        </View>
+                        <View style={{ paddingHorizontal: 5 }}>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                -
+                            </Text>
+                        </View>
+                        <View>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                GOI
+                            </Text>
+                        </View>
+                    </View>
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            2h:10m
+                        </Text>
+                    </View>
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 30,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            ₹950.72
+                        </Text>
+                    </View>
+                </View>
+                {/* icon */}
+
+                <View style={{ position: 'absolute', left: 180, top: 70 }}>
+                    <FontAwesome5
+                        name="exchange-alt"
+                        color="#195fb9"
+                        size={30}
+                    />
+                </View>
+                {/* return */}
+                <View
+                    style={{
+                        position: 'absolute',
+                        right: 50,
+                        top: 30,
+                        alignItems: 'center',
+                    }}
+                >
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 15,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            Return
+                        </Text>
+                    </View>
+                    <View
+                        style={{
+                            width: 60,
+                            height: 3,
+                            backgroundColor: COLOR.secondary,
+                        }}
+                    />
+                    <View
+                        style={{ flexDirection: 'row', alignItems: 'center' }}
+                    >
+                        <View>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                GOI
+                            </Text>
+                        </View>
+                        <View style={{ paddingHorizontal: 5 }}>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                -
+                            </Text>
+                        </View>
+                        <View>
+                            <Text
+                                style={{
+                                    color: COLOR.white,
+                                    fontSize: 20,
+                                    fontWeight: 'bold',
+                                }}
+                            >
+                                DEL
+                            </Text>
+                        </View>
+                    </View>
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            2h:45m
+                        </Text>
+                    </View>
+                    <View>
+                        <Text
+                            style={{
+                                color: COLOR.white,
+                                fontSize: 30,
+                                fontWeight: 'bold',
+                            }}
+                        >
+                            {' '}
+                            ₹950.72
+                        </Text>
+                    </View>
+                </View>
+            </View>

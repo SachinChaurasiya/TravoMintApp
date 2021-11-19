@@ -35,208 +35,182 @@ const DrawerContent = (props) => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
-            <View
-                style={{
-                    marginTop: 30,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-            >
-                <View>
-                    <Image
-                        source={Logo}
-                        style={{ width: 150, height: 30, marginLeft: 10 }}
-                    />
-                </View>
-                <View style={{ marginRight: 20, marginTop: 5 }}>
-                    <TouchableOpacity>
-                        <FontAwesome5
-                            onPress={() =>
-                                props.navigation.dispatch(
-                                    DrawerActions.closeDrawer()
-                                )
-                            }
-                            name="bars"
-                            size={28}
-                            color={COLOR.primary}
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <DrawerContentScrollView style={{ marginTop: 10 }} {...props}>
-                <Drawer.Section style={styles.drawerSection}>
-                    <DrawerItem
-                        style={{ marginLeft: 10 }}
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <Fontisto name="plane" size={14} color="#fff" />
-                            </View>
-                        )}
-                        label="Flight"
-                        onPress={() => {
-                            props.navigation.navigate('Nav');
-                        }}
-                    />
-
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="hotel"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        label="Hotels"
-                        onPress={() => {
-                            props.navigation.navigate('Hotel');
-                        }}
-                    />
-
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="exchange-alt"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        label="Transfer"
-                        onPress={() => {
-                            props.navigation.navigate('Bookmark');
-                        }}
-                    />
-
-                    <Separator />
-
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="sign-in-alt"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        onPress={() => props.navigation.navigate('SignIn')}
-                        label="Sign In"
-                    />
-
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="user-plus"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        style={{ marginLeft: 6 }}
-                        onPress={() => {
-                            props.navigation.navigate('');
-                        }}
-                        label="Register"
-                    />
-
-                    <DrawerItem
-                        // style={{marginLeft:13}}
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 12,
-                                    borderRadius: 50,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="clipboard"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        onPress={() => {
-                            props.navigation.navigate('Explore');
-                        }}
-                        label="My Booking"
-                    />
-
-                    <DrawerItem
-                        icon={({ color, size }) => (
-                            <View
-                                style={{
-                                    backgroundColor: COLOR.primary,
-                                    padding: 10,
-                                    borderRadius: 30,
-                                }}
-                            >
-                                <FontAwesome5
-                                    name="headset"
-                                    size={14}
-                                    color="#fff"
-                                />
-                            </View>
-                        )}
-                        onPress={() => {
-                            props.navigation.navigate('Support');
-                        }}
-                        label="Support"
-                    />
-                </Drawer.Section>
-
-                <Drawer.Section title="Preferences">
-                    <TouchableRipple
-                        onPress={() => {
-                            toggleTheme();
-                        }}
-                    >
-                        <View style={styles.preference}>
-                            <Text>Dark Theme</Text>
-                            <View pointerEvents="none">
-                                <Switch value={isDarkTheme} />
-                            </View>
-                        </View>
-                    </TouchableRipple>
-                </Drawer.Section>
-            </DrawerContentScrollView>
+      <View style={{ flex: 1 }}>
+        <View
+          style={{
+            marginTop: 30,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <View>
+            <Image
+              source={Logo}
+              style={{ width: 150, height: 30, marginLeft: 10 }}
+            />
+          </View>
+          <View style={{ marginRight: 20, marginTop: 5 }}>
+            <TouchableOpacity>
+              <FontAwesome5
+                onPress={() =>
+                  props.navigation.dispatch(DrawerActions.closeDrawer())
+                }
+                name="bars"
+                size={28}
+                color={COLOR.primary}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
+        <DrawerContentScrollView style={{ marginTop: 10 }} {...props}>
+          <Drawer.Section style={styles.drawerSection}>
+            <DrawerItem
+              style={{ marginLeft: 10 }}
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <Fontisto name="plane" size={14} color="#fff" />
+                </View>
+              )}
+              label="Flight"
+              onPress={() => {
+                props.navigation.navigate('Nav');
+              }}
+            />
+
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <FontAwesome5 name="hotel" size={14} color="#fff" />
+                </View>
+              )}
+              label="Hotels"
+              onPress={() => {
+                props.navigation.navigate('Hotel');
+              }}
+            />
+
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <FontAwesome5 name="exchange-alt" size={14} color="#fff" />
+                </View>
+              )}
+              label="Transfer"
+              onPress={() => {
+                props.navigation.navigate('transfer');
+              }}
+            />
+
+            <Separator />
+
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <FontAwesome5 name="sign-in-alt" size={14} color="#fff" />
+                </View>
+              )}
+              onPress={() => props.navigation.navigate('SignInScreen')}
+              label="Sign In"
+            />
+
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <FontAwesome5 name="user-plus" size={14} color="#fff" />
+                </View>
+              )}
+              style={{ marginLeft: 6 }}
+              onPress={() => {
+                props.navigation.navigate('SignUpScreen');
+              }}
+              label="Register"
+            />
+
+            <DrawerItem
+              // style={{marginLeft:13}}
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 12,
+                    borderRadius: 50,
+                  }}
+                >
+                  <FontAwesome5 name="clipboard" size={14} color="#fff" />
+                </View>
+              )}
+              onPress={() => {
+                props.navigation.navigate('Explore');
+              }}
+              label="My Booking"
+            />
+
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.primary,
+                    padding: 10,
+                    borderRadius: 30,
+                  }}
+                >
+                  <FontAwesome5 name="headset" size={14} color="#fff" />
+                </View>
+              )}
+              onPress={() => {
+                props.navigation.navigate('Support');
+              }}
+              label="Support"
+            />
+          </Drawer.Section>
+
+          <Drawer.Section title="Preferences">
+            <TouchableRipple
+              onPress={() => {
+                toggleTheme();
+              }}
+            >
+              <View style={styles.preference}>
+                <Text>Dark Theme</Text>
+                <View pointerEvents="none">
+                  <Switch value={isDarkTheme} />
+                </View>
+              </View>
+            </TouchableRipple>
+          </Drawer.Section>
+        </DrawerContentScrollView>
+      </View>
     );
 };
 

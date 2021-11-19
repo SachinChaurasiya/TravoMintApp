@@ -102,7 +102,7 @@ const BestOffer = () => {
                     renderItem={renderItem}
                     showsHorizontalScrollIndicator={false}
                     horizontal
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item.id.toString()}
                     style={{ marginLeft: 10 }}
                 />
             </View>

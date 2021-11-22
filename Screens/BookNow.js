@@ -15,7 +15,7 @@ import { useRoute } from '@react-navigation/native';
 const width = Dimensions.get('window').width;
 
 const BookNow = (props) => {
-    const {fare,inBound,outBound} = props.route.params.Flight;
+    const {fare,inBound,outBound,airline} = props.route.params.apiData;
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,7 +32,9 @@ const BookNow = (props) => {
                   >
                     DEPARTURE
                   </Text> */}
-                  <Text>{inBound[0].toAirport}</Text>
+                  <Text>{inBound[0].fromAirport}</Text>
+                  <Text>{airline[1].code}</Text>
+                  <Text>{inBound[0].eft}</Text>
                 </View>
                 <View>
                   <Image

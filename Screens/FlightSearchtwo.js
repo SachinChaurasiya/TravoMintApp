@@ -44,7 +44,7 @@ const FlightSearchtwo = (props) => {
   // };
 
   const Flight = ({ Flight }) => {
-    const [apiData, setApiData] = useState(Flight);
+    const [apiData, setApiData] = useState(FlightData);
     const [CheckboxDataVisible, setCheckboxDataVisible] = useState(false);
 
     // useMemo(Flight)
@@ -509,7 +509,9 @@ const FlightSearchtwo = (props) => {
                               </Text>
                             </Pressable>
                             <Pressable
-                              onPress={() => navigation.navigate('Book',{Flight})}
+                              onPress={() =>
+                                navigation.navigate('Book', {apiData})
+                              }
                             >
                               <Text style={{ padding: 10, color: COLOR.white }}>
                                 BookNow

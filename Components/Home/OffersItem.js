@@ -252,6 +252,7 @@ const Offersitem = () => {
                     showsHorizontalScrollIndicator={false}
                     horizontal
                     data={offers}
+                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => <RecommendedCard place={item} />}
                 />
             </View>

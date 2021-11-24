@@ -7,6 +7,7 @@ import {
     ScrollView,
     FlatList,
     Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../assets/consts/colors';
@@ -14,8 +15,8 @@ import { useRoute } from '@react-navigation/native';
 
 const width = Dimensions.get('window').width;
 
-const BookNow = (props) => {
-    const {fare,inBound,outBound,airline} = props.route.params.apiData;
+const BookNow = ({ navigation}) => {
+    // const {fare,inBound,outBound,airline} = props.route.params.apiData;
     return (
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,9 +33,9 @@ const BookNow = (props) => {
                   >
                     DEPARTURE
                   </Text> */}
-                  <Text>{inBound[0].fromAirport}</Text>
+                  {/* <Text>{inBound[0].fromAirport}</Text>
                   <Text>{airline[1].code}</Text>
-                  <Text>{inBound[0].eft}</Text>
+                  <Text>{inBound[0].eft}</Text> */}
                 </View>
                 <View>
                   <Image
@@ -212,15 +213,21 @@ const BookNow = (props) => {
                   elevation: 5,
                 }}
               >
-                <View
-                  style={{
-                    backgroundColor: 'blue',
-                    alignItems: 'center',
-                    borderRadius: 30,
-                  }}
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('TravelInfo')}
                 >
-                  <Text style={{ fontSize: 20, color: 'white' }}>Continue</Text>
-                </View>
+                  <View
+                    style={{
+                      backgroundColor: COLOR.blue,
+                      alignItems: 'center',
+                      borderRadius: 30,
+                    }}
+                  >
+                    <Text style={{ fontSize: 20, color: 'white', padding: 8 }}>
+                      Continue
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

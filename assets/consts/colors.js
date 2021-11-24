@@ -4,6 +4,7 @@ const COLORS = {
   primary: '#F15b2F',
   secondary: '#bf1212',
   light: '#f9f9f9',
+  blue:"#195fb9",
   grey: '#dddedd',
   whitesmoke : "#F5F5F5",
   lightpink : '#F3EDF6',

@@ -9,7 +9,7 @@ import SignUpScreen from './SignUpScreen';
 import DrawerScreen from '../Tabs/DrawerScreen';
 import Flightsearch from './FlightSearch';
 import FlightSearchResult from './FlightSearchResult';
-import TravelInfo from './TravelInfo'
+import TravelInfo from './TravelInfo';
 
 // color
 import COLOR from '../assets/consts/colors';
@@ -20,6 +20,7 @@ import FlightSearchtwo from './FlightSearchtwo';
 import UserEditScreen from '../Components/More/UserEditScreen';
 import BookNow from './BookNow';
 import Paynow from './PayNow';
+import Flightpromo from './FlightPromo';
 
 const RootStack = createStackNavigator();
 
@@ -145,6 +146,18 @@ const RootStackScreen = ({ navigation }) => (
       }}
       name="PayNow"
       component={Paynow}
+    />
+    <RootStack.Screen
+      options={{
+        headerTitle: 'Flight Promo',
+        headerStyle: { backgroundColor: COLOR.secondary },
+        headerTintColor: COLOR.white,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+      name="FlightPromo"
+      component={Flightpromo}
     />
   </RootStack.Navigator>
 );

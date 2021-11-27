@@ -12,6 +12,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import counterReducer from './Components/Reducer';
+import LottieView from 'lottie-react-native';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 
@@ -66,7 +67,7 @@ export default function App({ navigation }) {
     setTimeout(() => {
       setIsloading(false);
       // dispatch({type : 'REGISTER' , token : 'ddfef'})
-    }, 1000);
+    }, 4000);
   }, []);
 
   if (isloading) {
@@ -78,7 +79,12 @@ export default function App({ navigation }) {
           alignItems: 'center',
         }}
       >
-        <ActivityIndicator size="large" color="#000" />
+        {/* <ActivityIndicator size="large" color="#000" /> */}
+        <LottieView
+          source={require('./9932-flight-ticket.json')}
+          autoPlay
+          loop
+        />
       </View>
     );
   }

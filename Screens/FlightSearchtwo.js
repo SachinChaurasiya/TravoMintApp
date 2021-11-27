@@ -22,6 +22,7 @@ import COLOR from '../assets/consts/colors';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import INDIGO from '../assets/Image/INDIGO.png';
+import Oneway from './Oneway';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -272,32 +273,18 @@ const FlightSearchtwo = ({ route, navigation }) => {
 
   return (
     <>
-      {/* <View>
-        <Text>Sachin</Text>
-      </View> */}
       <View style={styles.container}>
-        {/* <View style={styles.header}>
-        <Text>Flight Result</Text>
-      </View> */}
-
-        <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <Animatable.View animation="fadeInUpBig">
           <View>
-            <View>
-              <FlatList
-                data={datapass.flightResult}
-                renderItem={({ item }) => (
-                  <Flight Flight={item} />
-                  // <>
-                  //   <Text>Sachin</Text>
-                  //   <Text>{item.resultID}</Text>
-                  // </>
-                )}
-                //   // numColumns={2}
-                keyExtractor={(item, index) => index.toString()}
-                // scrollEnabled={false}
-                showsVerticalScrollIndicator={false}
-              />
-            </View>
+            <FlatList
+              data={datapass.flightResult}
+              renderItem={({ item }) => <Flight Flight={item} />}
+              //   // numColumns={2}
+              keyExtractor={(item, index) => index.toString()}
+              // scrollEnabled={false}
+              showsVerticalScrollIndicator={false}
+            />
+            <Oneway visible={true} />
           </View>
         </Animatable.View>
       </View>
@@ -308,7 +295,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f15b2f',
+    backgroundColor: COLOR.white,
   },
   // contentDiv:{
   //     flex:1,

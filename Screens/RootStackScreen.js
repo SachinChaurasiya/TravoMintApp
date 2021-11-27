@@ -14,6 +14,7 @@ import TravelInfo from './TravelInfo';
 // color
 import COLOR from '../assets/consts/colors';
 import HotelForm from './Hotels';
+import Lotti from './Oneway';
 import Transferscreen from './TransferScreen';
 import calendar from '../Components/Calendar/Calendar';
 import FlightSearchtwo from './FlightSearchtwo';

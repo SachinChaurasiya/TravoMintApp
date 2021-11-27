@@ -12,19 +12,14 @@ import {
 } from 'react-native';
 import DateRangePicker from 'rn-select-date-range';
 import { CheckBox } from 'react-native-elements';
-import DropDownPicker from 'react-native-dropdown-picker';
+import { Picker } from '@react-native-picker/picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../../assets/consts/colors';
 import moment from 'moment';
 const width = Dimensions.get('screen').width;
 const Infantinfo = () => {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: 'Male', value: 'Male' },
-    { label: 'Female', value: 'Female' },
-  ]);
   const [check, setCheck] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState();
   const [thirdselectedRange, setThirdRange] = useState({});
   const [thirdmodalVisible, setThirdModalVisible] = useState(false);
   return (
@@ -116,18 +111,19 @@ const Infantinfo = () => {
               style={{ marginTop: 5 }}
               color={COLOR.primary}
             />
-            <DropDownPicker
-              style={styles.DropDown}
-              open={open}
-              value={value}
-              items={items}
-              placeholder="Select"
-              placeholderTextColor={COLOR.grey}
-              setOpen={setOpen}
-              dropDownDirection="TOP"
-              setValue={setValue}
-              setItems={setItems}
-            />
+            <View>
+              <Picker
+                style={{ width: 330, height: 30, padding: 10 }}
+                selectedValue={selectedLanguage}
+                mode="dropdown"
+                onValueChange={(itemValue, itemIndex) =>
+                  setSelectedLanguage(itemValue)
+                }
+              >
+                <Picker.Item label="Male" value="Male" />
+                <Picker.Item label="Female" value="Female" />
+              </Picker>
+            </View>
           </View>
         </View>
         <TouchableOpacity

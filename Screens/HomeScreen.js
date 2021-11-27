@@ -7,25 +7,21 @@ import WelcomeSection from '../Components/Home/Header/WelcomeSection';
 import Cards from '../CardsData';
 
 const HomeScreen = (props) => {
-    return (
-        <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.container}
-        >
-            <HeaderTab {...props} />
-            <WelcomeSection {...props} />
-            <BestOffer />
-            <Cards />
-            <Categories />
-        </ScrollView>
-    );
+  return (
+    <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
+      <HeaderTab {...props} />
+      <WelcomeSection {...props} />
+      <BestOffer />
+      <Categories />
+    </ScrollView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
 });
 
 export default HomeScreen;

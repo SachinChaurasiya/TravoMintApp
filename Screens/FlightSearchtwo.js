@@ -12,7 +12,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
-import { Button } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import FlightData from '../FlightData';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import * as Animatable from 'react-native-animatable';
@@ -21,6 +21,7 @@ import COLOR from '../assets/consts/colors';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import INDIGO from '../assets/Image/INDIGO.png';
+import Oneway from './Oneway';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
@@ -258,7 +259,7 @@ const FlightSearchtwo = ({ route }) => {
       {/* <View style={styles.header}>
         <Text>Flight Result</Text>
       </View> */}
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+      <Animatable.View animation="fadeInUpBig">
         <View>
           <View>
             <FlatList
@@ -275,6 +276,7 @@ const FlightSearchtwo = ({ route }) => {
               // scrollEnabled={false}
               showsVerticalScrollIndicator={false}
             />
+            <Oneway visible={true} />
           </View>
         </View>
       </Animatable.View>
@@ -285,7 +287,7 @@ const FlightSearchtwo = ({ route }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f15b2f',
+    backgroundColor: COLOR.white,
   },
   // contentDiv:{
   //     flex:1,

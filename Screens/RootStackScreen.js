@@ -21,6 +21,7 @@ import UserEditScreen from '../Components/More/UserEditScreen';
 import BookNow from './BookNow';
 import Paynow from './PayNow';
 import Flightpromo from './FlightPromo';
+import RoundWaySearchResult from './RoundWaySearchResult';
 
 const RootStack = createStackNavigator();
 
@@ -158,6 +159,10 @@ const RootStackScreen = ({ navigation }) => (
       }}
       name="FlightPromo"
       component={Flightpromo}
+    />
+    <RootStack.Screen
+      name="RoundWaySearchResult"
+      component={RoundWaySearchResult}
     />
   </RootStack.Navigator>
 );

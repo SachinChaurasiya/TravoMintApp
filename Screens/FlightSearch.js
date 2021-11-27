@@ -1482,7 +1482,7 @@ export const Flightsearch = ({ route, navigation }) => {
     const a3 = DepartureTravelDate.DepartureTravelDate;
     const a4 = ArriveTravelDate.ArriveTravelDate;
 
-    navigation.navigate('FlightSearchtwo', {
+    navigation.navigate('RoundWaySearchResult', {
       originAirportName: a1,
       destinationAirportName: a2,
       departureTravelDate: a3,

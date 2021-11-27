@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
+import BottomSheet from 'reanimated-bottom-sheet';
 import { Button } from 'react-native-paper';
 import FlightData from '../FlightData';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -25,8 +26,9 @@ import INDIGO from '../assets/Image/INDIGO.png';
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-const FlightSearchtwo = ({ route }) => {
+const FlightSearchtwo = ({ route, navigation }) => {
   const [datapass, setDatapass] = useState({});
+
   const {
     originAirportName,
     destinationAirportName,
@@ -123,13 +125,20 @@ const FlightSearchtwo = ({ route }) => {
     return `${hours}h:${minutes}m`;
   };
 
-  // const BookDetails = (props) => {
-  //   //   console.log(props.inBound);
-  //   //   setApiData(props);
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const flightdeatils = (Flight) => {
   //   return (
-  //     <View>
-  //       {console.log(props.inBound[0].fromAirport)}
-  //       <Text>{props.inBound[0].fromAirport}</Text>
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         backgroundColor: COLOR.primary,
+  //         height: 500,
+  //         width: width,
+  //       }}
+  //     >
+  //       <Text>{console.log('Sachin')}</Text>
+  //       <Text>{console.log(Flight.fare.grandTotal)}</Text>
+  //       <Text>{Flight.fare.grandTotal}</Text>
   //     </View>
   //   );
   // };
@@ -145,12 +154,19 @@ const FlightSearchtwo = ({ route }) => {
         {/* {console.log('Lenfth' + Flight.outBound.length)} */}
         {Flight.outBound.length !== undefined &&
           Flight.outBound.map((item, index) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() =>
+                navigation.navigate('Book', { flightdata: datapass })
+              }
+              // onPress={() => setModalVisible(true)}
+            >
               <View
                 style={{
                   flex: 1,
                   width: width - 20,
                   borderWidth: 1,
+                  borderRadius: 10,
                   // marginHorizontal: 10,
                 }}
               >
@@ -236,6 +252,7 @@ const FlightSearchtwo = ({ route }) => {
                 </View>
               </View>
             </TouchableOpacity>
+
             // <View key={item.key}>
             //   <Text>
             //     {console.log(index)}
@@ -254,31 +271,37 @@ const FlightSearchtwo = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* <View style={styles.header}>
+    <>
+      {/* <View>
+        <Text>Sachin</Text>
+      </View> */}
+      <View style={styles.container}>
+        {/* <View style={styles.header}>
         <Text>Flight Result</Text>
       </View> */}
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View>
+
+        <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <View>
-            <FlatList
-              data={datapass.flightResult}
-              renderItem={({ item }) => (
-                <Flight Flight={item} />
-                // <>
-                //   <Text>Sachin</Text>
-                //   <Text>{item.resultID}</Text>
-                // </>
-              )}
-              //   // numColumns={2}
-              keyExtractor={(item, index) => index.toString()}
-              // scrollEnabled={false}
-              showsVerticalScrollIndicator={false}
-            />
+            <View>
+              <FlatList
+                data={datapass.flightResult}
+                renderItem={({ item }) => (
+                  <Flight Flight={item} />
+                  // <>
+                  //   <Text>Sachin</Text>
+                  //   <Text>{item.resultID}</Text>
+                  // </>
+                )}
+                //   // numColumns={2}
+                keyExtractor={(item, index) => index.toString()}
+                // scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+              />
+            </View>
           </View>
-        </View>
-      </Animatable.View>
-    </View>
+        </Animatable.View>
+      </View>
+    </>
   );
 };
 
@@ -355,7 +378,7 @@ const styles = StyleSheet.create({
   modalView: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: 'red',
   },
   button: {
     borderRadius: 20,

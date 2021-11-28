@@ -162,6 +162,9 @@ const RootStackScreen = ({ navigation }) => (
       component={Flightpromo}
     />
     <RootStack.Screen
+      options={{
+        headerStyle: { borderBottomWidth: 0 },
+      }}
       name="RoundWaySearchResult"
       component={RoundWaySearchResult}
     />

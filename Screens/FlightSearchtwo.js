@@ -167,7 +167,8 @@ const FlightSearchtwo = ({ route, navigation }) => {
                   flex: 1,
                   width: width - 20,
                   borderWidth: 1,
-                  borderRadius: 10,
+                  borderColor: COLOR.grey,
+                  // borderRadius: 10,
                   // marginHorizontal: 10,
                 }}
               >

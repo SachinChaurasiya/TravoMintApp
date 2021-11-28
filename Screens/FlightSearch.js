@@ -1482,12 +1482,36 @@ export const Flightsearch = ({ route, navigation }) => {
     const a3 = DepartureTravelDate.DepartureTravelDate;
     const a4 = ArriveTravelDate.ArriveTravelDate;
 
-    navigation.navigate('RoundWaySearchResult', {
-      originAirportName: a1,
-      destinationAirportName: a2,
-      departureTravelDate: a3,
-      arriveTravelDate: a4,
-    });
+    // {
+    //   a1 || a2 || a3 || a4
+    //     ? navigation.navigate('RoundWaySearchResult', {
+    //         originAirportName: a1,
+    //         destinationAirportName: a2,
+    //         departureTravelDate: a3,
+    //         arriveTravelDate: a4,
+    //       })
+    //     : navigation.navigate('FlightSearchtwo', {
+    //         originAirportName: a1,
+    //         destinationAirportName: a2,
+    //         departureTravelDate: a3,
+    //       });
+    // }
+    if (a1 && a2 && a3 && a4) {
+      navigation.navigate('RoundWaySearchResult', {
+        originAirportName: a1,
+        destinationAirportName: a2,
+        departureTravelDate: a3,
+        arriveTravelDate: a4,
+      });
+    } else if (a1 && a2 && a3 && !a4) {
+      navigation.navigate('FlightSearchtwo', {
+        originAirportName: a1,
+        destinationAirportName: a2,
+        departureTravelDate: a3,
+      });
+    } else {
+      console.log(err);
+    }
   };
 
   // get api

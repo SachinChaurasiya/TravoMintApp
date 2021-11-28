@@ -68,7 +68,7 @@ const LeftInBound = (props) => {
             Flight.inBound.map((item, index) => (
               <TouchableOpacity
                 activeOpacity={0.6}
-                onPress={() => setModalVisible(true)}
+                onPress={() => console.log(item.resultId)}
               >
                 <View
                   style={{
@@ -182,27 +182,6 @@ const LeftInBound = (props) => {
               </TouchableOpacity>
             ))}
         </View>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.textStyle}>Hide Modal</Text>
-              </Pressable>
-            </View>
-          </View>
-        </Modal>
       </View>
     );
   };

@@ -21,7 +21,7 @@ const Height = Dimensions.get('window').height;
 const WelcomeSection = ({ navigation }) => {
   return (
     <>
-      <View style={{ marginVertical: 80 }}>
+      <View style={{ marginTop: 80 }}>
         <View>
           <View style={styles.Background}>
             <View style={styles.textDiv}>
@@ -31,7 +31,9 @@ const WelcomeSection = ({ navigation }) => {
                   alignItems: 'center',
                 }}
               >
-                <Text style={[styles.text, { fontSize: 15 }]}>Welcome To </Text>
+                <Text style={[styles.text, { fontSize: 15, marginTop: 20 }]}>
+                  Welcome To{' '}
+                </Text>
                 <Text style={[styles.text, { color: COLOR.white }]}>
                   Travomint
                 </Text>
@@ -76,13 +78,13 @@ const WelcomeSection = ({ navigation }) => {
               <View style={{ justifyContent: 'space-between' }}>
                 <View
                   style={{
-                    backgroundColor: COLOR.white,
+                    backgroundColor: COLOR.whitesmoke,
                     height: 30,
                     width: 30,
                     borderRadius: 50,
                     marginLeft: 8,
                     justifyContent: 'center',
-                    marginTop: 10,
+                    marginTop: 20,
                     position: 'absolute',
                     zIndex: 99,
                     alignItems: 'center',
@@ -105,9 +107,9 @@ const WelcomeSection = ({ navigation }) => {
                 >
                   <View
                     style={{
-                      backgroundColor: COLOR.white,
+                      backgroundColor: COLOR.whitesmoke,
                       borderRadius: 5,
-                      marginTop: 30,
+                      marginTop: 40,
                       shadowOpacity: 1,
                       width: 110,
                       shadowColor: COLOR.grey,
@@ -117,12 +119,14 @@ const WelcomeSection = ({ navigation }) => {
                     <View
                       style={{
                         marginRight: 10,
-                        marginTop: 20,
+                        marginTop: 10,
                         marginLeft: 5,
                         marginBottom: 15,
                       }}
                     >
-                      <Text style={{ fontWeight: 'bold' }}>Flights</Text>
+                      <Text style={{ fontWeight: 'bold', color: COLOR.dark }}>
+                        Flights
+                      </Text>
                       <View
                         style={{
                           flexDirection: 'row',
@@ -149,13 +153,13 @@ const WelcomeSection = ({ navigation }) => {
               <View>
                 <View
                   style={{
-                    backgroundColor: COLOR.white,
+                    backgroundColor: COLOR.whitesmoke,
                     height: 30,
                     width: 30,
                     borderRadius: 50,
                     marginLeft: 25,
                     justifyContent: 'center',
-                    marginTop: 10,
+                    marginTop: 20,
                     position: 'absolute',
                     zIndex: 99,
                     alignItems: 'center',
@@ -176,20 +180,20 @@ const WelcomeSection = ({ navigation }) => {
                 <TouchableOpacity onPress={() => navigation.navigate('Hotel')}>
                   <View
                     style={{
-                      backgroundColor: COLOR.white,
+                      backgroundColor: COLOR.whitesmoke,
                       borderRadius: 5,
-                      marginTop: 30,
+                      marginTop: 40,
                       shadowOpacity: 1,
                       marginLeft: 20,
                       width: 110,
-                      shadowColor: COLOR.grey,
+                      shadowColor: COLOR.whitesmoke,
                       shadowRadius: 8,
                     }}
                   >
                     <View
                       style={{
-                        marginRight: 10,
-                        marginTop: 20,
+                        marginRight: 20,
+                        marginTop: 10,
                         marginLeft: 5,
                         marginBottom: 15,
                       }}
@@ -221,10 +225,10 @@ const WelcomeSection = ({ navigation }) => {
               <View>
                 <View
                   style={{
-                    backgroundColor: COLOR.white,
+                    backgroundColor: COLOR.whitesmoke,
                     height: 30,
                     width: 30,
-                    marginTop: 10,
+                    marginTop: 20,
                     marginLeft: 25,
                     borderRadius: 50,
                     justifyContent: 'center',
@@ -232,7 +236,7 @@ const WelcomeSection = ({ navigation }) => {
                     zIndex: 99,
                     shadowRadius: 8,
                     shadowOpacity: 1,
-                    shadowColor: COLOR.grey,
+                    shadowColor: COLOR.whitesmoke,
                     alignItems: 'center',
                   }}
                 >
@@ -248,20 +252,20 @@ const WelcomeSection = ({ navigation }) => {
                 <TouchableOpacity onPress={() => alert('This is a button')}>
                   <View
                     style={{
-                      backgroundColor: COLOR.white,
+                      backgroundColor: COLOR.whitesmoke,
                       borderRadius: 5,
-                      marginTop: 30,
+                      marginTop: 40,
                       shadowOpacity: 1,
                       width: 110,
                       marginLeft: 16,
-                      shadowColor: COLOR.grey,
+                      shadowColor: COLOR.whitesmoke,
                       shadowRadius: 8,
                     }}
                   >
                     <View
                       style={{
                         marginRight: 10,
-                        marginTop: 20,
+                        marginTop: 10,
                         marginLeft: 5,
                         marginBottom: 15,
                       }}
@@ -303,17 +307,16 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 20,
     width: Width,
     height: 200,
-    backgroundColor: COLOR.secondary,
+    backgroundColor: 'transparent',
   },
   textDiv: {
     // flexDirection:'row',
     width: Width,
-    marginTop: 20,
     marginLeft: 10,
     justifyContent: 'center',
   },
   text: {
-    fontSize: 30,
+    fontSize: 40,
     color: COLOR.white,
   },
 });

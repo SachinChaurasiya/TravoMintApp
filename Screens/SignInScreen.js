@@ -133,7 +133,7 @@ const SignInScreen = ({ navigation }) => {
           style={[
             styles.text_footer,
             {
-              color: colors.text,
+              color: COLOR.blue,
             },
           ]}
         >
@@ -172,7 +172,7 @@ const SignInScreen = ({ navigation }) => {
           style={[
             styles.text_footer,
             {
-              color: colors.text,
+              color: COLOR.blue,
               marginTop: 35,
             },
           ]}

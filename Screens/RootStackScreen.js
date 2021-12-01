@@ -1,6 +1,12 @@
 import React from 'react';
-
+import { TouchableOpacity, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
+
+// icons
+import Icons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Octicons from 'react-native-vector-icons/Octicons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import SplashScreen from './SplashScreen';
 import SignInScreen from './SignInScreen';
@@ -8,12 +14,14 @@ import SignUpScreen from './SignUpScreen';
 // import MainTabScreens from './MainTabSceens';
 import DrawerScreen from '../Tabs/DrawerScreen';
 import Flightsearch from './FlightSearch';
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 import FlightSearchResult from './FlightSearchResult';
 import TravelInfo from './TravelInfo';
 
 // color
 import COLOR from '../assets/consts/colors';
 import HotelForm from './Hotels';
+import Lotti from './Oneway';
 import Transferscreen from './TransferScreen';
 import calendar from '../Components/Calendar/Calendar';
 import FlightSearchtwo from './FlightSearchtwo';
@@ -21,6 +29,7 @@ import UserEditScreen from '../Components/More/UserEditScreen';
 import BookNow from './BookNow';
 import Paynow from './PayNow';
 import Flightpromo from './FlightPromo';
+import RoundWaySearchResult from './RoundWaySearchResult';
 
 const RootStack = createStackNavigator();
 
@@ -51,7 +60,7 @@ const RootStackScreen = ({ navigation }) => (
       options={{
         headerTitle: 'Transfer',
         headerStyle: {
-          backgroundColor: COLOR.secondary,
+          backgroundColor: COLOR.primary,
         },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
@@ -65,21 +74,33 @@ const RootStackScreen = ({ navigation }) => (
       options={{
         headerTitle: 'Book Your Flight',
         headerStyle: {
-          backgroundColor: COLOR.secondary,
+          backgroundColor: COLOR.primary,
         },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerRight: () => (
+          <View>
+            <TouchableOpacity>
+              <FontAwesome5
+                name="hand-holding-usd"
+                size={20}
+                style={{ marginRight: 5 }}
+                color={COLOR.white}
+              />
+            </TouchableOpacity>
+          </View>
+        ),
       }}
       component={Flightsearch}
-    />
+    ></RootStack.Screen>
 
     <RootStack.Screen
       name="FlightSearchtwo"
       options={{
         headerTitle: 'Flight Result',
-        headerStyle: { backgroundColor: COLOR.secondary },
+        headerStyle: { backgroundColor: COLOR.primary },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -103,7 +124,7 @@ const RootStackScreen = ({ navigation }) => (
       options={{
         headerTitle: 'Hotel Form',
         headerStyle: {
-          backgroundColor: COLOR.secondary,
+          backgroundColor: COLOR.primary,
         },
         headerTintColor: COLOR.white,
       }}
@@ -114,7 +135,7 @@ const RootStackScreen = ({ navigation }) => (
     <RootStack.Screen
       options={{
         headerTitle: 'Flight Details',
-        headerStyle: { backgroundColor: COLOR.secondary },
+        headerStyle: { backgroundColor: COLOR.primary },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -126,7 +147,7 @@ const RootStackScreen = ({ navigation }) => (
     <RootStack.Screen
       options={{
         headerTitle: 'Travel Information',
-        headerStyle: { backgroundColor: COLOR.secondary },
+        headerStyle: { backgroundColor: COLOR.primary },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -138,7 +159,7 @@ const RootStackScreen = ({ navigation }) => (
     <RootStack.Screen
       options={{
         headerTitle: 'Pay Now',
-        headerStyle: { backgroundColor: COLOR.secondary },
+        headerStyle: { backgroundColor: COLOR.primary },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -150,7 +171,7 @@ const RootStackScreen = ({ navigation }) => (
     <RootStack.Screen
       options={{
         headerTitle: 'Flight Promo',
-        headerStyle: { backgroundColor: COLOR.secondary },
+        headerStyle: { backgroundColor: COLOR.primary },
         headerTintColor: COLOR.white,
         headerTitleStyle: {
           fontWeight: 'bold',
@@ -158,6 +179,17 @@ const RootStackScreen = ({ navigation }) => (
       }}
       name="FlightPromo"
       component={Flightpromo}
+    />
+    <RootStack.Screen
+      options={{
+        headerTitle: 'Flight Search',
+        headerStyle: {
+          backgroundColor: COLOR.blue,
+        },
+        headerTintColor: COLOR.white,
+      }}
+      name="RoundWaySearchResult"
+      component={RoundWaySearchResult}
     />
   </RootStack.Navigator>
 );

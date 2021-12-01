@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   Pressable,
 } from 'react-native';
+import BottomSheet from 'reanimated-bottom-sheet';
 import { Button } from 'react-native-paper';
 import FlightData from '../FlightData';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
@@ -21,16 +22,19 @@ import COLOR from '../assets/consts/colors';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import INDIGO from '../assets/Image/INDIGO.png';
+import Oneway from './Oneway';
 
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-const FlightSearchtwo = ({ route }) => {
+const FlightSearchtwo = ({ route, navigation }) => {
   const [datapass, setDatapass] = useState({});
+
   const {
     originAirportName,
     destinationAirportName,
     departureTravelDate,
+    selectedLanguage,
     arriveTravelDate,
   } = route.params;
 
@@ -40,11 +44,12 @@ const FlightSearchtwo = ({ route }) => {
     console.log(originAirportName);
     console.log(destinationAirportName);
     console.log(departureTravelDate);
-    // console.log(arriveTravelDate);
+    console.log(selectedLanguage);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
+    const a8 = selectedLanguage;
     // const a4 = arriveTravelDate;
 
     var myHeaders = new Headers();
@@ -74,7 +79,7 @@ const FlightSearchtwo = ({ route }) => {
       infantsWs: 0,
       cabinType: 1,
       airline: 'All',
-      currencyCode: 'INR',
+      currencyCode: a8,
       siteId: 6,
       source: 'online',
       media: 'online',
@@ -100,7 +105,7 @@ const FlightSearchtwo = ({ route }) => {
     };
 
     fetch(
-      'http://stest2.hunterwave.com/Flights/GetFlightResult?authcode=Trav3103s987876',
+      'http://api.traveloes.com/Flights/GetFlightResult?authcode=Trav3103s987876',
       requestOptions
     )
       .then((response) => response.json())
@@ -123,13 +128,20 @@ const FlightSearchtwo = ({ route }) => {
     return `${hours}h:${minutes}m`;
   };
 
-  // const BookDetails = (props) => {
-  //   //   console.log(props.inBound);
-  //   //   setApiData(props);
+  // const [modalVisible, setModalVisible] = useState(false);
+  // const flightdeatils = (Flight) => {
   //   return (
-  //     <View>
-  //       {console.log(props.inBound[0].fromAirport)}
-  //       <Text>{props.inBound[0].fromAirport}</Text>
+  //     <View
+  //       style={{
+  //         flex: 1,
+  //         backgroundColor: COLOR.primary,
+  //         height: 500,
+  //         width: width,
+  //       }}
+  //     >
+  //       <Text>{console.log('Sachin')}</Text>
+  //       <Text>{console.log(Flight.fare.grandTotal)}</Text>
+  //       <Text>{Flight.fare.grandTotal}</Text>
   //     </View>
   //   );
   // };
@@ -145,12 +157,20 @@ const FlightSearchtwo = ({ route }) => {
         {/* {console.log('Lenfth' + Flight.outBound.length)} */}
         {Flight.outBound.length !== undefined &&
           Flight.outBound.map((item, index) => (
-            <TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() =>
+                navigation.navigate('Book', { flightdata: datapass })
+              }
+              // onPress={() => setModalVisible(true)}
+            >
               <View
                 style={{
                   flex: 1,
                   width: width - 20,
                   borderWidth: 1,
+                  borderColor: COLOR.grey,
+                  // borderRadius: 10,
                   // marginHorizontal: 10,
                 }}
               >
@@ -229,13 +249,62 @@ const FlightSearchtwo = ({ route }) => {
                     </View>
                   </View>
                   <View>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                      {/* ${Flight.fare.grandTotal} */}₹{round}
+                    {/* ₹-INR */}
+                    {/* INR 
+          £-GBP
+          $-AUD
+          €-EUR
+          C$-CAD*/}
+                    <Text>
+                      {selectedLanguage === 'AED' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`د.إ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'GBP' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`£ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'EUR' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`€ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'AUD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`$ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'INR' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`₹ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'CAD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`C$ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'USD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`$ ${round}`}</Text>
+                        </View>
+                      ) : null}
                     </Text>
                   </View>
                 </View>
               </View>
             </TouchableOpacity>
+
             // <View key={item.key}>
             //   <Text>
             //     {console.log(index)}
@@ -254,38 +323,30 @@ const FlightSearchtwo = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* <View style={styles.header}>
-        <Text>Flight Result</Text>
-      </View> */}
-      <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-        <View>
+    <>
+      <View style={styles.container}>
+        <Animatable.View animation="fadeInUpBig">
           <View>
             <FlatList
               data={datapass.flightResult}
-              renderItem={({ item }) => (
-                <Flight Flight={item} />
-                // <>
-                //   <Text>Sachin</Text>
-                //   <Text>{item.resultID}</Text>
-                // </>
-              )}
+              renderItem={({ item }) => <Flight Flight={item} />}
               //   // numColumns={2}
               keyExtractor={(item, index) => index.toString()}
               // scrollEnabled={false}
               showsVerticalScrollIndicator={false}
             />
+            <Oneway visible={true} />
           </View>
-        </View>
-      </Animatable.View>
-    </View>
+        </Animatable.View>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f15b2f',
+    backgroundColor: COLOR.white,
   },
   // contentDiv:{
   //     flex:1,
@@ -355,7 +416,7 @@ const styles = StyleSheet.create({
   modalView: {
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    backgroundColor: 'whitesmoke',
+    backgroundColor: 'red',
   },
   button: {
     borderRadius: 20,

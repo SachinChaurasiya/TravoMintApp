@@ -65,7 +65,11 @@ const SplashScreen = ({ navigation }) => {
                 </LinearGradient> */}
             <View style={styles.signIn}>
               <Text style={styles.textSign}>Get Started</Text>
-              <MaterialIcons name="navigate-next" color="#fff" size={20} />
+              <MaterialIcons
+                name="navigate-next"
+                color={COLOR.blue}
+                size={20}
+              />
             </View>
           </TouchableOpacity>
         </View>
@@ -82,7 +86,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLOR.white,
+    backgroundColor: COLOR.whitesmoke,
   },
   header: {
     flex: 1,
@@ -102,7 +106,7 @@ const styles = StyleSheet.create({
     height: height_logo,
   },
   title: {
-    color: COLOR.white,
+    color: COLOR.whitesmoke,
     fontSize: 30,
     fontWeight: 'bold',
   },
@@ -121,10 +125,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 50,
     flexDirection: 'row',
-    backgroundColor: COLOR.secondary,
+    backgroundColor: COLOR.whitesmoke,
   },
   textSign: {
-    color: COLOR.white,
+    color: COLOR.blue,
     fontWeight: 'bold',
   },
 });

@@ -6,6 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
+  Dimensions,
+  ImageBackground,
 } from 'react-native';
 import Collapsible from 'react-native-collapsible';
 import COLOR from '../assets/consts/colors';
@@ -13,13 +15,17 @@ import ChildernInfo from '../Components/TravelInformation/ChildrenInfo';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Infantinfo from '../Components/TravelInformation/Infantinfo';
 import Adultinfo from '../Components/TravelInformation/Adultinfo';
+import { CheckBox } from 'react-native-elements';
 
 const Separator = () => <View style={styles.separator}></View>;
 
-const TravelInfo = ({ navigation }) => {
+const width = Dimensions.get('screen').width;
+
+const TravelInfo = ({ navigation }, props) => {
   const [collapsed, setCollapsed] = useState(true);
   const [iscollapsed, setIsCollapsed] = useState(true);
   const [thirdcollapsed, setThirdCollapsed] = useState(true);
+  const [check, setCheck] = useState(false);
   const [activeSections, setActiveSections] = useState([]);
   const adultCount = 2;
   const childCount = 2;
@@ -30,7 +36,7 @@ const TravelInfo = ({ navigation }) => {
   for (let i = 1; i < adultCount; i++) {
     form.push(
       <View key={i}>
-        <Adultinfo data={i} />
+        <Adultinfo data={i} {...props} />
       </View>
     );
   }
@@ -67,40 +73,52 @@ const TravelInfo = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View
+      <ImageBackground
+        source={require('../assets/Image/sunset.jpg')}
         style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 35,
-          marginTop: 20,
-          opacity: 0.7,
+          width: width,
+          height: 80,
+          resizMode: 'contain',
+          borderTopRightRadius: 10,
+          borderTopLeftRadius: 10,
         }}
+        blurRadius={2}
       >
-        <Text style={{ fontSize: 15, color: COLOR.white }}>Delhi</Text>
-        <FontAwesome5
-          name="exchange-alt"
-          size={15}
-          style={{ marginTop: 3 }}
-          color={COLOR.white}
-        />
-        <Text style={{ fontSize: 15, color: COLOR.white }}>Goa</Text>
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 30,
-          opacity: 0.7,
-        }}
-      >
-        <Text style={{ color: 'white', fontSize: 10 }}> 25 NOV - 30 NOV </Text>
-        <Text style={{ fontSize: 10, color: 'white' }}>Economy</Text>
-        <Text style={{ color: 'white', fontSize: 10 }}>
-          {' '}
-          Adult 1 , Children 1
-        </Text>
-      </View>
-      <Separator />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 35,
+            marginTop: 20,
+          }}
+        >
+          <Text style={{ fontSize: 15, color: COLOR.white }}>Delhi</Text>
+          <FontAwesome5
+            name="exchange-alt"
+            size={15}
+            style={{ marginTop: 3 }}
+            color={COLOR.white}
+          />
+          <Text style={{ fontSize: 15, color: COLOR.white }}>Goa</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 30,
+          }}
+        >
+          <Text style={{ color: 'white', fontSize: 10 }}>
+            {' '}
+            25 NOV - 30 NOV{' '}
+          </Text>
+          <Text style={{ fontSize: 10, color: 'white' }}>Economy</Text>
+          <Text style={{ color: 'white', fontSize: 10 }}>
+            {' '}
+            Adult 1 , Children 1
+          </Text>
+        </View>
+      </ImageBackground>
       <ScrollView>
         <View>
           <TouchableOpacity onPress={toggleExpanded}>
@@ -118,7 +136,8 @@ const TravelInfo = ({ navigation }) => {
           </Collapsible>
         </View>
         <Separator />
-        <View>
+
+        {childCount > 1 && (
           <TouchableOpacity onPress={istoggleExpanded}>
             <View style={styles.header}>
               <Text style={styles.headerText}>
@@ -128,29 +147,41 @@ const TravelInfo = ({ navigation }) => {
               <FontAwesome5 name="chevron-down" size={20} color={COLOR.white} />
             </View>
           </TouchableOpacity>
-          {/*Content of Single Collapsible*/}
+        )}
+        {/*Content of Single Collapsible*/}
+        <View>
           <Collapsible collapsed={iscollapsed} align="center">
             <View style={styles.content}>
               <Text style={{ textAlign: 'center' }}>{childform}</Text>
             </View>
           </Collapsible>
         </View>
+
         <Separator />
-        <View>
-          <TouchableOpacity onPress={ThirdtoggleExpanded}>
-            <View style={styles.header}>
-              <Text style={styles.headerText}>Enter the details of Infant</Text>
-              {/*Heading of Single Collapsible*/}
-              <FontAwesome5 name="chevron-down" size={20} color={COLOR.white} />
-            </View>
-          </TouchableOpacity>
-          {/*Content of Single Collapsible*/}
-          <Collapsible collapsed={thirdcollapsed} align="center">
-            <View style={styles.content}>
-              <Text style={{ textAlign: 'center' }}>{Infantform}</Text>
-            </View>
-          </Collapsible>
-        </View>
+
+        {infantCount > 1 && (
+          <View>
+            <TouchableOpacity onPress={ThirdtoggleExpanded}>
+              <View style={styles.header}>
+                <Text style={styles.headerText}>
+                  Enter the details of Infant
+                </Text>
+
+                <FontAwesome5
+                  name="chevron-down"
+                  size={20}
+                  color={COLOR.white}
+                />
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
+        <Collapsible collapsed={thirdcollapsed} align="center">
+          <View style={styles.content}>
+            <Text style={{ textAlign: 'center' }}>{Infantform}</Text>
+          </View>
+        </Collapsible>
+
         <Separator />
 
         <View style={{ backgroundColor: COLOR.white }}>
@@ -319,6 +350,31 @@ const TravelInfo = ({ navigation }) => {
                   placeholderTextColor={COLOR.grey}
                 />
               </View>
+            </View>
+          </View>
+          <View>
+            <View
+              style={{
+                flexDirection: 'row',
+                width: width - 50,
+              }}
+            >
+              <CheckBox
+                style={{ marginTop: 10, marginRight: 10 }}
+                checked={check}
+                checkedColor={COLOR.primary}
+                onPress={() => setCheck(!check)}
+              />
+              <Text
+                style={{
+                  marginTop: 10,
+                  width: width - 80,
+                  color: COLOR.grey,
+                }}
+              >
+                I hereby certify that the above statements are true and correct
+                to the best of my knowledge.
+              </Text>
             </View>
           </View>
         </View>

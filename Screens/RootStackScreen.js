@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // icons
@@ -14,6 +14,7 @@ import SignUpScreen from './SignUpScreen';
 // import MainTabScreens from './MainTabSceens';
 import DrawerScreen from '../Tabs/DrawerScreen';
 import Flightsearch from './FlightSearch';
+import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 import FlightSearchResult from './FlightSearchResult';
 import TravelInfo from './TravelInfo';
 
@@ -79,9 +80,21 @@ const RootStackScreen = ({ navigation }) => (
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerRight: () => (
+          <View>
+            <TouchableOpacity>
+              <FontAwesome5
+                name="hand-holding-usd"
+                size={20}
+                style={{ marginRight: 5 }}
+                color={COLOR.white}
+              />
+            </TouchableOpacity>
+          </View>
+        ),
       }}
       component={Flightsearch}
-    />
+    ></RootStack.Screen>
 
     <RootStack.Screen
       name="FlightSearchtwo"
@@ -179,7 +192,11 @@ const RootStackScreen = ({ navigation }) => (
     />
     <RootStack.Screen
       options={{
-        headerStyle: { borderBottomWidth: 0 },
+        headerTitle: 'Flight Search',
+        headerStyle: {
+          backgroundColor: COLOR.blue,
+        },
+        headerTintColor: COLOR.white,
       }}
       name="RoundWaySearchResult"
       component={RoundWaySearchResult}

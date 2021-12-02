@@ -38,6 +38,8 @@ const FlightSearchtwo = ({ route, navigation }) => {
     childNo,
     infantNo,
     // arriveTravelDate,
+    selectedLanguage,
+    arriveTravelDate,
   } = route.params;
 
   // postApi
@@ -50,6 +52,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
     console.log(childNo);
     console.log(infantNo);
     // console.log(arriveTravelDate);
+    console.log(selectedLanguage);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
@@ -57,6 +60,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
     const a4 = adultNo;
     const a5 = childNo;
     const a6 = infantNo;
+    const a8 = selectedLanguage;
     // const a4 = arriveTravelDate;
 
     var myHeaders = new Headers();
@@ -86,7 +90,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
       infantsWs: 0,
       cabinType: 1,
       airline: 'All',
-      currencyCode: 'INR',
+      currencyCode: a8,
       siteId: 6,
       source: 'online',
       media: 'online',
@@ -169,7 +173,11 @@ const FlightSearchtwo = ({ route, navigation }) => {
               // onPress={() =>
               //   navigation.navigate('Book', { flightdata: datapass })
               // }
-              onPress={() => console.log(datapass.adults)}
+              onPressIn={() => console.log(datapass.adults)}
+              onPress={() =>
+                navigation.navigate('Book', { flightdata: datapass })
+              }
+              // onPress={() => setModalVisible(true)}
             >
               <View
                 style={{
@@ -256,8 +264,56 @@ const FlightSearchtwo = ({ route, navigation }) => {
                     </View>
                   </View>
                   <View>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>
-                      {/* ${Flight.fare.grandTotal} */}₹{round}
+                    {/* ₹-INR */}
+                    {/* INR 
+          £-GBP
+          $-AUD
+          €-EUR
+          C$-CAD*/}
+                    <Text>
+                      {selectedLanguage === 'AED' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`د.إ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'GBP' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`£ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'EUR' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`€ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'AUD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`$ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'INR' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`₹ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'CAD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`C$ ${round}`}</Text>
+                        </View>
+                      ) : selectedLanguage === 'USD' ? (
+                        <View>
+                          <Text
+                            style={{ fontSize: 20, fontWeight: 'bold' }}
+                          >{`$ ${round}`}</Text>
+                        </View>
+                      ) : null}
                     </Text>
                   </View>
                 </View>

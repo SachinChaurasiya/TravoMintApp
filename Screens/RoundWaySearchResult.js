@@ -555,6 +555,7 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import LeftInBound from '../Components/RoundWaySearchResult/LeftInBound';
 import RightOutBound from '../Components/RoundWaySearchResult/RightOutBound';
+import Oneway from './Oneway';
 
 const Roundwaysearchresult = ({ route, navigation }) => {
   const [datapass, setDatapass] = useState({});
@@ -657,9 +658,9 @@ const Roundwaysearchresult = ({ route, navigation }) => {
   return (
     <View style={{ flex: 1, backgroundColor: 'white', flexDirection: 'row' }}>
       <TouchableOpacity>
-        <RightOutBound data={datapass} />
+        <LeftInBound data={datapass} />
       </TouchableOpacity>
-      <LeftInBound data={datapass} />
+      <RightOutBound data={datapass} />
     </View>
   );
 };

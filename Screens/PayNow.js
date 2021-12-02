@@ -1,21 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet, ColorPropType } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import LottieView from 'lottie-react-native';
 import COLOR from '../assets/consts/colors';
 
 const Separator = () => <View style={styles.separator} />;
 
-const PayNow = () => {
+const PayNow = (props) => {
   return (
     <View style={styles.container}>
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         <View>
-          <Text style={{ fontSize: 25, color: COLOR.white, marginTop: 25 }}>
+          <Text style={{ fontSize: 25, color: COLOR.blue }}>
             Congratulations!
           </Text>
         </View>
         <View>
-          <Text style={{ color: COLOR.white, marginBottom: 25 }}>
+          <Text style={{ color: COLOR.blue, marginBottom: 25 }}>
             You have booked Your Flight Successfully.
           </Text>
         </View>
@@ -24,8 +25,8 @@ const PayNow = () => {
       <View>
         <View
           style={{
-            backgroundColor: COLOR.secondary,
-            height: 45,
+            backgroundColor: COLOR.blue,
+            height: 48,
             margin: 20,
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
@@ -37,22 +38,36 @@ const PayNow = () => {
             <View style={{ flexDirection: 'row' }}>
               <Text
                 style={{
-                  fontSize: 15,
-                  padding: 10,
+                  fontSize: 20,
+                  marginTop: 10,
                   marginLeft: 5,
+                  fontWeight: '100',
                   color: COLOR.white,
                 }}
               >
                 Booking ID :
               </Text>
               <Text
-                style={{ fontWeight: '100', padding: 10, color: COLOR.white }}
+                style={{
+                  fontWeight: '100',
+                  marginTop: 12,
+                  marginLeft: 5,
+                  fontSize: 18,
+                  color: COLOR.white,
+                }}
               >
                 D5KULA31
               </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text style={{ fontSize: 20, padding: 10, color: COLOR.white }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  padding: 10,
+                  color: COLOR.white,
+                  fontWeight: '100',
+                }}
+              >
                 578 INR
               </Text>
             </View>
@@ -63,8 +78,7 @@ const PayNow = () => {
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
-                  marginHorizontal: 8,
-                  marginTop: 10,
+                  marginHorizontal: 10,
                 }}
               >
                 <View>
@@ -98,7 +112,7 @@ const PayNow = () => {
                   }}
                 />
                 <View>
-                  <Text style={{ fontSize: 22 }}>GOI</Text>
+                  <Text style={{ fontSize: 22, marginLeft: 5 }}>GOI</Text>
                   <Text>Goa</Text>
                 </View>
               </View>
@@ -126,7 +140,7 @@ const PayNow = () => {
                   marginHorizontal: 20,
                 }}
               >
-                <Text style={{ fontWeight: 'bold' }}>Kapil Kumar Singh</Text>
+                <Text style={{ fontWeight: 'bold' }}>Mayank</Text>
                 <Text style={{ fontWeight: 'bold' }}>12A</Text>
               </View>
               <View
@@ -138,7 +152,7 @@ const PayNow = () => {
                   margin: 10,
                 }}
               >
-                <Text style={{ fontWeight: 'bold' }}>Rakita Kaur bedi</Text>
+                <Text style={{ fontWeight: 'bold' }}>Sachin</Text>
                 <Text style={{ fontWeight: 'bold' }}>12B</Text>
               </View>
               <Separator />
@@ -227,14 +241,11 @@ const PayNow = () => {
                       justifyContent: 'center',
                       alignItems: 'center',
                       flex: 1,
+                      borderBottomLeftRadius: 10,
+                      borderBottomRightRadius: 10,
                     }}
                   >
-                    <View style={{ flexDirection: 'row' }}>
-                      <FontAwesome5
-                        name="check"
-                        size={25}
-                        color={COLOR.white}
-                      />
+                    <View>
                       <Text style={{ color: COLOR.white }}>
                         {' '}
                         Note: Please Check your E-mail for Complete Flight
@@ -254,9 +265,7 @@ const PayNow = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLOR.primary,
-    flex: 1,
-    elevation: 10,
+    backgroundColor: COLOR.whitesmoke,
   },
   separator: {
     marginHorizontal: 1,

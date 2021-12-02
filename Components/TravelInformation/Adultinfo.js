@@ -15,16 +15,40 @@ import { Picker } from '@react-native-picker/picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../../assets/consts/colors';
 import moment from 'moment';
+
 const width = Dimensions.get('screen').width;
+
 const Adultinfo = () => {
-  const [check, setCheck] = useState(false);
   const [check1, setCheck1] = useState(false);
+  const [AdultNo, setAdultNo] = useState('Male');
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
   const [selectedRange, setRange] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState();
+  const [value, setValue] = useState({
+    FirstName: '',
+    MiddleName: '',
+    LastName: '',
+    gender: { value },
+    dob: '',
+  });
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSubmit = () => {
+    setValue({
+      FirstName: '',
+      MiddleName: '',
+      LastName: '',
+      gender: '',
+      dob: '',
+    });
+    console.log(value.FirstName);
+    console.log(value.MiddleName);
+    console.log(value.LastName);
+    console.log(value.gender);
+    console.log(value.dob);
+  };
   return (
     <View>
       <View style={styles.adult}>
@@ -80,7 +104,14 @@ const Adultinfo = () => {
               color={COLOR.primary}
               size={20}
             />
-            <TextInput style={styles.CheckInput} placeholder="FirstName" />
+            <TextInput
+              style={styles.CheckInput}
+              returnKeyLabel={'next'}
+              placeholder="FirstName"
+              onChangeText={(text) => setValue({ ...value, FirstName: text })}
+              value={value.FirstName}
+              autoCompleteType="off"
+            />
           </View>
 
           <View>
@@ -95,7 +126,16 @@ const Adultinfo = () => {
                 color={COLOR.primary}
                 size={20}
               />
-              <TextInput style={styles.CheckInput} placeholder="MiddleName" />
+              <TextInput
+                style={styles.CheckInput}
+                returnKeyLabel={'next'}
+                placeholder="MiddleName"
+                onChangeText={(text) =>
+                  setValue({ ...value, MiddleName: text })
+                }
+                value={value.MiddleName}
+                autoCompleteType="off"
+              />
             </View>
           </View>
           <View style={{ width: 100 }}>
@@ -110,7 +150,14 @@ const Adultinfo = () => {
                 color={COLOR.primary}
                 size={20}
               />
-              <TextInput style={styles.CheckInput} placeholder="LastName" />
+              <TextInput
+                style={styles.CheckInput}
+                returnKeyLabel={'next'}
+                placeholder="LastName"
+                onChangeText={(text) => setValue({ ...value, LastName: text })}
+                value={value.LastName}
+                autoCompleteType="off"
+              />
             </View>
           </View>
         </View>
@@ -133,24 +180,59 @@ const Adultinfo = () => {
               borderBottomColor: COLOR.grey,
             }}
           >
-            <FontAwesome5
-              name="user"
-              size={20}
-              style={{ marginTop: 5 }}
-              color={COLOR.primary}
-            />
             <View>
-              <Picker
-                style={{ width: 330, height: 30, padding: 10 }}
-                selectedValue={selectedLanguage}
-                mode="dropdown"
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedLanguage(itemValue)
-                }
-              >
-                <Picker.Item label="Male" value="Male" />
-                <Picker.Item label="Female" value="Female" />
-              </Picker>
+              <View>
+                <View>
+                  <Text
+                    style={{
+                      // marginTop: 10,
+                      color: COLOR.secondary,
+                      // marginLeft: 14,
+                    }}
+                  ></Text>
+                </View>
+                <View
+                  style={{
+                    width: width - 50,
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                  }}
+                >
+                  {/* <Counter /> */}
+                  <TouchableOpacity
+                    onPress={() => <View>{setAdultNo(1)}</View>}
+                  >
+                    <Text
+                      style={[
+                        styles.Adultchildinfant,
+                        {
+                          backgroundColor:
+                            AdultNo === 1 ? COLOR.primary : COLOR.white,
+                          color: AdultNo === 1 ? COLOR.white : COLOR.dark,
+                        },
+                      ]}
+                    >
+                      Male {console.log('Adult' + +AdultNo)}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => <View>{setAdultNo(2)}</View>}
+                  >
+                    <Text
+                      style={[
+                        styles.Adultchildinfant,
+                        {
+                          backgroundColor:
+                            AdultNo === 2 ? COLOR.primary : COLOR.white,
+                          color: AdultNo === 2 ? COLOR.white : COLOR.dark,
+                        },
+                      ]}
+                    >
+                      Female {console.log('Adult' + +AdultNo)}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
         </View>
@@ -186,29 +268,6 @@ const Adultinfo = () => {
             </View>
           </View>
         </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: width - 50,
-          }}
-        >
-          <CheckBox
-            style={{ marginTop: 10, marginRight: 10 }}
-            checked={check}
-            checkedColor={COLOR.primary}
-            onPress={() => setCheck(!check)}
-          />
-          <Text
-            style={{
-              marginTop: 10,
-              width: width - 80,
-              color: COLOR.grey,
-            }}
-          >
-            I hereby certify that the above statements are true and correct to
-            the best of my knowledge.
-          </Text>
-        </View>
       </View>
       <Modal
         animationType="fade"
@@ -227,6 +286,8 @@ const Adultinfo = () => {
               }}
               responseFormat="DD-MM-YYYY"
               maxDate={moment().add(90, 'days')}
+              onChangeText={(text) => setValue({ ...value, dob: text })}
+              value={value.dob}
               minDate={moment().subtract(90, 'days')}
               selectedDateContainerStyle={styles.selectedDateContainerStyle}
               selectedDateStyle={styles.selectedDateStyle}
@@ -317,6 +378,15 @@ const styles = StyleSheet.create({
   },
   modalView: {
     marginVertical: 20,
+  },
+  Adultchildinfant: {
+    borderWidth: 0.5,
+    borderColor: COLOR.secondary,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    fontSize: 13,
+    fontWeight: 'bold',
   },
 });
 export default Adultinfo;

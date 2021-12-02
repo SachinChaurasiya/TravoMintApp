@@ -6,7 +6,7 @@ const COLORS = {
   light: '#f9f9f9',
   blue: '#195fb9',
   grey: '#dddedd',
-  whitesmoke: '#F5F5F5',
+  whitesmoke: '#F1F1F1',
   lightpink: '#F3EDF6',
   input: '#05375a',
   error: '#FF0000',

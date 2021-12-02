@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import DateRangePicker from 'rn-select-date-range';
-import { CheckBox } from 'react-native-elements';
+// import { CheckBox } from 'react-native-elements';
 import { Picker } from '@react-native-picker/picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import COLOR from '../../assets/consts/colors';
@@ -25,6 +25,8 @@ const ChildernInfo = () => {
     { label: 'Male', value: 'Male' },
     { label: 'Female', value: 'Female' },
   ]);
+  const [AdultNo, setAdultNo] = useState('Male');
+
   const [check, setCheck] = useState(false);
 
   const [selectedLanguage, setSelectedLanguage] = useState();
@@ -119,17 +121,58 @@ const ChildernInfo = () => {
               color={COLOR.primary}
             />
             <View>
-              <Picker
-                style={{ width: 330, height: 30, padding: 10 }}
-                selectedValue={selectedLanguage}
-                mode="dropdown"
-                onValueChange={(itemValue, itemIndex) =>
-                  setSelectedLanguage(itemValue)
-                }
-              >
-                <Picker.Item label="Male" value="Male" />
-                <Picker.Item label="Female" value="Female" />
-              </Picker>
+              <View>
+                <View>
+                  <Text
+                    style={{
+                      // marginTop: 10,
+                      color: COLOR.secondary,
+                      // marginLeft: 14,
+                    }}
+                  ></Text>
+                </View>
+                <View
+                  style={{
+                    width: width - 50,
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                  }}
+                >
+                  {/* <Counter /> */}
+                  <TouchableOpacity
+                    onPress={() => <View>{setAdultNo(1)}</View>}
+                  >
+                    <Text
+                      style={[
+                        styles.Adultchildinfant,
+                        {
+                          backgroundColor:
+                            AdultNo === 1 ? COLOR.primary : COLOR.white,
+                          color: AdultNo === 1 ? COLOR.white : COLOR.dark,
+                        },
+                      ]}
+                    >
+                      Male {console.log('Adult' + +AdultNo)}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => <View>{setAdultNo(2)}</View>}
+                  >
+                    <Text
+                      style={[
+                        styles.Adultchildinfant,
+                        {
+                          backgroundColor:
+                            AdultNo === 2 ? COLOR.primary : COLOR.white,
+                          color: AdultNo === 2 ? COLOR.white : COLOR.dark,
+                        },
+                      ]}
+                    >
+                      Female {console.log('Adult' + +AdultNo)}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             </View>
           </View>
         </View>
@@ -165,29 +208,6 @@ const ChildernInfo = () => {
             </View>
           </View>
         </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: width - 50,
-          }}
-        >
-          <CheckBox
-            style={{ marginTop: 10, marginRight: 10 }}
-            checked={check}
-            checkedColor={COLOR.primary}
-            onPress={() => setCheck(!check)}
-          />
-          <Text
-            style={{
-              marginTop: 10,
-              width: width - 80,
-              color: COLOR.grey,
-            }}
-          >
-            I hereby certify that the above statements are true and correct to
-            the best of my knowledge.
-          </Text>
-        </View>
       </View>
       <Modal
         animationType="fade"
@@ -297,6 +317,15 @@ const styles = StyleSheet.create({
   },
   modalView: {
     marginVertical: 20,
+  },
+  Adultchildinfant: {
+    borderWidth: 0.5,
+    borderColor: COLOR.secondary,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 5,
+    fontSize: 13,
+    fontWeight: 'bold',
   },
 });
 export default ChildernInfo;

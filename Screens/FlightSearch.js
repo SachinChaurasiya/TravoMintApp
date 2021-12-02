@@ -8,15 +8,18 @@ import {
   Dimensions,
   FlatList,
   ScrollView,
-  Button,
   Modal,
   TextInput,
+  Button,
 } from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { Picker } from '@react-native-picker/picker';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { Flag } from 'react-native-svg-flagkit';
 import * as Animatable from 'react-native-animatable';
 import DateRangePicker from 'rn-select-date-range';
 import moment from 'moment';
+// import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 // import { useRoute } from '@react-navigation/native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -32,6 +35,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
   const [destinationAirportData, setDestinationAirportData] = useState('GOI');
   const [DepartureTravelDate, setDepartureTravelDate] = useState('');
   const [ArriveTravelDate, setArriveTravelDate] = useState('');
+  // const [Currency, setCurrency] = useState('');
+  const [selectedLanguage, setSelectedLanguage] = useState('INR');
 
   // Adult Child Infant
   const [AdultNo, setAdultNo] = useState(1);
@@ -47,9 +52,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
     console.log(destinationAirportData);
     console.log(DepartureTravelDate.DepartureTravelDate);
     console.log(ArriveTravelDate.ArriveTravelDate);
-    console.log(props.values);
-    // console.log(child);
-    // console.log(infant);
+    console.log(selectedLanguage);
 
     const a1 = originAirportData;
     const a2 = destinationAirportData;
@@ -58,6 +61,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
     const a5 = AdultNo;
     const a6 = child;
     const a7 = infant;
+    const a8 = selectedLanguage;
 
     // {
     //   a1 || a2 || a3 || a4
@@ -82,6 +86,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
         adultNo: a5,
         childNo: a6,
         infantNo: a7,
+        selectedLanguage: a8,
       });
     } else if (a1 && a2 && a3 && !a4) {
       navigation.navigate('FlightSearchtwo', {
@@ -91,6 +96,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
         adultNo: a5,
         childNo: a6,
         infantNo: a7,
+        selectedLanguage: a8,
       });
     } else {
       console.log('err');
@@ -172,6 +178,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/> */}
+
       <View style={styles.header}>
         <Text style={styles.text_header}>Flight Search Now!</Text>
       </View>
@@ -203,7 +210,46 @@ export const Flightsearch = ({ route, navigation, props }) => {
               </Text>
             </View>
           </View>
-
+          <View
+            style={{
+              borderColor: COLOR.grey,
+              borderWidth: 1,
+              flexDirection: 'row',
+              alignSelf: 'flex-end',
+              borderRadius: 10,
+            }}
+          >
+            <View style={{ padding: 5 }}>
+              <Flag id={'IN'} size={0.1} style={{ borderRadius: 10 }} />
+            </View>
+            <Picker
+              selectedValue={selectedLanguage}
+              mode="dropdown"
+              dropdownIconRippleColor={COLOR.blue}
+              style={{
+                width: 130,
+                height: 30,
+                padding: 10,
+              }}
+              onValueChange={(itemValue, itemIndex) =>
+                setSelectedLanguage(itemValue)
+              }
+            >
+              <Picker.Item label="₹-INR" value="INR" />
+              <Picker.Item label="$-USD" value="USD" />
+              <Picker.Item label="£-GBP" value="GBP" />
+              <Picker.Item label="$-AUD" value="AUD" />
+              <Picker.Item label="د.إ-AED" value="AED" />
+              <Picker.Item label="€-EUR" value="EUR" />
+              <Picker.Item label="C$-CAD" value="CAD" />
+              {console.log(selectedLanguage)}
+            </Picker>
+          </View>
+          {/* INR 
+          £-GBP
+          $-AUD
+          €-EUR
+          C$-CAD*/}
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <View
@@ -653,7 +699,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                     <Text
                       style={{
                         // marginTop: 10,
-                        color: COLOR.secondary,
+                        color: COLOR.blue,
                         // marginLeft: 14,
                       }}
                     >
@@ -829,11 +875,11 @@ export const Flightsearch = ({ route, navigation, props }) => {
                     <Text
                       style={{
                         marginTop: 10,
-                        color: COLOR.secondary,
+                        color: COLOR.blue,
                         // marginLeft: 14,
                       }}
                     >
-                      Childern(-12)
+                      Childern(2-12)
                     </Text>
                   </View>
                   <View
@@ -1005,11 +1051,11 @@ export const Flightsearch = ({ route, navigation, props }) => {
                     <Text
                       style={{
                         marginTop: 10,
-                        color: COLOR.secondary,
+                        color: COLOR.blue,
                         // marginLeft: 14,
                       }}
                     >
-                      Infant
+                      Infant(0-2)
                     </Text>
                   </View>
                   <View
@@ -1143,7 +1189,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                       alignItems: 'center',
                       justifyContent: 'center',
                       marginBottom: 50,
-                      backgroundColor: '#195fb9',
+                      backgroundColor: COLOR.blue,
                       borderRadius: 30,
                       marginTop: 20,
                     }}
@@ -1151,12 +1197,12 @@ export const Flightsearch = ({ route, navigation, props }) => {
                     <Text
                       style={{
                         color: COLOR.white,
-                        fontSize: 20,
+                        fontSize: 15,
                         padding: 10,
                         fontWeight: 'bold',
                       }}
                     >
-                      Search
+                      Search Flights
                     </Text>
                   </View>
                 </TouchableOpacity>
@@ -1176,7 +1222,7 @@ const HeaderButtons = (props) => {
         activeOpacity={0.6}
         style={{
           backgroundColor:
-            props.activetab === props.text ? COLOR.secondary : COLOR.white,
+            props.activetab === props.text ? COLOR.blue : COLOR.white,
           borderRadius: 30,
           paddingVertical: 6,
           paddingHorizontal: 16,
@@ -1189,8 +1235,7 @@ const HeaderButtons = (props) => {
       >
         <Text
           style={{
-            color:
-              props.activetab === props.text ? COLOR.white : COLOR.secondary,
+            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
             fontSize: 15,
             fontWeight: '900',
           }}
@@ -1214,7 +1259,7 @@ const EBFClassbtnfunction = () => {
               <EBFClassbtn
                 text="Economy"
                 value="1"
-                btncolor={COLOR.secondary}
+                btncolor={COLOR.blue}
                 textcolor="white"
                 activetab={activetab}
                 setActiveTab={setActiveTab}
@@ -1229,7 +1274,7 @@ const EBFClassbtnfunction = () => {
               <EBFClassbtn
                 text="Premium"
                 value="2"
-                btncolor={COLOR.secondary}
+                btncolor={COLOR.blue}
                 textcolor={COLOR.white}
                 activetab={activetab}
                 setActiveTab={setActiveTab}
@@ -1244,7 +1289,7 @@ const EBFClassbtnfunction = () => {
                 text="Business"
                 value="3"
                 btncolor={COLOR.white}
-                textcolor={COLOR.secondary}
+                textcolor={COLOR.blue}
                 activetab={activetab}
                 setActiveTab={setActiveTab}
                 values={values}
@@ -1257,8 +1302,8 @@ const EBFClassbtnfunction = () => {
               <EBFClassbtn
                 text="First"
                 value="4"
-                btncolor={COLOR.secondary}
-                textcolor={COLOR.white}
+                btncolor={COLOR.blue}
+                textcolor={COLOR.dark}
                 activetab={activetab}
                 setActiveTab={setActiveTab}
                 values={values}
@@ -1278,7 +1323,7 @@ const EBFClassbtn = (props) => {
       <TouchableOpacity
         style={{
           backgroundColor:
-            props.activetab === props.text ? COLOR.secondary : COLOR.white,
+            props.activetab === props.text ? COLOR.blue : COLOR.white,
           borderRadius: 30,
           paddingVertical: 6,
           paddingHorizontal: 16,
@@ -1288,8 +1333,7 @@ const EBFClassbtn = (props) => {
       >
         <Text
           style={{
-            color:
-              props.activetab === props.text ? COLOR.white : COLOR.secondary,
+            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
             fontSize: 11.5,
             fontWeight: '900',
           }}
@@ -1350,7 +1394,7 @@ const styles = StyleSheet.create({
     // padding: 20,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: COLOR.secondary,
+    borderColor: COLOR.grey,
     borderRadius: 30,
   },
   input: {
@@ -1422,7 +1466,7 @@ const styles = StyleSheet.create({
   },
   Adultchildinfant: {
     borderWidth: 0.5,
-    borderColor: COLOR.secondary,
+    borderColor: COLOR.grey,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 5,

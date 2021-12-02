@@ -26,6 +26,7 @@ const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 const RightOutBound = (props) => {
+  const [childValue, setChildValue] = useState(props.data);
   // -----------------------------------------------------------------------------------------------
 
   const ConvertMinsToTime = ({ data }) => {
@@ -34,25 +35,6 @@ const RightOutBound = (props) => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return `${hours}h:${minutes}m`;
   };
-
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const flightdeatils = (Flight) => {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: COLOR.primary,
-  //         height: 500,
-  //         width: width,
-  //       }}
-  //     >
-  //       <Text>{console.log('Sachin')}</Text>
-  //       <Text>{console.log(Flight.fare.grandTotal)}</Text>
-  //       <Text>{Flight.fare.grandTotal}</Text>
-  //     </View>
-  //   );
-  // };
-
   const Flight = ({ Flight }) => {
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
     // console.log(uri);
@@ -71,7 +53,7 @@ const RightOutBound = (props) => {
                 // onPress={() =>
                 //   navigation.navigate('Book', { flightdata: datapass })
                 // }
-                // onPress={() => setModalVisible(true)}
+                onPress={() => console.log(childValue.child)}
               >
                 <View
                   style={{

@@ -34,7 +34,10 @@ const FlightSearchtwo = ({ route, navigation }) => {
     originAirportName,
     destinationAirportName,
     departureTravelDate,
-    arriveTravelDate,
+    adultNo,
+    childNo,
+    infantNo,
+    // arriveTravelDate,
   } = route.params;
 
   // postApi
@@ -43,11 +46,17 @@ const FlightSearchtwo = ({ route, navigation }) => {
     console.log(originAirportName);
     console.log(destinationAirportName);
     console.log(departureTravelDate);
+    console.log(adultNo);
+    console.log(childNo);
+    console.log(infantNo);
     // console.log(arriveTravelDate);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
+    const a4 = adultNo;
+    const a5 = childNo;
+    const a6 = infantNo;
     // const a4 = arriveTravelDate;
 
     var myHeaders = new Headers();
@@ -71,9 +80,9 @@ const FlightSearchtwo = ({ route, navigation }) => {
       searchDirectFlight: false,
       flexibleSearch: false,
       tripType: 1,
-      adults: 2,
-      child: 1,
-      infants: 1,
+      adults: a4,
+      child: a5,
+      infants: a6,
       infantsWs: 0,
       cabinType: 1,
       airline: 'All',
@@ -103,7 +112,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
     };
 
     fetch(
-      'http://stest2.hunterwave.com/Flights/GetFlightResult?authcode=Trav3103s987876',
+      'http://api.traveloes.com/Flights/GetFlightResult?authcode=Trav3103s987876',
       requestOptions
     )
       .then((response) => response.json())
@@ -157,10 +166,10 @@ const FlightSearchtwo = ({ route, navigation }) => {
           Flight.outBound.map((item, index) => (
             <TouchableOpacity
               activeOpacity={0.6}
-              onPress={() =>
-                navigation.navigate('Book', { flightdata: datapass })
-              }
-              // onPress={() => setModalVisible(true)}
+              // onPress={() =>
+              //   navigation.navigate('Book', { flightdata: datapass })
+              // }
+              onPress={() => console.log(datapass.adults)}
             >
               <View
                 style={{

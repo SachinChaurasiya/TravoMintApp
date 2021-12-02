@@ -26,7 +26,7 @@ const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
 const LeftInBound = (props) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [infantsValue, setInfantsValue] = useState(props.data);
 
   const ConvertMinsToTime = ({ data }) => {
     let hours = Math.floor(data / 60);
@@ -34,24 +34,6 @@ const LeftInBound = (props) => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return `${hours}h:${minutes}m`;
   };
-
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const flightdeatils = (Flight) => {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: COLOR.primary,
-  //         height: 500,
-  //         width: width,
-  //       }}
-  //     >
-  //       <Text>{console.log('Sachin')}</Text>
-  //       <Text>{console.log(Flight.fare.grandTotal)}</Text>
-  //       <Text>{Flight.fare.grandTotal}</Text>
-  //     </View>
-  //   );
-  // };
 
   const Flight = ({ Flight }) => {
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
@@ -68,7 +50,7 @@ const LeftInBound = (props) => {
             Flight.inBound.map((item, index) => (
               <TouchableOpacity
                 activeOpacity={0.6}
-                onPress={() => console.log(item.resultId)}
+                onPress={() => console.log(infantsValue.infants)}
               >
                 <View
                   style={{

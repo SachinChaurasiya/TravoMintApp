@@ -135,12 +135,12 @@ const WelcomeSection = ({ navigation }) => {
                         }}
                       >
                         <View>
-                          <Text>Upto 12% Off</Text>
+                          <Text style={{ fontSize: 10 }}>Upto 12% Off</Text>
                         </View>
                         <View style={{ marginLeft: 5 }}>
                           <FontAwesome5
                             name="chevron-right"
-                            color="darkblue"
+                            color={COLOR.blue}
                             size={15}
                           />
                         </View>
@@ -207,12 +207,12 @@ const WelcomeSection = ({ navigation }) => {
                         }}
                       >
                         <View>
-                          <Text>Upto 10% Off</Text>
+                          <Text style={{ fontSize: 10 }}>Upto 10% Off</Text>
                         </View>
                         <View style={{ marginLeft: 5 }}>
                           <FontAwesome5
                             name="chevron-right"
-                            color="darkblue"
+                            color={COLOR.blue}
                             size={15}
                           />
                         </View>
@@ -279,12 +279,12 @@ const WelcomeSection = ({ navigation }) => {
                         }}
                       >
                         <View>
-                          <Text>Upto 5% Off</Text>
+                          <Text style={{ fontSize: 10 }}>Upto 5% Off</Text>
                         </View>
                         <View style={{ marginLeft: 5 }}>
                           <FontAwesome5
                             name="chevron-right"
-                            color="darkblue"
+                            color={COLOR.blue}
                             size={15}
                           />
                         </View>

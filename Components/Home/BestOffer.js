@@ -39,7 +39,7 @@ const Item = ({ image }) => (
   >
     <Image
       source={image}
-      style={{ resizeMode: 'contain', width: 350, height: 200 }}
+      style={{ resizeMode: 'contain', width: 350, height: 150 }}
     />
   </View>
 );
@@ -84,17 +84,16 @@ const BestOffer = () => {
             backgroundColor: COLOR.blue,
           }}
         ></View>
-        <View>
-          <View
-            style={{
-              marginTop: 5,
-              marginLeft: 15,
-              width: 150,
-              height: 1,
-              backgroundColor: COLOR.blue,
-            }}
-          ></View>
-        </View>
+
+        <View
+          style={{
+            marginTop: 5,
+            marginLeft: 15,
+            width: 150,
+            height: 1,
+            backgroundColor: COLOR.blue,
+          }}
+        ></View>
       </View>
       <View>
         <FlatList

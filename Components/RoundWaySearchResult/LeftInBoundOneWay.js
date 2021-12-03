@@ -31,7 +31,7 @@ import CustomSelectButton from '../CustomAppElements/CustomSelectButton';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const LeftInBound = (props) => {
+const LeftInBoundOneWay = (props) => {
   const navigation = useNavigation();
   const [choice, setChoice] = useState('1');
   const [modalVisible, setModalVisible] = useState(false);
@@ -107,7 +107,6 @@ const LeftInBound = (props) => {
     return (
       <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
         {/* {console.log('Lenfth' + Flight.outBound.length)} */}
-
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => {
@@ -120,7 +119,7 @@ const LeftInBound = (props) => {
         >
           <View
             style={{
-              width: width / 2,
+              width: width,
               //borderBottomWidth: 2,
               //  borderBottomColor: COLOR.grey,
             }}
@@ -128,7 +127,7 @@ const LeftInBound = (props) => {
             <View
               style={{
                 flex: 1,
-                width: width / 2,
+                width: width,
 
                 borderWidth: 0.5,
                 // height: 100,
@@ -327,6 +326,9 @@ const LeftInBound = (props) => {
             style={{
               flexDirection: 'column',
               justifyContent: 'space-around',
+              margin: 3,
+              padding: 2,
+              width: width,
             }}
           >
             {selectedFlight.Flight.outBound != null &&
@@ -336,8 +338,11 @@ const LeftInBound = (props) => {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
+                    margin: 3,
+                    padding: 2,
                     borderColor: '#bbb',
                     borderWidth: 0.3,
+                    width: width,
                   }}
                 >
                   <TouchableOpacity activeOpacity={0.6}>
@@ -578,15 +583,14 @@ const LeftInBound = (props) => {
                   </TouchableOpacity>
                 </View>
               ))}
-            <View></View>
           </Animatable.View>
         </ScrollView>
         <View
           style={{
             flex: 1,
+            alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: 60,
-            height: 30,
+            marginBottom: 120,
             alignItems: 'flex-end',
             marginRight: 10,
           }}
@@ -600,6 +604,7 @@ const LeftInBound = (props) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: COLOR.primary,
+                marginTop: 30,
               }}
               activeOpacity={0.7}
               onPress={handelProceed}
@@ -816,4 +821,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LeftInBound;
+export default LeftInBoundOneWay;

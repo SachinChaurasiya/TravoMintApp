@@ -105,9 +105,7 @@ const HeaderTab = ({ navigation }) => {
                   </Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('TravelInfo')}
-              >
+              <TouchableOpacity onPress={() => navigation.navigate('transfer')}>
                 <View style={style.iconContainer}>
                   <View
                     style={{

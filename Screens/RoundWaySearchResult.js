@@ -558,6 +558,7 @@ import RightOutBound from '../Components/RoundWaySearchResult/RightOutBound';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DummyFlightData from '../FlightData';
 import LottieView from 'lottie-react-native';
+import FlightData from '../RoundWayData';
 import COLORS from '../assets/consts/colors';
 const Roundwaysearchresult = ({ route, navigation }) => {
   const [isloading, setIsloading] = useState(true);
@@ -650,9 +651,7 @@ const Roundwaysearchresult = ({ route, navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsloading(false);
-      setDatapass(DummyFlightData);
-      // flightresultfetchApi();
-      // dispatch({type : 'REGISTER' , token : 'ddfef'})
+      setDatapass(FlightData);
     }, 2000);
   }, []);
 
@@ -728,7 +727,7 @@ const Roundwaysearchresult = ({ route, navigation }) => {
       >
         <LeftInBound data={datapass} />
         <View style={{ width: 1 }}></View>
-        {/* <RightOutBound data={datapass} /> */}
+        <RightOutBound data={datapass} />
       </View>
     </>
   );

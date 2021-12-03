@@ -64,11 +64,6 @@ const FlightSearchtwo = ({ route, navigation }) => {
           destinationAirport: a2,
           travelDate: a3,
         },
-        // {
-        //   originAirport: a2,
-        //   destinationAirport: a1,
-        //   travelDate: a4,
-        // },
       ],
       searchDirectFlight: false,
       flexibleSearch: false,

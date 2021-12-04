@@ -31,6 +31,7 @@ import Paynow from './PayNow';
 import Flightpromo from './FlightPromo';
 import RoundWaySearchResult from './RoundWaySearchResult';
 import Roundwaysearchresult from './RoundWaySearchResult';
+import MyBooking from './My booking';
 
 const RootStack = createStackNavigator();
 
@@ -191,6 +192,17 @@ const RootStackScreen = ({ navigation }) => (
       }}
       name="RoundWaySearchResult"
       component={RoundWaySearchResult}
+    />
+    <RootStack.Screen
+      name="My booking"
+      options={{
+        headerTitle: 'My Bookings',
+        headerStyle: {
+          backgroundColor: COLOR.blue,
+        },
+        headerTintColor: COLOR.white,
+      }}
+      component={MyBooking}
     />
   </RootStack.Navigator>
 );

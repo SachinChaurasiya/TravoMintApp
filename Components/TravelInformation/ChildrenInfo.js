@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import {
   View,
   Text,
@@ -25,6 +24,28 @@ const ChildernInfo = () => {
     { label: 'Male', value: 'Male' },
     { label: 'Female', value: 'Female' },
   ]);
+  // const [value, setValue] = useState({
+  //   FirstName: '',
+  //   MiddleName: '',
+  //   LastName: '',
+  //   gender: '',
+  //   dob: '',
+  // });
+
+  // const handleSubmit = () => {
+  //   setValue({
+  //     FirstName: '',
+  //     MiddleName: '',
+  //     LastName: '',
+  //     gender: '',
+  //     dob: '',
+  //   });
+  //   console.log(value.FirstName);
+  //   console.log(value.MiddleName);
+  //   console.log(value.LastName);
+  //   console.log(value.gender);
+  //   console.log(selected.firstDate);
+  // };
   const [AdultNo, setAdultNo] = useState('Male');
 
   const [check, setCheck] = useState(false);

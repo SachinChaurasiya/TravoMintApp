@@ -33,10 +33,14 @@ const height = Dimensions.get('screen').height;
 export const Flightsearch = ({ route, navigation, props }) => {
   const [originAirportData, setOriginAirportData] = useState('DEL');
   const [destinationAirportData, setDestinationAirportData] = useState('GOI');
-  const [DepartureTravelDate, setDepartureTravelDate] = useState('');
+  const [calendarVisible, setCalendarVisible] = useState('');
+  const [secondCalendarVisible, setSecondCalendarVisible] = useState('');
   const [ArriveTravelDate, setArriveTravelDate] = useState('');
   // const [Currency, setCurrency] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('INR');
+
+  const [activetab, setActiveTab] = useState('Economy');
+  const [values, setValues] = useState('1');
 
   // Adult Child Infant
   const [AdultNo, setAdultNo] = useState(1);
@@ -47,21 +51,28 @@ export const Flightsearch = ({ route, navigation, props }) => {
   const { data, loading } = state;
   // post Api
   const flightresultfetchApi = (props) => {
-    console.log('Pressed');
-    console.log(originAirportData);
-    console.log(destinationAirportData);
-    console.log(DepartureTravelDate.DepartureTravelDate);
-    console.log(ArriveTravelDate.ArriveTravelDate);
-    console.log(selectedLanguage);
+    // console.log('Pressed');
+    // console.log(originAirportData);
+    // console.log(destinationAirportData);
+    // console.log(selectedRange.firstDate);
+    // console.log(selectedRange.secondDate);
+    // console.log(selectedLanguage);
+    // console.log(values);
+    // console.log(AdultNo);
+    // console.log(child);
+    // console.log(infant);
 
     const a1 = originAirportData;
     const a2 = destinationAirportData;
-    const a3 = DepartureTravelDate.DepartureTravelDate;
-    const a4 = ArriveTravelDate.ArriveTravelDate;
+    // const a3 = DepartureTravelDate.DepartureTravelDate;
+    // const a4 = ArriveTravelDate.ArriveTravelDate;
+    const a3 = selectedRange.firstDate;
+    const a4 = selectedRange.secondDate;
     const a5 = AdultNo;
     const a6 = child;
     const a7 = infant;
     const a8 = selectedLanguage;
+    const a9 = values;
 
     // {
     //   a1 || a2 || a3 || a4
@@ -78,17 +89,31 @@ export const Flightsearch = ({ route, navigation, props }) => {
     //       });
     // }
     if (a1 && a2 && a3 && a4) {
-      navigation.navigate('RoundWaySearchResult', {
-        originAirportName: a1,
-        destinationAirportName: a2,
-        departureTravelDate: a3,
-        arriveTravelDate: a4,
-        adultNo: a5,
-        childNo: a6,
-        infantNo: a7,
-        selectedLanguage: a8,
-      });
+      if (a1 && a2 && a3 === a4) {
+        console.log('lOOP 1');
+        navigation.navigate('FlightSearchtwo', {
+          originAirportName: a1,
+          destinationAirportName: a2,
+          departureTravelDate: a3,
+          arriveTravelDate: a4,
+          AdultNo: a5,
+          child: a6,
+          infant: a7,
+          selectedLanguage: a8,
+          values: a9,
+        });
+      } else {
+        console.log('LOOP @');
+        navigation.navigate('RoundWaySearchResult', {
+          originAirportName: a1,
+          destinationAirportName: a2,
+          departureTravelDate: a3,
+          arriveTravelDate: a4,
+          selectedLanguage: a8,
+        });
+      }
     } else if (a1 && a2 && a3 && !a4) {
+      console.log('lOOP 3');
       navigation.navigate('FlightSearchtwo', {
         originAirportName: a1,
         destinationAirportName: a2,
@@ -153,7 +178,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
     );
   };
 
-  const [activetab, setActiveTab] = useState('Round Trip');
+  // const [activetab, setActiveTab] = useState('Round Trip');
   const [selectedRange, setRange] = React.useState('Date');
 
   // hide and unhide
@@ -175,10 +200,176 @@ export const Flightsearch = ({ route, navigation, props }) => {
     }
   };
 
+  // buttons
+  const HeaderButtons = (props) => {
+    return (
+      <View>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          style={{
+            backgroundColor:
+              props.activetab === props.text ? COLOR.blue : COLOR.white,
+            borderRadius: 30,
+            paddingVertical: 6,
+            paddingHorizontal: 16,
+          }}
+          onPressIn={() => {
+            props.setActiveTab(props.text);
+          }}
+          onPress={props.onPress}
+          // onPress={()=>ffFun()}
+        >
+          <Text
+            style={{
+              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              fontSize: 15,
+              fontWeight: '900',
+            }}
+          >
+            {props.text}
+          </Text>
+          {/* <Button style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}} title={props.text}/> */}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const EBFClassbtnfunction = () => {
+    return (
+      <View>
+        <View style={{ width: width / 1.1, marginTop: 5 }}>
+          <View style={[styles.btn, { marginTop: 15 }]}>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Economy"
+                  value="1"
+                  btncolor={COLOR.blue}
+                  textcolor="white"
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                  // onPress={() => setValues(1)}
+                />
+              </Text>
+            </View>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Premium"
+                  value="2"
+                  btncolor={COLOR.blue}
+                  textcolor={COLOR.white}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Business"
+                  value="3"
+                  btncolor={COLOR.white}
+                  textcolor={COLOR.blue}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+            <View>
+              <Text>
+                <EBFClassbtn
+                  text="First"
+                  value="4"
+                  btncolor={COLOR.blue}
+                  textcolor={COLOR.dark}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const EBFClassbtn = (props) => {
+    return (
+      <View>
+        <TouchableOpacity
+          style={{
+            backgroundColor:
+              props.activetab === props.text ? COLOR.blue : COLOR.white,
+            borderRadius: 30,
+            paddingVertical: 6,
+            paddingHorizontal: 16,
+          }}
+          onPress={() => props.setActiveTab(props.text)}
+          onPressIn={() => props.setValues(props.value)}
+        >
+          <Text
+            style={{
+              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              fontSize: 11.5,
+              fontWeight: '900',
+            }}
+          >
+            {props.text}
+            {/* {console.log(props.values)} */}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/> */}
-
+      <View
+        style={{
+          borderColor: COLOR.blue,
+          borderWidth: 1,
+          flexDirection: 'row',
+          alignSelf: 'flex-end',
+          borderRadius: 10,
+        }}
+      >
+        <View style={{ padding: 5 }}>
+          <Flag id={'IN'} size={0.1} style={{ borderRadius: 10 }} />
+        </View>
+        <Picker
+          selectedValue={selectedLanguage}
+          mode="dropdown"
+          dropdownIconRippleColor={COLOR.blue}
+          style={{
+            width: 130,
+            backgroundColor: COLOR.blue,
+            height: 30,
+            padding: 10,
+            color: COLOR.whitesmoke,
+          }}
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedLanguage(itemValue)
+          }
+        >
+          <Picker.Item label="₹-INR" value="INR" />
+          <Picker.Item label="$-USD" value="USD" />
+          <Picker.Item label="£-GBP" value="GBP" />
+          <Picker.Item label="$-AUD" value="AUD" />
+          <Picker.Item label="د.إ-AED" value="AED" />
+          <Picker.Item label="€-EUR" value="EUR" />
+          <Picker.Item label="C$-CAD" value="CAD" />
+          {console.log(selectedLanguage)}
+        </Picker>
+      </View>
       <View style={styles.header}>
         <Text style={styles.text_header}>Flight Search Now!</Text>
       </View>
@@ -210,41 +401,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
               </Text>
             </View>
           </View>
-          <View
-            style={{
-              borderColor: COLOR.grey,
-              borderWidth: 1,
-              flexDirection: 'row',
-              alignSelf: 'flex-end',
-              borderRadius: 10,
-            }}
-          >
-            <View style={{ padding: 5 }}>
-              <Flag id={'IN'} size={0.1} style={{ borderRadius: 10 }} />
-            </View>
-            <Picker
-              selectedValue={selectedLanguage}
-              mode="dropdown"
-              dropdownIconRippleColor={COLOR.blue}
-              style={{
-                width: 130,
-                height: 30,
-                padding: 10,
-              }}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedLanguage(itemValue)
-              }
-            >
-              <Picker.Item label="₹-INR" value="INR" />
-              <Picker.Item label="$-USD" value="USD" />
-              <Picker.Item label="£-GBP" value="GBP" />
-              <Picker.Item label="$-AUD" value="AUD" />
-              <Picker.Item label="د.إ-AED" value="AED" />
-              <Picker.Item label="€-EUR" value="EUR" />
-              <Picker.Item label="C$-CAD" value="CAD" />
-              {console.log(selectedLanguage)}
-            </Picker>
-          </View>
+
           {/* INR 
           £-GBP
           $-AUD
@@ -377,9 +534,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
                 </View>
 
                 <View>
-                  <Text style={[styles.title, { paddingLeft: -20 }]}>
-                    Flying To
-                  </Text>
                   {/* <TextInput
             placeholder="Flying To"
              style={styles.input}
@@ -387,6 +541,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
              value={totext}
              underlineColorAndroid="transparent"
             /> */}
+                  <Text style={styles.title}>Flying From</Text>
                   <TouchableOpacity onPress={() => setModalVisibles(true)}>
                     <View>
                       <Text
@@ -491,79 +646,13 @@ export const Flightsearch = ({ route, navigation, props }) => {
                 }}
               >
                 <View>
-                  {/* <Text style={styles.title}>Flying Date</Text>
-            <View style={{flexDirection: 'row',alignItems: 'center'}}  >
-                <FontAwesome5 name="calendar-alt" size={18} color={COLOR.primary} onPress={()=>navigation.navigate("calendar")}/>
-            <TextInput
-            placeholder="Flying Date"
-             style={[styles.input,{width: isVisible ? width-230: width-55}]}
-             onChangeText={flyingdateText}
-             value={flyingdatetext}
-            />
-            </View> */}
-
-                  {/* -------------------------------------------------------------------------------------------------- */}
                   <View>
-                    <Text style={styles.title}>Flying Date</Text>
-
                     <View
                       style={{
                         flexDirection: 'row',
                         alignItems: 'center',
                       }}
                     >
-                      <Fontisto
-                        name="calendar"
-                        size={18}
-                        color={COLOR.primary}
-                      />
-
-                      <View>
-                        {/* <TouchableOpacity
-                          onPress={() => setFlyingDate(true)}
-                          activeOpacity={0.6}
-                        >
-                          <View>
-                            <Text
-                              style={[
-                                styles.flightDest,
-                                {
-                                  marginTop: 10,
-                                },
-                              ]}
-                            >
-                              {selectedRange.firstDate}
-                            </Text>
-                            <Text style={{ color: 'black' }}>
-                              {route.params.myData}
-                            </Text>
-                          </View>
-                        </TouchableOpacity> */}
-                        {/* <View
-                          style={{
-                            marginLeft: 0,
-                            // marginTop:18,
-                            // style={[styles.input,{width: isVisible ? width-230: width-55}]}
-                            width: isVisible ? width - 240 : width - 50,
-                            height: 1,
-                            backgroundColor: COLOR.grey,
-                          }}
-                        /> */}
-                      </View>
-
-                      {/* modal */}
-                      {/* <Modal
-                        animationType="slide"
-                        transparent={true}
-                        visible={FlyingDate}
-                        onRequestClose={() => {
-                          alert('Modal has been closed.');
-                          setFlyingDate(!FlyingDate);
-                        }}
-                      > */}
-                      {/* <View style={styles.centeredView}>
-                          <View style={styles.modalView}> */}
-                      {/* <Text>cnscjbdjcbbkdsddvdvdsdsz</Text> */}
                       <View>
                         {loading === false ? (
                           <View
@@ -574,36 +663,39 @@ export const Flightsearch = ({ route, navigation, props }) => {
                               }
                             }
                           >
-                            {/* <DateRangePicker
-                                    onSelectDateRange={(range) => {
-                                      setRange(range);
+                            <TouchableOpacity
+                              onPress={() => setCalendarVisible(true)}
+                              activeOpacity={0.6}
+                            >
+                              <View
+                                style={{
+                                  justifyContent: 'space-between',
+                                  borderBottomWidth: 1,
+                                  borderBottomColor: COLOR.whitesmoke,
+                                  width: 155,
+                                  marginLeft: 10,
+                                }}
+                              >
+                                <Text style={styles.Text}>Departure</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                  <FontAwesome5
+                                    name="calendar-alt"
+                                    color={COLOR.primary}
+                                    size={20}
+                                    style={{
+                                      marginBottom: 5,
                                     }}
-                                    blockSingleDateSelection={false}
-                                    responseFormat="DD-MM-YYYY"
-                                    maxDate={moment().add(90, 'days')}
-                                    minDate={moment().subtract(90, 'days')}
-                                    selectedDateContainerStyle={
-                                      styles.selectedDateContainerStyle
+                                  />
+                                  <TextInput
+                                    onChangeText={(DepartureTravelDate) =>
+                                      setOriginAirportData(DepartureTravelDate)
                                     }
-                                    selectedDateStyle={styles.selectedDateStyle}
-                                  /> */}
-                            <TextInput
-                              placeholder="Flying To"
-                              style={[
-                                styles.input,
-                                {
-                                  width: width / 2,
-                                  paddingHorizontal: 12,
-                                },
-                              ]}
-                              //  onChangeText={flyingfromText}
-                              onChangeText={(DepartureTravelDate) =>
-                                setDepartureTravelDate({
-                                  DepartureTravelDate,
-                                })
-                              }
-                              value={DepartureTravelDate}
-                            />
+                                    value={selectedRange.firstDate}
+                                    style={{}}
+                                  ></TextInput>
+                                </View>
+                              </View>
+                            </TouchableOpacity>
                           </View>
                         ) : (
                           <Text>loading</Text>
@@ -619,60 +711,39 @@ export const Flightsearch = ({ route, navigation, props }) => {
                       {isVisible ? (
                         <Animatable.View animation="lightSpeedIn">
                           <View>
-                            <Text
-                              style={{
-                                position: 'absolute',
-                                bottom: 30,
-                                fontSize: 12,
-                                color: COLOR.primary,
-                                fontWeight: 'bold',
-                              }}
-                            >
-                              Flying Date
-                            </Text>
-                            {/* <TouchableOpacity
-                              onPress={() => setFlyingDate(true)}
+                            <TouchableOpacity
+                              onPress={() => setSecondCalendarVisible(true)}
                               activeOpacity={0.6}
                             >
-                              <View>
-                                <Text
-                                  style={{
-                                    marginTop: 0,
-                                  }}
-                                >
-                                  {selectedRange.secondDate}
-                                </Text>
-                                <Text style={{color:"black"}}>{route.params.myData}</Text>
+                              <View
+                                style={{
+                                  justifyContent: 'space-between',
+                                  borderBottomWidth: 1,
+                                  borderBottomColor: COLOR.whitesmoke,
+                                  width: 150,
+                                  marginLeft: 20,
+                                  justifyContent: 'flex-end',
+                                }}
+                              >
+                                <Text style={styles.Text}>Arrive</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                  <FontAwesome5
+                                    name="calendar-alt"
+                                    color={COLOR.primary}
+                                    size={20}
+                                    style={{
+                                      marginBottom: 5,
+                                    }}
+                                  />
+                                  <TextInput
+                                    onChangeText={(ArriveTravelDate) =>
+                                      setOriginAirportData(ArriveTravelDate)
+                                    }
+                                    value={selectedRange.secondDate}
+                                  ></TextInput>
+                                </View>
                               </View>
-                            </TouchableOpacity> */}
-                            {/* <View
-                              style={{
-                                marginLeft: 0,
-                                position: 'absolute',
-                                top: 28,
-                                // marginTop: 30,
-                                width: width - 240,
-                                height: 1,
-                                backgroundColor: COLOR.grey,
-                              }}
-                            /> */}
-                            <TextInput
-                              placeholder="Flying To"
-                              style={[
-                                styles.input,
-                                {
-                                  width: width,
-                                  paddingHorizontal: 12,
-                                },
-                              ]}
-                              //  onChangeText={flyingfromText}
-                              onChangeText={(ArriveTravelDate) =>
-                                setArriveTravelDate({
-                                  ArriveTravelDate,
-                                })
-                              }
-                              value={ArriveTravelDate}
-                            />
+                            </TouchableOpacity>
                           </View>
                         </Animatable.View>
                       ) : null}
@@ -681,15 +752,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
 
                   {/* --------------------------------------------------------------------------------------------------------- */}
                 </View>
-                {/* { isVisible ? <Animatable.View animation="lightSpeedIn">
-                <Text style={[styles.title,{paddingLeft:-20}]}>Return Form</Text>
-            <TextInput
-            placeholder="Return"
-             style={styles.input}
-             onChangeText={returndateText}
-             value={returndatetext}
-            />
-            </Animatable.View>:null} */}
               </View>
               <EBFClassbtnfunction />
               <View>
@@ -698,9 +760,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   <View>
                     <Text
                       style={{
-                        // marginTop: 10,
+                        fontSize: 10,
                         color: COLOR.blue,
-                        // marginLeft: 14,
                       }}
                     >
                       Adult(+18)
@@ -708,7 +769,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   </View>
                   <View
                     style={{
-                      marginTop: 10,
                       width: width - 50,
                       flexDirection: 'row',
                       justifyContent: 'space-evenly',
@@ -875,6 +935,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                     <Text
                       style={{
                         marginTop: 10,
+                        fontSize: 10,
                         color: COLOR.blue,
                         // marginLeft: 14,
                       }}
@@ -884,7 +945,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   </View>
                   <View
                     style={{
-                      marginTop: 10,
                       width: width - 50,
                       flexDirection: 'row',
                       justifyContent: 'space-evenly',
@@ -1050,6 +1110,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   <View>
                     <Text
                       style={{
+                        fontSize: 10,
                         marginTop: 10,
                         color: COLOR.blue,
                         // marginLeft: 14,
@@ -1060,7 +1121,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   </View>
                   <View
                     style={{
-                      marginTop: 10,
                       width: width,
                       flexDirection: 'row',
                       marginLeft: 7,
@@ -1178,7 +1238,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                 </View>
               </View>
               {/* Search Button  */}
-              <View>
+              <View style={{ marginBottom: 20 }}>
                 <TouchableOpacity
                   activeOpacity={0.8}
                   //   onPress={() => navigation.navigate('FlightSearchtwo')}
@@ -1211,140 +1271,110 @@ export const Flightsearch = ({ route, navigation, props }) => {
           </ScrollView>
         </View>
       </Animatable.View>
-    </View>
-  );
-};
-
-const HeaderButtons = (props) => {
-  return (
-    <View>
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={{
-          backgroundColor:
-            props.activetab === props.text ? COLOR.blue : COLOR.white,
-          borderRadius: 30,
-          paddingVertical: 6,
-          paddingHorizontal: 16,
-        }}
-        onPressIn={() => {
-          props.setActiveTab(props.text);
-        }}
-        onPress={props.onPress}
-        // onPress={()=>ffFun()}
-      >
-        <Text
-          style={{
-            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
-            fontSize: 15,
-            fontWeight: '900',
+      <View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={calendarVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+            setCalendarVisible(!calendarVisible);
           }}
         >
-          {props.text}
-        </Text>
-        {/* <Button style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}} title={props.text}/> */}
-      </TouchableOpacity>
-    </View>
-  );
-};
-const EBFClassbtnfunction = () => {
-  const [activetab, setActiveTab] = useState('Economy');
-  const [values, setValues] = useState('1');
-  return (
-    <View>
-      <View style={{ width: width / 1.1, marginVertical: 5 }}>
-        <View style={[styles.btn, { marginTop: 15 }]}>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Economy"
-                value="1"
-                btncolor={COLOR.blue}
-                textcolor="white"
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-                values={values}
-                setValues={setValues}
-                // onPress={() => setValues(1)}
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <DateRangePicker
+                onSelectDateRange={(range) => {
+                  setRange(range);
+                }}
+                responseFormat="MM/DD/YYYY"
+                maxDate={moment().add(90, 'days')}
+                minDate={moment().subtract(90, 'days')}
+                selectedDateContainerStyle={styles.selectedDateContainerStyle}
+                selectedDateStyle={styles.selectedDateStyle}
               />
-            </Text>
+              <TouchableOpacity
+                onPress={() => setCalendarVisible(!calendarVisible)}
+              >
+                <View
+                  style={{
+                    marginLeft: 15,
+                    borderWidth: 1,
+                    borderColor: COLOR.primary,
+                    backgroundColor: COLOR.primary,
+                    width: 80,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text
+                    style={{
+                      padding: 10,
+                      marginLeft: 12,
+                      color: COLOR.white,
+                    }}
+                  >
+                    Done
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Premium"
-                value="2"
-                btncolor={COLOR.blue}
-                textcolor={COLOR.white}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-                values={values}
-                setValues={setValues}
+        </Modal>
+      </View>
+      <View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={secondCalendarVisible}
+          onRequestClose={() => {
+            alert('Modal has been closed.');
+            setSecondCalendarVisible(!secondCalendarVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <DateRangePicker
+                onSelectDateRange={(range) => {
+                  setRange(range);
+                }}
+                responseFormat="MM/DD/YYYY"
+                maxDate={moment().add(90, 'days')}
+                minDate={moment().subtract(90, 'days')}
+                selectedDateContainerStyle={styles.selectedDateContainerStyle}
+                selectedDateStyle={styles.selectedDateStyle}
               />
-            </Text>
+              <TouchableOpacity
+                onPress={() => setSecondCalendarVisible(!secondCalendarVisible)}
+              >
+                <View
+                  style={{
+                    marginLeft: 15,
+                    borderWidth: 1,
+                    borderColor: COLOR.primary,
+                    backgroundColor: COLOR.primary,
+                    width: 80,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text
+                    style={{
+                      padding: 10,
+                      marginLeft: 12,
+                      color: COLOR.white,
+                    }}
+                  >
+                    Done
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Business"
-                value="3"
-                btncolor={COLOR.white}
-                textcolor={COLOR.blue}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-                values={values}
-                setValues={setValues}
-              />
-            </Text>
-          </View>
-          <View>
-            <Text>
-              <EBFClassbtn
-                text="First"
-                value="4"
-                btncolor={COLOR.blue}
-                textcolor={COLOR.dark}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-                values={values}
-                setValues={setValues}
-              />
-            </Text>
-          </View>
-        </View>
+        </Modal>
       </View>
     </View>
   );
 };
 
-const EBFClassbtn = (props) => {
-  return (
-    <View>
-      <TouchableOpacity
-        style={{
-          backgroundColor:
-            props.activetab === props.text ? COLOR.blue : COLOR.white,
-          borderRadius: 30,
-          paddingVertical: 6,
-          paddingHorizontal: 16,
-        }}
-        onPress={() => props.setActiveTab(props.text)}
-        onPressIn={() => props.setValues(props.value)}
-      >
-        <Text
-          style={{
-            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
-            fontSize: 11.5,
-            fontWeight: '900',
-          }}
-        >
-          {props.text}
-          {console.log(props.values)}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -1472,6 +1502,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontSize: 13,
     fontWeight: 'bold',
+  },
+  Text: {
+    color: COLOR.primary,
+    fontWeight: 'bold',
+    marginTop: 15,
   },
   // Adultchildinfanttouch: {
   //   borderWidth: 0.5,

@@ -21,7 +21,6 @@ import COLOR from '../../assets/consts/colors';
 import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
-// import AppButton from '../../Components/Elements/Button';
 
 // import INDIGO from '../../assets/Image/INDIGO.png';
 
@@ -431,7 +430,7 @@ const RightInBound = (props) => {
                 textTransform: 'uppercase',
               }}
             >
-              Proceed
+              Proceed >>
             </Text>
           </TouchableOpacity>
         </View>

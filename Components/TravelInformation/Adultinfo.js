@@ -7,6 +7,7 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
+  Button,
   TouchableOpacity,
 } from 'react-native';
 import DateRangePicker from 'rn-select-date-range';
@@ -18,7 +19,7 @@ import moment from 'moment';
 
 const width = Dimensions.get('screen').width;
 
-const Adultinfo = () => {
+const Adultinfo = ({ navigation, route }) => {
   const [check1, setCheck1] = useState(false);
   const [AdultNo, setAdultNo] = useState('Male');
   const [check2, setCheck2] = useState(false);
@@ -29,7 +30,7 @@ const Adultinfo = () => {
     FirstName: '',
     MiddleName: '',
     LastName: '',
-    gender: { value },
+    gender: '',
     dob: '',
   });
 
@@ -47,8 +48,9 @@ const Adultinfo = () => {
     console.log(value.MiddleName);
     console.log(value.LastName);
     console.log(value.gender);
-    console.log(value.dob);
+    console.log(selected.firstDate);
   };
+
   return (
     <View>
       <View style={styles.adult}>
@@ -83,6 +85,7 @@ const Adultinfo = () => {
             <CheckBox
               title="Mrs"
               checked={check2}
+              onPressIn={handleSubmit}
               checkedColor={COLOR.primary}
               onPress={() => setCheck2(!check2)}
             />
@@ -198,7 +201,6 @@ const Adultinfo = () => {
                     justifyContent: 'space-evenly',
                   }}
                 >
-                  {/* <Counter /> */}
                   <TouchableOpacity
                     onPress={() => <View>{setAdultNo(1)}</View>}
                   >
@@ -212,7 +214,7 @@ const Adultinfo = () => {
                         },
                       ]}
                     >
-                      Male {console.log('Adult' + +AdultNo)}
+                      Male
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -228,7 +230,7 @@ const Adultinfo = () => {
                         },
                       ]}
                     >
-                      Female {console.log('Adult' + +AdultNo)}
+                      Female
                     </Text>
                   </TouchableOpacity>
                 </View>
@@ -257,15 +259,14 @@ const Adultinfo = () => {
                   marginBottom: 5,
                 }}
               />
-              <Text
+              <TextInput
                 style={{
                   marginLeft: 5,
                   marginTop: 5,
                 }}
-              >
-                {selectedRange.firstDate}
-              </Text>
+              ></TextInput>
             </View>
+            <Button title="Check" onPress={handleSubmit} />
           </View>
         </TouchableOpacity>
       </View>

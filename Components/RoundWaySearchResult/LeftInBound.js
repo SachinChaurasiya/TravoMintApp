@@ -430,9 +430,7 @@ const LeftInBound = (props) => {
                 color: 'white',
                 textTransform: 'uppercase',
               }}
-            >
-              Proceed
-            </Text>
+            ></Text>
           </TouchableOpacity>
         </View>
       </>

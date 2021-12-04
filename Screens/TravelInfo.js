@@ -21,7 +21,7 @@ const Separator = () => <View style={styles.separator}></View>;
 
 const width = Dimensions.get('screen').width;
 
-const TravelInfo = ({ navigation }, props) => {
+const TravelInfo = ({ navigation, route }) => {
   const [collapsed, setCollapsed] = useState(true);
   const [iscollapsed, setIsCollapsed] = useState(true);
   const [thirdcollapsed, setThirdCollapsed] = useState(true);
@@ -36,7 +36,7 @@ const TravelInfo = ({ navigation }, props) => {
   for (let i = 1; i < adultCount; i++) {
     form.push(
       <View key={i}>
-        <Adultinfo data={i} {...props} />
+        <Adultinfo data={i} />
       </View>
     );
   }
@@ -55,6 +55,14 @@ const TravelInfo = ({ navigation }, props) => {
       </View>
     );
   }
+  // const [datapass, setDatapass] = useState({});
+  // const { FirstName, MiddleName, LastName, gender } = route.params;
+
+  // console.log(FirstName);
+  // console.log(MiddleName);
+  // console.log(LastName);
+  // console.log(gender);
+  // console.log('No' + datapass);
 
   const toggleExpanded = () => {
     //Toggling the state of single Collapsible

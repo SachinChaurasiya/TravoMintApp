@@ -34,12 +34,13 @@ const FlightSearchtwo = ({ route, navigation }) => {
     originAirportName,
     destinationAirportName,
     departureTravelDate,
-    adultNo,
-    childNo,
-    infantNo,
+    AdultNo,
+    child,
+    infant,
     // arriveTravelDate,
     selectedLanguage,
     arriveTravelDate,
+    values,
   } = route.params;
 
   // postApi
@@ -48,19 +49,21 @@ const FlightSearchtwo = ({ route, navigation }) => {
     console.log(originAirportName);
     console.log(destinationAirportName);
     console.log(departureTravelDate);
-    console.log(adultNo);
-    console.log(childNo);
-    console.log(infantNo);
+    console.log(AdultNo);
+    console.log(child);
+    console.log(infant);
     // console.log(arriveTravelDate);
     console.log(selectedLanguage);
+    console.log(values);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
-    const a4 = adultNo;
-    const a5 = childNo;
-    const a6 = infantNo;
+    const a4 = AdultNo;
+    const a5 = child;
+    const a6 = infant;
     const a8 = selectedLanguage;
+    const a9 = values;
     // const a4 = arriveTravelDate;
 
     var myHeaders = new Headers();
@@ -75,11 +78,6 @@ const FlightSearchtwo = ({ route, navigation }) => {
           destinationAirport: a2,
           travelDate: a3,
         },
-        // {
-        //   originAirport: a2,
-        //   destinationAirport: a1,
-        //   travelDate: a4,
-        // },
       ],
       searchDirectFlight: false,
       flexibleSearch: false,
@@ -88,7 +86,7 @@ const FlightSearchtwo = ({ route, navigation }) => {
       child: a5,
       infants: a6,
       infantsWs: 0,
-      cabinType: 1,
+      cabinType: a9,
       airline: 'All',
       currencyCode: a8,
       siteId: 6,

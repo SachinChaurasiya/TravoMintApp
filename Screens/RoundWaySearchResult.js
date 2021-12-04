@@ -555,9 +555,13 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import LeftInBound from '../Components/RoundWaySearchResult/LeftInBound';
 import RightOutBound from '../Components/RoundWaySearchResult/RightOutBound';
-import Oneway from './Oneway';
-
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import DummyFlightData from '../FlightData';
+import LottieView from 'lottie-react-native';
+import FlightData from '../RoundWayData';
+import COLORS from '../assets/consts/colors';
 const Roundwaysearchresult = ({ route, navigation }) => {
+  const [isloading, setIsloading] = useState(true);
   const [datapass, setDatapass] = useState({});
 
   const {
@@ -569,6 +573,12 @@ const Roundwaysearchresult = ({ route, navigation }) => {
     childNo,
     infantNo,
   } = route.params;
+  // const {
+  //   originAirportName,
+  //   destinationAirportName,
+  //   departureTravelDate,
+  //   arriveTravelDate,
+  // } = route.params;
 
   // postApi
   const flightresultfetchApi = () => {
@@ -641,6 +651,8 @@ const Roundwaysearchresult = ({ route, navigation }) => {
       redirect: 'follow',
     };
 
+    //console.log('requestOptions--', requestOptions);
+
     fetch(
       'http://api.traveloes.com/Flights/GetFlightResult?authcode=Trav3103s987876',
       requestOptions
@@ -652,16 +664,87 @@ const Roundwaysearchresult = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    flightresultfetchApi();
+    setTimeout(() => {
+      setIsloading(false);
+      setDatapass(FlightData);
+    }, 2000);
   }, []);
-  console.log('No' + datapass);
+
+  const sortListASC = () => {
+    datapass.fare.sort((obj1, obj2) => {
+      return obj1.grandTotal - obj2.grandTotal;
+    });
+
+    setDatapass([...datapass]); // update
+  };
+
+  const sortListToal = () => {
+    alert('clicked');
+    // let cloneObj = datapass;
+    // // console.log(datapass);
+    // cloneObj.flightResult.filter((obj1) => {
+    //   // console.log(obj1.resultID);
+    //   return obj1.resultID == '2';
+    // });
+    // setDatapass([]);
+  };
+
+  if (isloading) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignContent: 'center',
+
+          opacity: 0.5,
+        }}
+      >
+        {/* <ActivityIndicator size="large" color="#000" /> */}
+        <LottieView
+          source={require('../9932-flight-ticket.json')}
+          autoPlay
+          loop
+        />
+      </View>
+    );
+  }
+  //console.log('No' + datapass);
   return (
-    <View style={{ flex: 1, backgroundColor: 'white', flexDirection: 'row' }}>
-      <TouchableOpacity>
+    <>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          margin: 3,
+          padding: 2,
+        }}
+      >
+        <TouchableOpacity onPress={sortListToal}>
+          <View>
+            <MaterialIcons name="filter-list" color="#000" size={30} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => alert('In Progress')}>
+          <View>
+            <MaterialIcons name="sort-by-alpha" color="#000" size={30} />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+        }}
+      >
         <LeftInBound data={datapass} />
-      </TouchableOpacity>
-      <RightOutBound data={datapass} />
-    </View>
+        <View style={{ width: 1 }}></View>
+        <RightOutBound data={datapass} />
+      </View>
+    </>
   );
 };
 

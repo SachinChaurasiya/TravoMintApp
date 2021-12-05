@@ -149,12 +149,11 @@ const HeaderTab = ({ navigation }) => {
             onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
           >
             <Icon name="sort" size={28} color={COLOR.blue} />
-
-            <Image
-              source={require('../../assets/Image/logo T (1).png')}
-              style={{ width: 50, height: 50, resizeMode: 'contain' }}
-            />
           </TouchableOpacity>
+          <Image
+            source={require('../../assets/Image/TLogo.png')}
+            style={{ width: 30, height: 20, resizeMode: 'contain' }}
+          />
         </View>
         <View style={{ position: 'absolute', top: 120 }}>
           <ImageBackground

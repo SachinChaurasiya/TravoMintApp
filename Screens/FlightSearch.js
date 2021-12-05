@@ -206,7 +206,6 @@ export const Flightsearch = ({ route, navigation }) => {
           <Picker.Item label="د.إ-AED" value="AED" />
           <Picker.Item label="€-EUR" value="EUR" />
           <Picker.Item label="C$-CAD" value="CAD" />
-          {console.log(selectedLanguage)}
         </Picker>
       </View>
       <View style={styles.header}>
@@ -1247,33 +1246,6 @@ const HeaderButtons = (props) => {
   );
 };
 
-import { increment, decrement } from '../Components/Reducer';
-const Counter = () => {
-  const { counter } = useSelector((state) => state?.counter);
-  const dispatch = useDispatch();
-
-  return (
-    <View>
-      <View style={styles.SignDiv}>
-        <View>
-          <TouchableOpacity onPress={() => dispatch(decrement())}>
-            <Text style={styles.DecrementSign}>-</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Text style={{ fontSize: 13, marginLeft: 15, width: 24 }}>
-            {counter}
-          </Text>
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => dispatch(increment())}>
-            <Text style={styles.IncrementSign}>+</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </View>
-  );
-};
 const EBFClassbtnfunction = () => {
   const [activetab, setActiveTab] = useState('Economy');
 

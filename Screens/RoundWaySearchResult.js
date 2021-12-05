@@ -769,6 +769,7 @@ const Roundwaysearchresult = ({ route, navigation }) => {
               }}
               // activeOpacity={0.7}
               onPress={() => navigation.navigate('TravelInfo')}
+              onPressIn={() => alert('This is presed')}
             >
               <Text
                 style={{

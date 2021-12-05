@@ -365,7 +365,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
           <Picker.Item label="د.إ-AED" value="AED" />
           <Picker.Item label="€-EUR" value="EUR" />
           <Picker.Item label="C$-CAD" value="CAD" />
-          {console.log(selectedLanguage)}
         </Picker>
       </View>
       <View style={styles.header}>

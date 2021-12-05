@@ -185,7 +185,7 @@ const DrawerContent = (props) => {
               </View>
             )}
             onPress={() => {
-              props.navigation.navigate('Explore');
+              props.navigation.navigate('My booking');
             }}
             label="My Booking"
           />

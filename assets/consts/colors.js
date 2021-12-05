@@ -8,6 +8,7 @@ const COLORS = {
   grey: '#dddedd',
   whitesmoke: '#F1F1F1',
   lightpink: '#F3EDF6',
+  slategrey: '#778899',
   input: '#05375a',
   error: '#FF0000',
   placeholderColor: '#666666',

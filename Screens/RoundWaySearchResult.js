@@ -559,7 +559,8 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import DummyFlightData from '../FlightData';
 import LottieView from 'lottie-react-native';
 import FlightData from '../RoundWayData';
-import COLORS from '../assets/consts/colors';
+import COLOR from '../assets/consts/colors';
+
 const Roundwaysearchresult = ({ route, navigation }) => {
   const [isloading, setIsloading] = useState(true);
   const [datapass, setDatapass] = useState({});
@@ -743,6 +744,44 @@ const Roundwaysearchresult = ({ route, navigation }) => {
         <LeftInBound data={datapass} />
         <View style={{ width: 1 }}></View>
         <RightOutBound data={datapass} />
+      </View>
+      <View style={{ backgroundColor: COLOR.white }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: 'center',
+            marginBottom: 55,
+            height: 30,
+            alignItems: 'flex-end',
+            backgroundColor: COLOR.white,
+            marginRight: 10,
+          }}
+        >
+          <View>
+            <TouchableOpacity
+              style={{
+                borderRadius: 0,
+                height: 50,
+                width: 120,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: COLOR.primary,
+              }}
+              // activeOpacity={0.7}
+              onPress={() => navigation.navigate('TravelInfo')}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: 'white',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Book
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </>
   );

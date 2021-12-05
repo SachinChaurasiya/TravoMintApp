@@ -347,13 +347,11 @@ export const Flightsearch = ({ route, navigation, props }) => {
         </View>
         <Picker
           selectedValue={selectedLanguage}
-          mode="dropdown"
           dropdownIconRippleColor={COLOR.blue}
           style={{
             width: 130,
             backgroundColor: COLOR.blue,
             height: 30,
-            padding: 10,
             color: COLOR.whitesmoke,
           }}
           onValueChange={(itemValue, itemIndex) =>
@@ -1488,7 +1486,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'blue',
+    backgroundColor: COLOR.blue,
   },
   selectedDateStyle: {
     fontWeight: 'bold',

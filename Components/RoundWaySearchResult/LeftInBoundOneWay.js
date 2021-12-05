@@ -23,7 +23,7 @@ import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CustomSelectButton from '../CustomAppElements/CustomSelectButton';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 // import INDIGO from '../../assets/Image/INDIGO.png';
 
 // const width = Dimensions.get('screen').width;
@@ -31,16 +31,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const RightInBound = (props) => {
+const LeftInBoundOneWay = (props) => {
   const navigation = useNavigation();
   const [choice, setChoice] = useState('1');
   const [modalVisible, setModalVisible] = useState(false);
   const [currentItemBg, setCurrentItemBg] = useState('');
-  const predatapass = props.data.flightResult;
-
-  //console.log(predatapass);
-  //const [datapassPost, setDatapassPost] = useState(predatapass);
-
   const [selectedItem, setSelectedItem] = useState([
     {
       grandTotal: '9800.00',
@@ -68,23 +63,6 @@ const RightInBound = (props) => {
     return `${hours}h:${minutes}m`;
   };
 
-  // useEffect(() => {
-  //   setDatapassPost(predatapass);
-  // }, []);
-
-  const sortListToal = () => {
-    let newdata = predatapass.sort((obj1, obj2) => {
-      console.log(obj2.resultID);
-      return obj1.resultID - obj2.resultID;
-    });
-
-    //  console.log(datapass);
-    // let newdata = predatapass.filter((obj1) => {
-    //   return obj1.resultID > 40;
-    //   // console.log(obj1.resultID);
-    // });
-    setDatapassPost(newdata);
-  };
   // const [modalVisible, setModalVisible] = useState(false);
   // const flightdeatils = (Flight) => {
   //   return (
@@ -104,18 +82,17 @@ const RightInBound = (props) => {
   // };
 
   const Flight = ({ Flight }) => {
-    // console.log(Flight);
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
-    let inBoundCount = Flight.inBound.length;
+    let inBoundCount = Flight.outBound.length;
 
     // console.log('Outbound Count:', Flight.outBound.length);
     // console.log('airline-', props.data.airline);
     //  if(inBoundCount==1){
-    let getToAirport = Flight.inBound[inBoundCount - 1].toAirport;
-    let getFromAirport = Flight.inBound[0].fromAirport;
-    let geteft = Flight.inBound[0].eft + Flight.inBound[0].layOverTime;
-    let getairlineName = Flight.inBound[0].airline;
-    let getflightNo = Flight.inBound[0].flightNo;
+    let getToAirport = Flight.outBound[inBoundCount - 1].toAirport;
+    let getFromAirport = Flight.outBound[0].fromAirport;
+    let geteft = Flight.outBound[0].eft + Flight.outBound[0].layOverTime;
+    let getairlineName = Flight.outBound[0].airline;
+    let getflightNo = Flight.outBound[0].flightNo;
     let getStops = inBoundCount - 1;
 
     //  }else if (inBoundCount==2){
@@ -129,8 +106,7 @@ const RightInBound = (props) => {
 
     return (
       <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
-        {/* {console.log('Lenfth' + Flight.inBound.length)} */}
-
+        {/* {console.log('Lenfth' + Flight.outBound.length)} */}
         <TouchableOpacity
           activeOpacity={0.6}
           onPress={() => {
@@ -143,7 +119,7 @@ const RightInBound = (props) => {
         >
           <View
             style={{
-              width: width / 2,
+              width: width,
               //borderBottomWidth: 2,
               //  borderBottomColor: COLOR.grey,
             }}
@@ -151,7 +127,7 @@ const RightInBound = (props) => {
             <View
               style={{
                 flex: 1,
-                width: width / 2,
+                width: width,
 
                 borderWidth: 0.5,
                 // height: 100,
@@ -190,7 +166,7 @@ const RightInBound = (props) => {
                   <View>
                     {/* <Text>15:40</Text> */}
                     <Text style={{ fontSize: 14 }}>
-                      {Flight.inBound[0].depDate.split('T')[1].substring(0, 5)}
+                      {Flight.outBound[0].depDate.split('T')[1].substring(0, 5)}
                     </Text>
                   </View>
                 </View>
@@ -230,7 +206,7 @@ const RightInBound = (props) => {
                   <View>
                     <Text style={{ fontSize: 14 }}>
                       {' '}
-                      {Flight.inBound[inBoundCount - 1].reachDate
+                      {Flight.outBound[inBoundCount - 1].reachDate
                         .split('T')[1]
                         .substring(0, 5)}
                     </Text>
@@ -311,11 +287,15 @@ const RightInBound = (props) => {
   };
 
   const FlightSelectedBottom = ({ selectedFlight }) => {
-    console.log(selectedFlight);
+    // console.log(selectedFlight);
     // let uri = `https://www.travomint.com/resources/images/airline-logo/${selectedFlight.airline}.png`;
-
+    let totalAmount;
     //round = round.toFixed(2);
     //starting the Bottom sheet selected view
+    // console.log(
+    //   'checking object',
+    console.log(selectedFlight.Flight.farell ? 'ok' : 'not ok');
+    // );
 
     return (
       <>
@@ -351,9 +331,9 @@ const RightInBound = (props) => {
               width: width,
             }}
           >
-            {selectedFlight.Flight.inBound != null &&
-              selectedFlight.Flight.inBound.length !== undefined &&
-              selectedFlight.Flight.inBound.map((selItem, index) => (
+            {selectedFlight.Flight.outBound != null &&
+              selectedFlight.Flight.outBound.length !== undefined &&
+              selectedFlight.Flight.outBound.map((selItem, index) => (
                 <View
                   style={{
                     flexDirection: 'row',
@@ -604,42 +584,43 @@ const RightInBound = (props) => {
                 </View>
               ))}
           </Animatable.View>
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'center',
-              marginBottom: 60,
-              height: 30,
-              alignItems: 'flex-end',
-              marginRight: 10,
-            }}
-          >
-            <View>
-              <TouchableOpacity
-                style={{
-                  borderRadius: 0,
-                  height: 50,
-                  width: 120,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  backgroundColor: COLOR.primary,
-                }}
-                activeOpacity={0.7}
-                onPress={handelProceed}
-              >
-                <Text
-                  style={{
-                    fontSize: 18,
-                    color: 'white',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Book
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
         </ScrollView>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginBottom: 120,
+            alignItems: 'flex-end',
+            marginRight: 10,
+          }}
+        >
+          <View>
+            <TouchableOpacity
+              style={{
+                borderRadius: 0,
+                height: 50,
+                width: 120,
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: COLOR.primary,
+                marginTop: 30,
+              }}
+              activeOpacity={0.7}
+              onPress={handelProceed}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: 'white',
+                  textTransform: 'uppercase',
+                }}
+              >
+                {totalAmount} Book
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </>
     );
   };
@@ -651,7 +632,7 @@ const RightInBound = (props) => {
           <View>
             <View>
               <FlatList
-                data={predatapass}
+                data={props.data.flightResult}
                 renderItem={({ item }) => (
                   <View>
                     <Flight Flight={item} />
@@ -688,7 +669,7 @@ const RightInBound = (props) => {
 
           <RBSheet
             ref={refRBSheet}
-            height={height / 2}
+            height={height / 1.5}
             closeOnDragDown={true}
             closeOnPressMask={true}
             customStyles={{
@@ -815,6 +796,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
+
   modalText: {
     marginBottom: 5,
     fontSize: 30,
@@ -839,4 +821,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RightInBound;
+export default LeftInBoundOneWay;

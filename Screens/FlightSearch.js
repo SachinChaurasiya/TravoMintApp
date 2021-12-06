@@ -30,7 +30,7 @@ import COLOR from '../assets/consts/colors';
 const width = Dimensions.get('screen').width;
 const height = Dimensions.get('screen').height;
 
-export const Flightsearch = ({ route, navigation }) => {
+export const Flightsearch = ({ route, navigation, props }) => {
   const [originAirportData, setOriginAirportData] = useState('DEL');
   const [destinationAirportData, setDestinationAirportData] = useState('GOI');
   const [calendarVisible, setCalendarVisible] = useState('');
@@ -38,6 +38,9 @@ export const Flightsearch = ({ route, navigation }) => {
   const [ArriveTravelDate, setArriveTravelDate] = useState('');
   // const [Currency, setCurrency] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('INR');
+
+  const [activetab, setActiveTab] = useState('Economy');
+  const [values, setValues] = useState('1');
 
   // Adult Child Infant
   const [AdultNo, setAdultNo] = useState(1);
@@ -47,20 +50,44 @@ export const Flightsearch = ({ route, navigation }) => {
   const [state, setState] = useState({ data: [], loading: false }); // only one data source
   const { data, loading } = state;
   // post Api
-  const flightresultfetchApi = () => {
-    console.log('Pressed');
-    console.log(originAirportData);
-    console.log(destinationAirportData);
-    console.log(selectedRange.firstDate);
-    console.log(selectedRange.secondDate);
-    console.log(selectedLanguage);
+  const flightresultfetchApi = (props) => {
+    // console.log('Pressed');
+    // console.log(originAirportData);
+    // console.log(destinationAirportData);
+    // console.log(selectedRange.firstDate);
+    // console.log(selectedRange.secondDate);
+    // console.log(selectedLanguage);
+    // console.log(values);
+    // console.log(AdultNo);
+    // console.log(child);
+    // console.log(infant);
 
     const a1 = originAirportData;
     const a2 = destinationAirportData;
+    // const a3 = DepartureTravelDate.DepartureTravelDate;
+    // const a4 = ArriveTravelDate.ArriveTravelDate;
     const a3 = selectedRange.firstDate;
     const a4 = selectedRange.secondDate;
+    const a5 = AdultNo;
+    const a6 = child;
+    const a7 = infant;
     const a8 = selectedLanguage;
+    const a9 = values;
 
+    // {
+    //   a1 || a2 || a3 || a4
+    //     ? navigation.navigate('RoundWaySearchResult', {
+    //         originAirportName: a1,
+    //         destinationAirportName: a2,
+    //         departureTravelDate: a3,
+    //         arriveTravelDate: a4,
+    //       })
+    //     : navigation.navigate('FlightSearchtwo', {
+    //         originAirportName: a1,
+    //         destinationAirportName: a2,
+    //         departureTravelDate: a3,
+    //       });
+    // }
     if (a1 && a2 && a3 && a4) {
       if (a1 && a2 && a3 === a4) {
         console.log('lOOP 1');
@@ -69,7 +96,11 @@ export const Flightsearch = ({ route, navigation }) => {
           destinationAirportName: a2,
           departureTravelDate: a3,
           arriveTravelDate: a4,
+          AdultNo: a5,
+          child: a6,
+          infant: a7,
           selectedLanguage: a8,
+          values: a9,
         });
       } else {
         console.log('LOOP @');
@@ -87,6 +118,9 @@ export const Flightsearch = ({ route, navigation }) => {
         originAirportName: a1,
         destinationAirportName: a2,
         departureTravelDate: a3,
+        adultNo: a5,
+        childNo: a6,
+        infantNo: a7,
         selectedLanguage: a8,
       });
     } else {
@@ -144,12 +178,7 @@ export const Flightsearch = ({ route, navigation }) => {
     );
   };
 
-  const [activetab, setActiveTab] = useState('Round Trip');
-  // Input text controller
-  // const [flyingfromtext, flyingfromText] = React.useState('');
-  // const [totext, flyingtoText] = React.useState('');
-  // const [flyingdatetext, flyingdateText] = React.useState('');
-  // const [returndatetext, returndateText] = React.useState('');
+  // const [activetab, setActiveTab] = useState('Round Trip');
   const [selectedRange, setRange] = React.useState('Date');
 
   // hide and unhide
@@ -169,6 +198,136 @@ export const Flightsearch = ({ route, navigation }) => {
     {
       !isVisible ? setIsVisible(isVisible) : setIsVisible(!isVisible);
     }
+  };
+
+  // buttons
+  const HeaderButtons = (props) => {
+    return (
+      <View>
+        <TouchableOpacity
+          activeOpacity={0.6}
+          style={{
+            backgroundColor:
+              props.activetab === props.text ? COLOR.blue : COLOR.white,
+            borderRadius: 30,
+            paddingVertical: 6,
+            paddingHorizontal: 16,
+          }}
+          onPressIn={() => {
+            props.setActiveTab(props.text);
+          }}
+          onPress={props.onPress}
+          // onPress={()=>ffFun()}
+        >
+          <Text
+            style={{
+              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              fontSize: 15,
+              fontWeight: '900',
+            }}
+          >
+            {props.text}
+          </Text>
+          {/* <Button style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}} title={props.text}/> */}
+        </TouchableOpacity>
+      </View>
+    );
+  };
+  const EBFClassbtnfunction = () => {
+    return (
+      <View>
+        <View style={{ width: width / 1.1, marginTop: 5 }}>
+          <View style={[styles.btn, { marginTop: 15 }]}>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Economy"
+                  value="1"
+                  btncolor={COLOR.blue}
+                  textcolor="white"
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                  // onPress={() => setValues(1)}
+                />
+              </Text>
+            </View>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Premium"
+                  value="2"
+                  btncolor={COLOR.blue}
+                  textcolor={COLOR.white}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+            <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
+              <Text>
+                <EBFClassbtn
+                  text="Business"
+                  value="3"
+                  btncolor={COLOR.white}
+                  textcolor={COLOR.blue}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+            <View>
+              <Text>
+                <EBFClassbtn
+                  text="First"
+                  value="4"
+                  btncolor={COLOR.blue}
+                  textcolor={COLOR.dark}
+                  activetab={activetab}
+                  setActiveTab={setActiveTab}
+                  values={values}
+                  setValues={setValues}
+                />
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
+  const EBFClassbtn = (props) => {
+    return (
+      <View>
+        <TouchableOpacity
+          style={{
+            backgroundColor:
+              props.activetab === props.text ? COLOR.blue : COLOR.white,
+            borderRadius: 30,
+            paddingVertical: 6,
+            paddingHorizontal: 16,
+          }}
+          onPress={() => props.setActiveTab(props.text)}
+          onPressIn={() => props.setValues(props.value)}
+        >
+          <Text
+            style={{
+              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              fontSize: 11.5,
+              fontWeight: '900',
+            }}
+          >
+            {props.text}
+            {/* {console.log(props.values)} */}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
   };
 
   return (
@@ -1080,7 +1239,7 @@ export const Flightsearch = ({ route, navigation }) => {
                 <TouchableOpacity
                   activeOpacity={0.8}
                   //   onPress={() => navigation.navigate('FlightSearchtwo')}
-                  onPress={() => flightresultfetchApi()}
+                  onPress={() => flightresultfetchApi({ ...props })}
                 >
                   <View
                     style={{
@@ -1213,122 +1372,6 @@ export const Flightsearch = ({ route, navigation }) => {
   );
 };
 
-const HeaderButtons = (props) => {
-  return (
-    <View>
-      <TouchableOpacity
-        activeOpacity={0.6}
-        style={{
-          backgroundColor:
-            props.activetab === props.text ? COLOR.blue : COLOR.white,
-          borderRadius: 30,
-          paddingVertical: 6,
-          paddingHorizontal: 16,
-        }}
-        onPressIn={() => {
-          props.setActiveTab(props.text);
-        }}
-        onPress={props.onPress}
-        // onPress={()=>ffFun()}
-      >
-        <Text
-          style={{
-            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
-            fontSize: 15,
-            fontWeight: '900',
-          }}
-        >
-          {props.text}
-        </Text>
-        {/* <Button style={{color: props.activetab === props.text?COLOR.white:COLOR.secondary,fontSize:15,fontWeight:'900'}} title={props.text}/> */}
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const EBFClassbtnfunction = () => {
-  const [activetab, setActiveTab] = useState('Economy');
-
-  return (
-    <View>
-      <View style={{ width: width / 1.1, marginTop: 5 }}>
-        <View style={[styles.btn, { marginTop: 15 }]}>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Economy"
-                btncolor={COLOR.blue}
-                textcolor="white"
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-              />
-            </Text>
-          </View>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Premium"
-                btncolor={COLOR.blue}
-                textcolor={COLOR.white}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-              />
-            </Text>
-          </View>
-          <View style={{ borderRightWidth: 0.2, borderRadius: 20 }}>
-            <Text>
-              <EBFClassbtn
-                text="Business"
-                btncolor={COLOR.white}
-                textcolor={COLOR.blue}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-              />
-            </Text>
-          </View>
-          <View>
-            <Text>
-              <EBFClassbtn
-                text="First"
-                btncolor={COLOR.blue}
-                textcolor={COLOR.dark}
-                activetab={activetab}
-                setActiveTab={setActiveTab}
-              />
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-};
-
-const EBFClassbtn = (props) => {
-  return (
-    <View>
-      <TouchableOpacity
-        style={{
-          backgroundColor:
-            props.activetab === props.text ? COLOR.blue : COLOR.white,
-          borderRadius: 30,
-          paddingVertical: 6,
-          paddingHorizontal: 16,
-        }}
-        onPress={() => props.setActiveTab(props.text)}
-      >
-        <Text
-          style={{
-            color: props.activetab === props.text ? COLOR.white : COLOR.blue,
-            fontSize: 11.5,
-            fontWeight: '900',
-          }}
-        >
-          {props.text}
-        </Text>
-      </TouchableOpacity>
-    </View>
-  );
-};
 const styles = StyleSheet.create({
   container: {
     flex: 1,

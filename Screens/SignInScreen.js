@@ -35,7 +35,7 @@ const SignInScreen = ({ navigation }) => {
 
   const { colors } = useTheme();
 
-  const signIn = useContext(AuthContext);
+  const { signIn } = useContext(AuthContext);
 
   const textInputChange = (val) => {
     if (val.trim().length >= 4) {
@@ -226,7 +226,10 @@ const SignInScreen = ({ navigation }) => {
               },
             ]}
             // onPress={() => {loginHandle( data.username, data.password )}}
-            onPress={() => navigation.navigate('MainTabScreens')}
+            // onPress={() => navigation.navigate('MainTabScreens')}
+            onPress={() => {
+              loginHandle(data.username, data.password);
+            }}
           >
             {/* <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   StyleSheet,
   View,
@@ -25,7 +25,10 @@ import COLOR from '../assets/consts/colors';
 import Logo from '../assets/Image/Travomint.png';
 // import SignInScreen from './SignInScreen';
 
+import { AuthContext } from '../Context';
+
 const DrawerContent = (props) => {
+  const { signOut } = useContext(AuthContext);
   const Separator = () => <View style={styles.separator}></View>;
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -204,6 +207,24 @@ const DrawerContent = (props) => {
               props.navigation.navigate('Support');
             }}
             label="Support"
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
+              <View
+                style={{
+                  backgroundColor: COLOR.whitesmoke,
+                  padding: 10,
+                  borderRadius: 10,
+                  elevation: 8,
+                }}
+              >
+                <FontAwesome5 name="headset" size={14} color={COLOR.blue} />
+              </View>
+            )}
+            onPress={() => {
+              signOut();
+            }}
+            label="SignOut"
           />
         </Drawer.Section>
 

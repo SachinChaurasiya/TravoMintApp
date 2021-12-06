@@ -13,7 +13,7 @@ import SignInScreen from './SignInScreen';
 import SignUpScreen from './SignUpScreen';
 // import MainTabScreens from './MainTabSceens';
 import DrawerScreen from '../Tabs/DrawerScreen';
-import Flightsearch from './FlightSearch';
+// import Flightsearch from './FlightSearch';
 import { Modal, Portal, Text, Button, Provider } from 'react-native-paper';
 import FlightSearchResult from './FlightSearchResult';
 import TravelInfo from './TravelInfo';
@@ -30,6 +30,7 @@ import BookNow from './BookNow';
 import Paynow from './PayNow';
 import Flightpromo from './FlightPromo';
 import RoundWaySearchResult from './RoundWaySearchResult';
+import Flightsearch from './FlightSearch';
 import Roundwaysearchresult from './RoundWaySearchResult';
 import MyBooking from './My booking';
 
@@ -107,6 +108,16 @@ const RootStackScreen = ({ navigation }) => (
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerRight: () => (
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <FontAwesome5
+              name="user-edit"
+              size={20}
+              style={{ marginRight: 10 }}
+              color={COLOR.white}
+            />
+          </TouchableOpacity>
+        ),
       }}
       component={FlightSearchtwo}
     />
@@ -132,7 +143,7 @@ const RootStackScreen = ({ navigation }) => (
       }}
       component={HotelForm}
     />
-    <RootStack.Screen name="calendar" component={calendar} />
+    {/* <RootStack.Screen name="calendar" component={calendar} /> */}
     <RootStack.Screen name="UserEdit" component={UserEditScreen} />
     <RootStack.Screen
       options={{

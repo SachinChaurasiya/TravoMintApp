@@ -48,7 +48,6 @@ const TravelInfo = ({ navigation, route }) => {
       </View>
     );
   }
-
   for (let i = 1; i < infantCount; i++) {
     Infantform.push(
       <View key={i}>

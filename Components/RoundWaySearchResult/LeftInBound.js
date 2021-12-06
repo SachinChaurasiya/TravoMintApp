@@ -791,7 +791,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-
   modalText: {
     marginBottom: 5,
     fontSize: 30,

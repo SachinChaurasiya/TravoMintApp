@@ -565,6 +565,15 @@ const Roundwaysearchresult = ({ route, navigation }) => {
   const [isloading, setIsloading] = useState(true);
   const [datapass, setDatapass] = useState({});
 
+  const {
+    originAirportName,
+    destinationAirportName,
+    departureTravelDate,
+    arriveTravelDate,
+    adultNo,
+    childNo,
+    infantNo,
+  } = route.params;
   // const {
   //   originAirportName,
   //   destinationAirportName,
@@ -579,11 +588,17 @@ const Roundwaysearchresult = ({ route, navigation }) => {
     console.log(destinationAirportName);
     console.log(departureTravelDate);
     console.log(arriveTravelDate);
+    console.log(adultNo);
+    console.log(childNo);
+    console.log(infantNo);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
     const a4 = arriveTravelDate;
+    const a5 = adultNo;
+    const a6 = childNo;
+    const a7 = infantNo;
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -606,9 +621,9 @@ const Roundwaysearchresult = ({ route, navigation }) => {
       searchDirectFlight: false,
       flexibleSearch: false,
       tripType: 2,
-      adults: 2,
-      child: 1,
-      infants: 1,
+      adults: a5,
+      child: a6,
+      infants: a7,
       infantsWs: 0,
       cabinType: 1,
       airline: 'All',
@@ -752,7 +767,9 @@ const Roundwaysearchresult = ({ route, navigation }) => {
                 alignItems: 'center',
                 backgroundColor: COLOR.primary,
               }}
-              onPress={() => alert('This is presed')}
+              // activeOpacity={0.7}
+              onPress={() => navigation.navigate('TravelInfo')}
+              onPressIn={() => alert('This is presed')}
             >
               <Text
                 style={{

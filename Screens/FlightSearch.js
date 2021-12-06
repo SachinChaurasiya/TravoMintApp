@@ -525,8 +525,8 @@ export const Flightsearch = ({ route, navigation }) => {
                                     }}
                                   />
                                   <TextInput
-                                    onChangeText={(DepartureTravelDate) =>
-                                      setOriginAirportData(DepartureTravelDate)
+                                    onChangeText={(selectedRange) =>
+                                      setOriginAirportData(selectedRange)
                                     }
                                     value={selectedRange.firstDate}
                                     style={{}}

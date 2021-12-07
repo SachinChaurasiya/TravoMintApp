@@ -570,9 +570,11 @@ const Roundwaysearchresult = ({ route, navigation }) => {
     destinationAirportName,
     departureTravelDate,
     arriveTravelDate,
-    adultNo,
-    childNo,
-    infantNo,
+    AdultNo,
+    child,
+    infant,
+    selectedLanguage,
+    values,
   } = route.params;
   // const {
   //   originAirportName,
@@ -588,17 +590,21 @@ const Roundwaysearchresult = ({ route, navigation }) => {
     console.log(destinationAirportName);
     console.log(departureTravelDate);
     console.log(arriveTravelDate);
-    // console.log(adultNo);
-    // console.log(childNo);
-    // console.log(infantNo);
+    console.log(AdultNo);
+    console.log(child);
+    console.log(infant);
+    console.log(selectedLanguage);
+    console.log(values);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
     const a4 = arriveTravelDate;
-    // const a5 = adultNo;
-    // const a6 = childNo;
-    // const a7 = infantNo;
+    const a5 = values;
+    const a6 = AdultNo;
+    const a7 = child;
+    const a8 = infant;
+    const a9 = selectedLanguage;
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -621,13 +627,13 @@ const Roundwaysearchresult = ({ route, navigation }) => {
       searchDirectFlight: false,
       flexibleSearch: false,
       tripType: 2,
-      adults: 1,
-      child: 1,
-      infants: 0,
+      adults: a6,
+      child: a7,
+      infants: a8,
       infantsWs: 0,
-      cabinType: 1,
+      cabinType: a5,
       airline: 'All',
-      currencyCode: 'INR',
+      currencyCode: a9,
       siteId: 6,
       source: 'online',
       media: 'online',
@@ -741,9 +747,10 @@ const Roundwaysearchresult = ({ route, navigation }) => {
           justifyContent: 'space-around',
         }}
       >
-        <LeftInBound data={datapass} />
+        <RightOutBound data={datapass} language={selectedLanguage} />
+
         <View style={{ width: 1 }}></View>
-        <RightOutBound data={datapass} />
+        <LeftInBound data={datapass} language={selectedLanguage} />
       </View>
       <View style={{ backgroundColor: COLOR.white }}>
         <View

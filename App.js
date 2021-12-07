@@ -261,8 +261,6 @@ export default function App({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: Constants.statusBarHeight,
-    // paddingTop: Platform.OS === 'android' ? 55 : 0,
     backgroundColor: '#fff',
   },
 });

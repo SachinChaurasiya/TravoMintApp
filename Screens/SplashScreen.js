@@ -47,9 +47,11 @@ const SplashScreen = ({ navigation }) => {
             },
           ]}
         >
-          Fly With EveryOne!
+          Welcome To Travomint!
         </Text>
-        <Text style={styles.text}>Sign in with account</Text>
+        <Text style={styles.text}>
+          Searching For best Price .{'\n'} You Landed at Perfect Place.
+        </Text>
         <View style={styles.button}>
           <TouchableOpacity onPress={() => navigation.navigate('SignInScreen')}>
             {/* <LinearGradient
@@ -67,7 +69,7 @@ const SplashScreen = ({ navigation }) => {
               <Text style={styles.textSign}>Get Started</Text>
               <MaterialIcons
                 name="navigate-next"
-                color={COLOR.blue}
+                color={COLOR.whitesmoke}
                 size={20}
               />
             </View>
@@ -86,7 +88,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: COLOR.whitesmoke,
+    backgroundColor: COLOR.blue,
   },
   header: {
     flex: 1,
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: 1,
-    backgroundColor: COLOR.primary,
+    backgroundColor: COLOR.whitesmoke,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingVertical: 50,
@@ -106,12 +108,12 @@ const styles = StyleSheet.create({
     height: height_logo,
   },
   title: {
-    color: COLOR.whitesmoke,
+    color: COLOR.primary,
     fontSize: 30,
     fontWeight: 'bold',
   },
   text: {
-    color: COLOR.grey,
+    color: COLOR.blue,
     marginTop: 5,
   },
   button: {
@@ -125,10 +127,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 50,
     flexDirection: 'row',
-    backgroundColor: COLOR.whitesmoke,
+    backgroundColor: COLOR.primary,
   },
   textSign: {
-    color: COLOR.blue,
+    color: COLOR.whitesmoke,
     fontWeight: 'bold',
   },
 });

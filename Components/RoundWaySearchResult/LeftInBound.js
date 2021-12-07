@@ -37,7 +37,7 @@ const RightInBound = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [currentItemBg, setCurrentItemBg] = useState('');
   const predatapass = props.data.flightResult;
-  const currency = '$';
+  const currency = props.language;
 
   //console.log(predatapass);
   //const [datapassPost, setDatapassPost] = useState(predatapass);
@@ -107,14 +107,14 @@ const RightInBound = (props) => {
   const Flight = ({ Flight }) => {
     // console.log(Flight);
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
-    console.log(Flight.outBound ? 'Yes' : 'No');
-    // let outBoundFlight = [];
+    console.log(Flight.inBound ? 'Yes' : 'No');
+    // let inBoundFlight = [];
     // for (let flt of Flight) {
-    //   if (flt.outBound != null) {
-    //     outBoundFlight.push(flt);
+    //   if (flt.inBound != null) {
+    //     inBoundFlight.push(flt);
     //   }
     // }
-    let outBoundCount;
+    let inBoundCount;
     let getToAirport;
     let getFromAirport;
     let geteft;
@@ -122,16 +122,16 @@ const RightInBound = (props) => {
     let getflightNo;
     let getStops, reachDate;
 
-    if (Flight.outBound) {
-      outBoundCount = Flight.outBound.length;
-      getToAirport = Flight.outBound[outBoundCount - 1].toAirport;
+    if (Flight.inBound) {
+      inBoundCount = Flight.inBound.length;
+      getToAirport = Flight.inBound[inBoundCount - 1].toAirport;
 
-      getFromAirport = Flight.outBound[0].fromAirport;
-      geteft = Flight.outBound[0].eft + Flight.outBound[0].layOverTime;
-      getairlineName = Flight.outBound[0].airline;
-      getflightNo = Flight.outBound[0].flightNo;
-      getStops = outBoundCount - 1;
-      reachDate = Flight.outBound[outBoundCount - 1].reachDate
+      getFromAirport = Flight.inBound[0].fromAirport;
+      geteft = Flight.inBound[0].eft + Flight.inBound[0].layOverTime;
+      getairlineName = Flight.inBound[0].airline;
+      getflightNo = Flight.inBound[0].flightNo;
+      getStops = inBoundCount - 1;
+      reachDate = Flight.inBound[inBoundCount - 1].reachDate
         .split('T')[1]
         .substring(0, 5);
     }
@@ -140,10 +140,10 @@ const RightInBound = (props) => {
     var SeldepDate;
 
     round = round.toFixed(2);
-    if (Flight.outBound) {
+    if (Flight.inBound) {
       return (
         <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
-          {/* {console.log('Lenfth' + Flight.outBound.length)} */}
+          {/* {console.log('Lenfth' + Flight.inBound.length)} */}
 
           <TouchableOpacity
             activeOpacity={0.6}
@@ -204,7 +204,7 @@ const RightInBound = (props) => {
                     <View>
                       {/* <Text>15:40</Text> */}
                       <Text style={{ fontSize: 14 }}>
-                        {Flight.outBound[0].depDate
+                        {Flight.inBound[0].depDate
                           .split('T')[1]
                           .substring(0, 5)}
                       </Text>
@@ -305,7 +305,23 @@ const RightInBound = (props) => {
             onPress={() => setChoice(Flight.resultID.toString())}
             isChecked={choice === Flight.resultID.toString()}
             text={round}
-            currency={currency}
+            currency={
+              currency === 'INR'
+                ? '₹'
+                : currency === 'USD'
+                ? '$'
+                : currency === 'AED'
+                ? 'د.إ '
+                : currency === 'GBP'
+                ? '£'
+                : currency === 'EUR'
+                ? '€'
+                : currency === 'CAD'
+                ? 'C$'
+                : currency === 'AUD'
+                ? '$'
+                : null
+            }
             smalltext={getStops > 0 ? `${getStops} Stop` : 'Non-Stop'}
             mediumtext={getairlineName}
             textSize={21}
@@ -366,9 +382,9 @@ const RightInBound = (props) => {
               width: width,
             }}
           >
-            {selectedFlight.Flight.outBound != null &&
-              selectedFlight.Flight.outBound.length !== undefined &&
-              selectedFlight.Flight.outBound.map((selItem, index) => (
+            {selectedFlight.Flight.inBound != null &&
+              selectedFlight.Flight.inBound.length !== undefined &&
+              selectedFlight.Flight.inBound.map((selItem, index) => (
                 <View
                   style={{
                     flexDirection: 'row',

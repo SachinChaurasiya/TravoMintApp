@@ -31,12 +31,13 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
-const RightInBound = (props) => {
+const RightoutBound = (props) => {
   const navigation = useNavigation();
   const [choice, setChoice] = useState('1');
   const [modalVisible, setModalVisible] = useState(false);
   const [currentItemBg, setCurrentItemBg] = useState('');
   const predatapass = props.data.flightResult;
+  const currency = props.language;
 
   //console.log(predatapass);
   //const [datapassPost, setDatapassPost] = useState(predatapass);
@@ -106,15 +107,14 @@ const RightInBound = (props) => {
   const Flight = ({ Flight }) => {
     // console.log(Flight);
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
-    console.log(Flight.inBound ? 'Yes' : 'No');
-    // let inBoundFlight = [];
-
+    console.log(Flight.outBound ? 'Yes' : 'No');
+    // let outBoundFlight = [];
     // for (let flt of Flight) {
-    //   if (flt.inBound != null) {
-    //     inBoundFlight.push(flt);
+    //   if (flt.outBound != null) {
+    //     outBoundFlight.push(flt);
     //   }
     // }
-    let inBoundCount;
+    let outBoundCount;
     let getToAirport;
     let getFromAirport;
     let geteft;
@@ -122,16 +122,16 @@ const RightInBound = (props) => {
     let getflightNo;
     let getStops, reachDate;
 
-    if (Flight.inBound) {
-      inBoundCount = Flight.inBound.length;
-      getToAirport = Flight.inBound[inBoundCount - 1].toAirport;
+    if (Flight.outBound) {
+      outBoundCount = Flight.outBound.length;
+      getToAirport = Flight.outBound[outBoundCount - 1].toAirport;
 
-      getFromAirport = Flight.inBound[0].fromAirport;
-      geteft = Flight.inBound[0].eft + Flight.inBound[0].layOverTime;
-      getairlineName = Flight.inBound[0].airline;
-      getflightNo = Flight.inBound[0].flightNo;
-      getStops = inBoundCount - 1;
-      reachDate = Flight.inBound[inBoundCount - 1].reachDate
+      getFromAirport = Flight.outBound[0].fromAirport;
+      geteft = Flight.outBound[0].eft + Flight.outBound[0].layOverTime;
+      getairlineName = Flight.outBound[0].airline;
+      getflightNo = Flight.outBound[0].flightNo;
+      getStops = outBoundCount - 1;
+      reachDate = Flight.outBound[outBoundCount - 1].reachDate
         .split('T')[1]
         .substring(0, 5);
     }
@@ -140,10 +140,10 @@ const RightInBound = (props) => {
     var SeldepDate;
 
     round = round.toFixed(2);
-    if (Flight.inBound) {
+    if (Flight.outBound) {
       return (
         <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
-          {/* {console.log('Lenfth' + Flight.inBound.length)} */}
+          {/* {console.log('Lenfth' + Flight.outBound.length)} */}
 
           <TouchableOpacity
             activeOpacity={0.6}
@@ -204,7 +204,7 @@ const RightInBound = (props) => {
                     <View>
                       {/* <Text>15:40</Text> */}
                       <Text style={{ fontSize: 14 }}>
-                        {Flight.inBound[0].depDate
+                        {Flight.outBound[0].depDate
                           .split('T')[1]
                           .substring(0, 5)}
                       </Text>
@@ -305,6 +305,23 @@ const RightInBound = (props) => {
             onPress={() => setChoice(Flight.resultID.toString())}
             isChecked={choice === Flight.resultID.toString()}
             text={round}
+            currency={
+              currency === 'INR'
+                ? '₹'
+                : currency === 'USD'
+                ? '$'
+                : currency === 'AED'
+                ? 'د.إ '
+                : currency === 'GBP'
+                ? '£'
+                : currency === 'EUR'
+                ? '€'
+                : currency === 'CAD'
+                ? 'C$'
+                : currency === 'AUD'
+                ? '$'
+                : null
+            }
             smalltext={getStops > 0 ? `${getStops} Stop` : 'Non-Stop'}
             mediumtext={getairlineName}
             textSize={21}
@@ -365,9 +382,9 @@ const RightInBound = (props) => {
               width: width,
             }}
           >
-            {selectedFlight.Flight.inBound != null &&
-              selectedFlight.Flight.inBound.length !== undefined &&
-              selectedFlight.Flight.inBound.map((selItem, index) => (
+            {selectedFlight.Flight.outBound != null &&
+              selectedFlight.Flight.outBound.length !== undefined &&
+              selectedFlight.Flight.outBound.map((selItem, index) => (
                 <View
                   style={{
                     flexDirection: 'row',
@@ -702,7 +719,7 @@ const RightInBound = (props) => {
 
           <RBSheet
             ref={refRBSheet}
-            height={height / 2}
+            height={height - 300}
             closeOnDragDown={true}
             closeOnPressMask={true}
             customStyles={{
@@ -713,7 +730,7 @@ const RightInBound = (props) => {
                 backgroundColor: COLOR.secondary,
               },
               container: {
-                backgroundColor: '#ffffff',
+                backgroundColor: '#ccc',
               },
             }}
           >
@@ -853,4 +870,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RightInBound;
+export default RightoutBound;

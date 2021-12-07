@@ -123,7 +123,11 @@ export const Flightsearch = ({ route, navigation, props }) => {
           destinationAirportName: a2,
           departureTravelDate: a3,
           arriveTravelDate: a4,
-          // selectedLanguage: a8,
+          AdultNo: a5,
+          child: a6,
+          infant: a7,
+          selectedLanguage: a8,
+          values: a9,
         });
       }
     } else if (a1 && a2 && a3 && !a4) {
@@ -132,10 +136,12 @@ export const Flightsearch = ({ route, navigation, props }) => {
         originAirportName: a1,
         destinationAirportName: a2,
         departureTravelDate: a3,
-        adultNo: a5,
-        childNo: a6,
-        infantNo: a7,
-        // selectedLanguage: a8,
+        arriveTravelDate: a4,
+        AdultNo: a5,
+        child: a6,
+        infant: a7,
+        selectedLanguage: a8,
+        values: a9,
       });
     } else {
       console.log('err');

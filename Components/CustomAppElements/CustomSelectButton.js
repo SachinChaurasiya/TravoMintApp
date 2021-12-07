@@ -5,6 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 const CustomSelectButton = ({
   text,
   smalltext,
+  currency,
   mediumtext,
   textSize,
   iconName,
@@ -64,7 +65,7 @@ const CustomSelectButton = ({
             },
           ]}
         >
-          ${text}
+          {currency} {text}
         </Text>
         <Text style={[styles.button_item]}>
           {isChecked === true ? (

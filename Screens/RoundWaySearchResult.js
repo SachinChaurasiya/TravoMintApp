@@ -588,17 +588,17 @@ const Roundwaysearchresult = ({ route, navigation }) => {
     console.log(destinationAirportName);
     console.log(departureTravelDate);
     console.log(arriveTravelDate);
-    console.log(adultNo);
-    console.log(childNo);
-    console.log(infantNo);
+    // console.log(adultNo);
+    // console.log(childNo);
+    // console.log(infantNo);
 
     const a1 = originAirportName;
     const a2 = destinationAirportName;
     const a3 = departureTravelDate;
     const a4 = arriveTravelDate;
-    const a5 = adultNo;
-    const a6 = childNo;
-    const a7 = infantNo;
+    // const a5 = adultNo;
+    // const a6 = childNo;
+    // const a7 = infantNo;
 
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -621,9 +621,9 @@ const Roundwaysearchresult = ({ route, navigation }) => {
       searchDirectFlight: false,
       flexibleSearch: false,
       tripType: 2,
-      adults: a5,
-      child: a6,
-      infants: a7,
+      adults: 1,
+      child: 1,
+      infants: 0,
       infantsWs: 0,
       cabinType: 1,
       airline: 'All',
@@ -667,8 +667,8 @@ const Roundwaysearchresult = ({ route, navigation }) => {
   useEffect(() => {
     setTimeout(() => {
       setIsloading(false);
-      setDatapass(FlightData);
-    }, 2000);
+    }, 15000);
+    flightresultfetchApi();
   }, []);
 
   const sortListASC = () => {
@@ -769,7 +769,7 @@ const Roundwaysearchresult = ({ route, navigation }) => {
               }}
               // activeOpacity={0.7}
               onPress={() => navigation.navigate('TravelInfo')}
-              onPressIn={() => alert('This is presed')}
+              // onPressIn={() => alert('This is presed')}
             >
               <Text
                 style={{

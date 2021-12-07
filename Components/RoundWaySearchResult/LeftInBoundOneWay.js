@@ -23,6 +23,7 @@ import { CheckBox } from 'react-native-elements';
 import { useNavigation } from '@react-navigation/native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import CustomSelectButton from '../CustomAppElements/CustomSelectButton';
+import Oneway from '../../Screens/Oneway';
 
 // import INDIGO from '../../assets/Image/INDIGO.png';
 
@@ -36,6 +37,7 @@ const LeftInBoundOneWay = (props) => {
   const [choice, setChoice] = useState('1');
   const [modalVisible, setModalVisible] = useState(false);
   const [currentItemBg, setCurrentItemBg] = useState('');
+  const currency = props.language;
   const [selectedItem, setSelectedItem] = useState([
     {
       grandTotal: '9800.00',
@@ -62,24 +64,6 @@ const LeftInBoundOneWay = (props) => {
     minutes = minutes < 10 ? '0' + minutes : minutes;
     return `${hours}h:${minutes}m`;
   };
-
-  // const [modalVisible, setModalVisible] = useState(false);
-  // const flightdeatils = (Flight) => {
-  //   return (
-  //     <View
-  //       style={{
-  //         flex: 1,
-  //         backgroundColor: COLOR.primary,
-  //         height: 500,
-  //         width: width,
-  //       }}
-  //     >
-  //       <Text>{console.log('Sachin')}</Text>
-  //       <Text>{console.log(Flight.fare.grandTotal)}</Text>
-  //       <Text>{Flight.fare.grandTotal}</Text>
-  //     </View>
-  //   );
-  // };
 
   const Flight = ({ Flight }) => {
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
@@ -234,10 +218,10 @@ const LeftInBoundOneWay = (props) => {
                     >
                       {/* {props.data.airline
                         .filter((airline) => airline.code == getairlineName)
-                        .map((airline) => airline.name)} 
+                        .map((airline) => airline.name)}
                        {Flight.airline
                         .filter((item) => item.code == getairlineName)
-                        .map((item) => item.name)} 
+                        .map((item) => item.name)}
                       {getairlineName} {'\n'}
                       <Text style={{ fontSize: 9, color: '#696969' }}>
                         ({getStops > 0 ? `${getStops} Stop` : 'Non-Stop'})
@@ -258,7 +242,7 @@ const LeftInBoundOneWay = (props) => {
                   >
                     ${round}
                     {/* {item.SequenceNumber > 0 ? item.SequenceNumber : round} {''}
-                    {item.length === 1 ? round : 'Non-Stop'} 
+                    {item.length === 1 ? round : 'Non-Stop'}
                   </Text>
                 </View>
               </View> */}
@@ -266,10 +250,73 @@ const LeftInBoundOneWay = (props) => {
           </View>
         </TouchableOpacity>
 
+        {/* <Text>
+          {selectedLanguage === 'AED' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`د.إ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'GBP' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`£ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'EUR' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`€ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'AUD' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`$ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'INR' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`₹ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'CAD' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`C$ ${round}`}</Text>
+            </View>
+          ) : selectedLanguage === 'USD' ? (
+            <View>
+              <Text
+                style={{ fontSize: 20, fontWeight: 'bold' }}
+              >{`$ ${round}`}</Text>
+            </View>
+          ) : null}
+        </Text> */}
+
         <CustomSelectButton
           onPress={() => setChoice(Flight.resultID.toString())}
           isChecked={choice === Flight.resultID.toString()}
           text={round}
+          currency={
+            currency === 'INR'
+              ? '₹'
+              : currency === 'USD'
+              ? '$'
+              : currency === 'AED'
+              ? 'د.إ '
+              : currency === 'GBP'
+              ? '£'
+              : currency === 'EUR'
+              ? '€'
+              : currency === 'CAD'
+              ? 'C$'
+              : currency === 'AUD'
+              ? '$'
+              : null
+          }
           smalltext={getStops > 0 ? `${getStops} Stop` : 'Non-Stop'}
           mediumtext={getairlineName}
           textSize={21}

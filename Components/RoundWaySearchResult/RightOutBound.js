@@ -106,139 +106,150 @@ const RightInBound = (props) => {
   const Flight = ({ Flight }) => {
     // console.log(Flight);
     let uri = `https://www.travomint.com/resources/images/airline-logo/${Flight.airline}.png`;
-    let inBoundCount = Flight.inBound.length;
+    console.log(Flight.inBound ? 'Yes' : 'No');
+    // let inBoundFlight = [];
 
-    // console.log('Outbound Count:', Flight.outBound.length);
-    // console.log('airline-', props.data.airline);
-    //  if(inBoundCount==1){
-    let getToAirport = Flight.inBound[inBoundCount - 1].toAirport;
-    let getFromAirport = Flight.inBound[0].fromAirport;
-    let geteft = Flight.inBound[0].eft + Flight.inBound[0].layOverTime;
-    let getairlineName = Flight.inBound[0].airline;
-    let getflightNo = Flight.inBound[0].flightNo;
-    let getStops = inBoundCount - 1;
+    // for (let flt of Flight) {
+    //   if (flt.inBound != null) {
+    //     inBoundFlight.push(flt);
+    //   }
+    // }
+    let inBoundCount;
+    let getToAirport;
+    let getFromAirport;
+    let geteft;
+    let getairlineName;
+    let getflightNo;
+    let getStops, reachDate;
 
-    //  }else if (inBoundCount==2){
+    if (Flight.inBound) {
+      inBoundCount = Flight.inBound.length;
+      getToAirport = Flight.inBound[inBoundCount - 1].toAirport;
 
-    //  }
+      getFromAirport = Flight.inBound[0].fromAirport;
+      geteft = Flight.inBound[0].eft + Flight.inBound[0].layOverTime;
+      getairlineName = Flight.inBound[0].airline;
+      getflightNo = Flight.inBound[0].flightNo;
+      getStops = inBoundCount - 1;
+      reachDate = Flight.inBound[inBoundCount - 1].reachDate
+        .split('T')[1]
+        .substring(0, 5);
+    }
 
     var round = Flight.fare.grandTotal;
     var SeldepDate;
 
     round = round.toFixed(2);
+    if (Flight.inBound) {
+      return (
+        <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
+          {/* {console.log('Lenfth' + Flight.inBound.length)} */}
 
-    return (
-      <View key={Flight.resultID.toString()} style={{ marginBottom: 20 }}>
-        {/* {console.log('Lenfth' + Flight.inBound.length)} */}
+          <TouchableOpacity
+            activeOpacity={0.6}
+            onPress={() => {
+              // Flight['fare'] = round;
+              setSelectedItem({ Flight });
+              //  [RBSheet + index].open(selectedItem);
 
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={() => {
-            // Flight['fare'] = round;
-            setSelectedItem({ Flight });
-            //  [RBSheet + index].open(selectedItem);
-
-            refRBSheet.current.open(selectedItem);
-          }}
-        >
-          <View
-            style={{
-              width: width / 2,
-              //borderBottomWidth: 2,
-              //  borderBottomColor: COLOR.grey,
+              refRBSheet.current.open(selectedItem);
             }}
           >
             <View
               style={{
-                flex: 1,
                 width: width / 2,
-
-                borderWidth: 0.5,
-                // height: 100,
-                // borderRadius: 10,
-                borderOpacity: 0.4,
-                borderColor: '#f0f8ff',
+                //borderBottomWidth: 2,
+                //  borderBottomColor: COLOR.grey,
               }}
             >
               <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-evenly',
-                  padding: 15,
+                  flex: 1,
+                  width: width / 2,
+
+                  borderWidth: 0.5,
+                  // height: 100,
+                  // borderRadius: 10,
+                  borderOpacity: 0.4,
+                  borderColor: '#f0f8ff',
                 }}
               >
-                <View>
-                  <Image
-                    source={{ uri: uri }}
-                    style={{ width: 30, height: 30, marginRight: 10 }}
-                  />
-                </View>
                 <View
                   style={{
-                    marginRight: 5,
-                    flexDirection: 'column',
+                    flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: 'space-evenly',
+                    padding: 15,
                   }}
                 >
                   <View>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
-                      {getFromAirport}
-                    </Text>
-                  </View>
-                  <View>
-                    {/* <Text>15:40</Text> */}
-                    <Text style={{ fontSize: 14 }}>
-                      {Flight.inBound[0].depDate.split('T')[1].substring(0, 5)}
-                    </Text>
-                  </View>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                  }}
-                >
-                  <View>
-                    {/* <Text>2h:20m</Text> */}
-                    <Text style={{ fontSize: 12 }}>
-                      <ConvertMinsToTime data={geteft} />
-                    </Text>
+                    <Image
+                      source={{ uri: uri }}
+                      style={{ width: 30, height: 30, marginRight: 10 }}
+                    />
                   </View>
                   <View
                     style={{
-                      height: 0.6,
-                      width: 50,
-                      backgroundColor: '#ccc',
+                      marginRight: 5,
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
-                  />
-                </View>
-                <View
-                  style={{
-                    marginLeft: 5,
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <View>
-                    <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
-                      {getToAirport}
-                    </Text>
+                  >
+                    <View>
+                      <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                        {getFromAirport}
+                      </Text>
+                    </View>
+                    <View>
+                      {/* <Text>15:40</Text> */}
+                      <Text style={{ fontSize: 14 }}>
+                        {Flight.inBound[0].depDate
+                          .split('T')[1]
+                          .substring(0, 5)}
+                      </Text>
+                    </View>
                   </View>
-                  <View>
-                    <Text style={{ fontSize: 14 }}>
-                      {' '}
-                      {Flight.inBound[inBoundCount - 1].reachDate
-                        .split('T')[1]
-                        .substring(0, 5)}
-                    </Text>
-                    {/* <Text>20:40</Text> */}
+                  <View
+                    style={{
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <View>
+                      {/* <Text>2h:20m</Text> */}
+                      <Text style={{ fontSize: 12 }}>
+                        <ConvertMinsToTime data={geteft} />
+                      </Text>
+                    </View>
+                    <View
+                      style={{
+                        height: 0.6,
+                        width: 50,
+                        backgroundColor: '#ccc',
+                      }}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      marginLeft: 5,
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <View>
+                      <Text style={{ fontSize: 15, fontWeight: 'bold' }}>
+                        {getToAirport}
+                      </Text>
+                    </View>
+                    <View>
+                      <Text style={{ fontSize: 14 }}> {reachDate}</Text>
+                      {/* <Text>20:40</Text> */}
+                    </View>
                   </View>
                 </View>
-              </View>
-              {/* <View
+                {/* <View
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'space-between',
@@ -286,28 +297,31 @@ const RightInBound = (props) => {
                   </Text>
                 </View>
               </View> */}
+              </View>
             </View>
-          </View>
-        </TouchableOpacity>
+          </TouchableOpacity>
 
-        <CustomSelectButton
-          onPress={() => setChoice(Flight.resultID.toString())}
-          isChecked={choice === Flight.resultID.toString()}
-          text={round}
-          smalltext={getStops > 0 ? `${getStops} Stop` : 'Non-Stop'}
-          mediumtext={getairlineName}
-          textSize={21}
-          iconName="checksquareo"
-          iconColor="#fff"
-          iconSize={20}
-          buttonDefaultColor="#f0f8ff"
-          buttonSelectedColor={COLOR.primary}
-          textDefaultColor="#333"
-          textSelectedColor={COLOR.white}
-          fontWeight="bold"
-        />
-      </View>
-    );
+          <CustomSelectButton
+            onPress={() => setChoice(Flight.resultID.toString())}
+            isChecked={choice === Flight.resultID.toString()}
+            text={round}
+            smalltext={getStops > 0 ? `${getStops} Stop` : 'Non-Stop'}
+            mediumtext={getairlineName}
+            textSize={21}
+            iconName="checksquareo"
+            iconColor="#fff"
+            iconSize={20}
+            buttonDefaultColor="#f0f8ff"
+            buttonSelectedColor={COLOR.primary}
+            textDefaultColor="#333"
+            textSelectedColor={COLOR.white}
+            fontWeight="bold"
+          />
+        </View>
+      );
+    } else {
+      return <></>;
+    }
   };
 
   const FlightSelectedBottom = ({ selectedFlight }) => {

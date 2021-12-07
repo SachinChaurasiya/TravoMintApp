@@ -39,13 +39,27 @@ export const Flightsearch = ({ route, navigation, props }) => {
   // const [Currency, setCurrency] = useState('');
   const [selectedLanguage, setSelectedLanguage] = useState('INR');
 
-  const [activetab, setActiveTab] = useState('Economy');
-  const [values, setValues] = useState('1');
+  // const [activetab, setActiveTab] = useState('Economy');
+  // const [values, setValues] = useState('1');
 
   // Adult Child Infant
   const [AdultNo, setAdultNo] = useState(1);
   const [child, setChild] = useState(0);
   const [infant, setInfant] = useState(0);
+
+  const [EBFactivetab, setEBFactivetab] = useState('Economy');
+  const [values, setValues] = useState(1);
+
+  const [activetab, setActiveTab] = useState('Round Trip');
+  const [selectedRange, setRange] = React.useState('1');
+
+  // hide and unhide
+  const [isVisible, setIsVisible] = useState(true);
+  // const [selectedValue, setSelectedValue] = useState('Economy');
+
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibles, setModalVisibles] = useState(false);
+  const [FlyingDate, setFlyingDate] = useState(false);
 
   const [state, setState] = useState({ data: [], loading: false }); // only one data source
   const { data, loading } = state;
@@ -109,7 +123,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
           destinationAirportName: a2,
           departureTravelDate: a3,
           arriveTravelDate: a4,
-          selectedLanguage: a8,
+          // selectedLanguage: a8,
         });
       }
     } else if (a1 && a2 && a3 && !a4) {
@@ -121,7 +135,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
         adultNo: a5,
         childNo: a6,
         infantNo: a7,
-        selectedLanguage: a8,
+        // selectedLanguage: a8,
       });
     } else {
       console.log('err');
@@ -178,17 +192,6 @@ export const Flightsearch = ({ route, navigation, props }) => {
     );
   };
 
-  // const [activetab, setActiveTab] = useState('Round Trip');
-  const [selectedRange, setRange] = React.useState('Date');
-
-  // hide and unhide
-  const [isVisible, setIsVisible] = useState(true);
-  const [selectedValue, setSelectedValue] = useState('Economy');
-
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalVisibles, setModalVisibles] = useState(false);
-  const [FlyingDate, setFlyingDate] = useState(false);
-
   const toggleFunction = (props) => {
     {
       !isVisible ? setIsVisible(!isVisible) : setIsVisible(isVisible);
@@ -212,11 +215,12 @@ export const Flightsearch = ({ route, navigation, props }) => {
             borderRadius: 30,
             paddingVertical: 6,
             paddingHorizontal: 16,
+            elevation: 8,
           }}
-          onPressIn={() => {
+          onPress={() => {
             props.setActiveTab(props.text);
           }}
-          onPress={props.onPress}
+          onPressOut={props.onPress}
           // onPress={()=>ffFun()}
         >
           <Text
@@ -233,6 +237,38 @@ export const Flightsearch = ({ route, navigation, props }) => {
       </View>
     );
   };
+
+  const OneWayRoundWayButtons = (props) => {
+    return (
+      <View style={styles.btn}>
+        <View>
+          <Text>
+            <HeaderButtons
+              text="Round Trip"
+              onPress={toggleFunction}
+              btncolor={COLOR.primary}
+              textcolor={COLOR.white}
+              activetab={activetab}
+              setActiveTab={setActiveTab}
+            />
+          </Text>
+        </View>
+        <View>
+          <Text>
+            <HeaderButtons
+              text="One Way"
+              onPress={toggleFunctionvisible}
+              btncolor={COLOR.primary}
+              textcolor={COLOR.primary}
+              activetab={activetab}
+              setActiveTab={setActiveTab}
+            />
+          </Text>
+        </View>
+      </View>
+    );
+  };
+
   const EBFClassbtnfunction = () => {
     return (
       <View>
@@ -245,8 +281,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   value="1"
                   btncolor={COLOR.blue}
                   textcolor="white"
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  EBFactivetab={EBFactivetab}
+                  setEBFactivetab={setEBFactivetab}
                   values={values}
                   setValues={setValues}
                   // onPress={() => setValues(1)}
@@ -260,8 +296,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   value="2"
                   btncolor={COLOR.blue}
                   textcolor={COLOR.white}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  EBFactivetab={EBFactivetab}
+                  setEBFactivetab={setEBFactivetab}
                   values={values}
                   setValues={setValues}
                 />
@@ -274,8 +310,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   value="3"
                   btncolor={COLOR.white}
                   textcolor={COLOR.blue}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  EBFactivetab={EBFactivetab}
+                  setEBFactivetab={setEBFactivetab}
                   values={values}
                   setValues={setValues}
                 />
@@ -288,8 +324,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   value="4"
                   btncolor={COLOR.blue}
                   textcolor={COLOR.dark}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  EBFactivetab={EBFactivetab}
+                  setEBFactivetab={setEBFactivetab}
                   values={values}
                   setValues={setValues}
                 />
@@ -307,17 +343,19 @@ export const Flightsearch = ({ route, navigation, props }) => {
         <TouchableOpacity
           style={{
             backgroundColor:
-              props.activetab === props.text ? COLOR.blue : COLOR.white,
+              props.EBFactivetab === props.text ? COLOR.blue : COLOR.white,
             borderRadius: 30,
             paddingVertical: 6,
             paddingHorizontal: 16,
+            elevation: 8,
           }}
-          onPress={() => props.setActiveTab(props.text)}
-          onPressIn={() => props.setValues(props.value)}
+          onPress={() => props.setEBFactivetab(props.text)}
+          onPressOut={() => props.setValues(props.value)}
         >
           <Text
             style={{
-              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              color:
+                props.EBFactivetab === props.text ? COLOR.white : COLOR.blue,
               fontSize: 11.5,
               fontWeight: '900',
             }}
@@ -333,7 +371,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={COLOR.secondary} barStyle="light-content"/> */}
-      <View
+      {/* <View
         style={{
           borderColor: COLOR.blue,
           borderWidth: 1,
@@ -366,44 +404,54 @@ export const Flightsearch = ({ route, navigation, props }) => {
           <Picker.Item label="€-EUR" value="EUR" />
           <Picker.Item label="C$-CAD" value="CAD" />
         </Picker>
-      </View>
+      </View> */}
       <View style={styles.header}>
         <Text style={styles.text_header}>Flight Search Now!</Text>
       </View>
+      <View
+        style={{
+          borderColor: COLOR.blue,
+          borderWidth: 1,
+          flexDirection: 'row',
+          alignItems: 'center',
+          // flex: 1,
+          borderRadius: 10,
+          marginLeft: 10,
+          marginBottom: 10,
+        }}
+      >
+        <View>
+          <Flag id={'IN'} size={0.1} style={{ borderRadius: 10 }} />
+        </View>
+        <View style={{ padding: 5 }}>
+          <Picker
+            mode="dropdown"
+            selectedValue={selectedLanguage}
+            dropdownIconRippleColor={COLOR.blue}
+            style={{
+              width: 130,
+              backgroundColor: COLOR.blue,
+              height: 30,
+              color: COLOR.whitesmoke,
+            }}
+            onValueChange={(itemValue, itemIndex) =>
+              setSelectedLanguage(itemValue)
+            }
+          >
+            <Picker.Item label="₹-INR" value="INR" />
+            <Picker.Item label="$-USD" value="USD" />
+            <Picker.Item label="£-GBP" value="GBP" />
+            <Picker.Item label="$-AUD" value="AUD" />
+            <Picker.Item label="د.إ-AED" value="AED" />
+            <Picker.Item label="€-EUR" value="EUR" />
+            <Picker.Item label="C$-CAD" value="CAD" />
+          </Picker>
+        </View>
+      </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
         <View>
-          <View style={styles.btn}>
-            <View>
-              <Text>
-                <HeaderButtons
-                  text="Round Trip"
-                  onPress={toggleFunction}
-                  btncolor={COLOR.primary}
-                  textcolor={COLOR.white}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
-                />
-              </Text>
-            </View>
-            <View>
-              <Text>
-                <HeaderButtons
-                  text="One Way"
-                  onPress={toggleFunctionvisible}
-                  btncolor={COLOR.primary}
-                  textcolor={COLOR.primary}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
-                />
-              </Text>
-            </View>
-          </View>
+          <OneWayRoundWayButtons {...props} />
 
-          {/* INR 
-          £-GBP
-          $-AUD
-          €-EUR
-          C$-CAD*/}
           <ScrollView showsVerticalScrollIndicator={false}>
             <View>
               <View
@@ -445,6 +493,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                           width: width - 240,
                           height: 1,
                           backgroundColor: COLOR.grey,
+                          elevation: 2,
                         }}
                       />
                     </View>
@@ -538,7 +587,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
              value={totext}
              underlineColorAndroid="transparent"
             /> */}
-                  <Text style={styles.title}>Flying From</Text>
+                  <Text style={styles.title}>Flying To</Text>
                   <TouchableOpacity onPress={() => setModalVisibles(true)}>
                     <View>
                       <Text
@@ -557,6 +606,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                       width: width - 240,
                       height: 1,
                       backgroundColor: COLOR.grey,
+                      elevation: 2,
                     }}
                   />
                   <Modal
@@ -684,8 +734,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                                     }}
                                   />
                                   <TextInput
-                                    onChangeText={(DepartureTravelDate) =>
-                                      setOriginAirportData(DepartureTravelDate)
+                                    onChangeText={(selectedRange) =>
+                                      setRange(selectedRange)
                                     }
                                     value={selectedRange.firstDate}
                                     style={{}}
@@ -693,6 +743,16 @@ export const Flightsearch = ({ route, navigation, props }) => {
                                 </View>
                               </View>
                             </TouchableOpacity>
+                            <View
+                              style={{
+                                marginLeft: 15,
+                                // marginTop:18,
+                                width: width - 240,
+                                height: 1,
+                                backgroundColor: COLOR.grey,
+                                elevation: 2,
+                              }}
+                            />
                           </View>
                         ) : (
                           <Text>loading</Text>
@@ -733,14 +793,24 @@ export const Flightsearch = ({ route, navigation, props }) => {
                                     }}
                                   />
                                   <TextInput
-                                    onChangeText={(ArriveTravelDate) =>
-                                      setOriginAirportData(ArriveTravelDate)
+                                    onChangeText={(selectedRange) =>
+                                      setRange(selectedRange)
                                     }
                                     value={selectedRange.secondDate}
                                   ></TextInput>
                                 </View>
                               </View>
                             </TouchableOpacity>
+                            <View
+                              style={{
+                                marginLeft: 15,
+                                // marginTop:18,
+                                width: width - 240,
+                                height: 1,
+                                backgroundColor: COLOR.grey,
+                                elevation: 2,
+                              }}
+                            />
                           </View>
                         </Animatable.View>
                       ) : null}
@@ -1249,6 +1319,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
                       backgroundColor: COLOR.blue,
                       borderRadius: 30,
                       marginTop: 20,
+                      elevation: 8,
                     }}
                   >
                     <Text
@@ -1420,7 +1491,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // padding: 20,
     marginBottom: 20,
-    borderWidth: 1,
+    // borderWidth: 1,
     borderColor: COLOR.grey,
     borderRadius: 30,
   },
@@ -1437,6 +1508,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 12,
     paddingLeft: 20,
+    elevation: 8,
   },
   adultNo: {
     borderWidth: 2,
@@ -1499,11 +1571,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     fontSize: 13,
     fontWeight: 'bold',
+    elevation: 1,
   },
   Text: {
     color: COLOR.primary,
     fontWeight: 'bold',
-    marginTop: 15,
+    // marginTop: 15,
+    marginLeft: 15,
+    marginBottom: 15,
   },
   // Adultchildinfanttouch: {
   //   borderWidth: 0.5,

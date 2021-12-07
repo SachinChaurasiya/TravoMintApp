@@ -95,12 +95,11 @@ export default function App({ navigation }) {
       signIn: (userName, password) => {
         // setUserToken('dffd');
         // setIsloading(false);
-        let userToken;
-        userToken = null;
+        // let userToken;
+        const userToken = null;
         if (userName == 'user' && password == 'pass') {
           userToken = 'sdsd';
-        }
-        dispatch({ type: 'LOGIN', id: userName, token: userToken });
+        } else dispatch({ type: 'LOGIN', id: userName, token: userToken });
       },
       signOut: () => {
         // setUserToken(null);

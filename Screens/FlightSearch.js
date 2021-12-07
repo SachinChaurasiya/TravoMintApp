@@ -40,6 +40,7 @@ export const Flightsearch = ({ route, navigation, props }) => {
   const [selectedLanguage, setSelectedLanguage] = useState('INR');
 
   const [activetab, setActiveTab] = useState('Economy');
+
   const [values, setValues] = useState('1');
 
   // Adult Child Infant
@@ -183,6 +184,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
 
   // hide and unhide
   const [isVisible, setIsVisible] = useState(true);
+  const [activetab1, setActiveTab1] = useState('Round Trip');
+  const [active, setActive] = useState('Round Trip');
   const [selectedValue, setSelectedValue] = useState('Economy');
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -208,20 +211,20 @@ export const Flightsearch = ({ route, navigation, props }) => {
           activeOpacity={0.6}
           style={{
             backgroundColor:
-              props.activetab === props.text ? COLOR.blue : COLOR.white,
+              props.active === props.text ? COLOR.blue : COLOR.white,
             borderRadius: 30,
             paddingVertical: 6,
             paddingHorizontal: 16,
           }}
           onPressIn={() => {
-            props.setActiveTab(props.text);
+            props.setActive(props.text);
           }}
           onPress={props.onPress}
           // onPress={()=>ffFun()}
         >
           <Text
             style={{
-              color: props.activetab === props.text ? COLOR.white : COLOR.blue,
+              color: props.active === props.text ? COLOR.white : COLOR.blue,
               fontSize: 15,
               fontWeight: '900',
             }}
@@ -380,8 +383,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   onPress={toggleFunction}
                   btncolor={COLOR.primary}
                   textcolor={COLOR.white}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  active={active}
+                  setActive={setActive}
                 />
               </Text>
             </View>
@@ -392,8 +395,8 @@ export const Flightsearch = ({ route, navigation, props }) => {
                   onPress={toggleFunctionvisible}
                   btncolor={COLOR.primary}
                   textcolor={COLOR.primary}
-                  activetab={activetab}
-                  setActiveTab={setActiveTab}
+                  active={active}
+                  setActive={setActive}
                 />
               </Text>
             </View>

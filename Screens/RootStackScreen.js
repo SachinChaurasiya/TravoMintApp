@@ -33,11 +33,12 @@ import RoundWaySearchResult from './RoundWaySearchResult';
 import Flightsearch from './FlightSearch';
 import Roundwaysearchresult from './RoundWaySearchResult';
 import MyBooking from './My booking';
+import Support from './Support';
 
 const RootStack = createStackNavigator();
 
 const RootStackScreen = ({ navigation }) => (
-  <RootStack.Navigator>
+  <RootStack.Navigator initialRouteName={Support}>
     <RootStack.Screen
       name="SplashScreen"
       options={{ headerShown: false }}
@@ -214,6 +215,17 @@ const RootStackScreen = ({ navigation }) => (
         headerTintColor: COLOR.white,
       }}
       component={MyBooking}
+    />
+    <RootStack.Screen
+      name="Support"
+      options={{
+        headerTitle: 'My Bookings',
+        headerStyle: {
+          backgroundColor: COLOR.blue,
+        },
+        headerTintColor: COLOR.white,
+      }}
+      component={Support}
     />
   </RootStack.Navigator>
 );

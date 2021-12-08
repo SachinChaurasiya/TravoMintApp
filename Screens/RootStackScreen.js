@@ -38,7 +38,7 @@ import Support from './Support';
 const RootStack = createStackNavigator();
 
 const RootStackScreen = ({ navigation }) => (
-  <RootStack.Navigator initialRouteName={Support}>
+  <RootStack.Navigator>
     <RootStack.Screen
       name="SplashScreen"
       options={{ headerShown: false }}
@@ -147,6 +147,7 @@ const RootStackScreen = ({ navigation }) => (
     {/* <RootStack.Screen name="calendar" component={calendar} /> */}
     <RootStack.Screen name="UserEdit" component={UserEditScreen} />
     <RootStack.Screen
+      name="Book"
       options={{
         headerTitle: 'Flight Details',
         headerStyle: { backgroundColor: COLOR.primary },
@@ -155,10 +156,10 @@ const RootStackScreen = ({ navigation }) => (
           fontWeight: 'bold',
         },
       }}
-      name="Book"
       component={BookNow}
     />
     <RootStack.Screen
+      name="TravelInfo"
       options={{
         headerTitle: 'Travel Information',
         headerStyle: { backgroundColor: COLOR.primary },
@@ -167,10 +168,10 @@ const RootStackScreen = ({ navigation }) => (
           fontWeight: 'bold',
         },
       }}
-      name="TravelInfo"
       component={TravelInfo}
     />
     <RootStack.Screen
+      name="PayNow"
       options={{
         headerTitle: 'Pay Now',
         headerStyle: { backgroundColor: COLOR.primary },
@@ -179,10 +180,10 @@ const RootStackScreen = ({ navigation }) => (
           fontWeight: 'bold',
         },
       }}
-      name="PayNow"
       component={Paynow}
     />
     <RootStack.Screen
+      name="FlightPromo"
       options={{
         headerTitle: 'Flight Promo',
         headerStyle: { backgroundColor: COLOR.primary },
@@ -191,10 +192,10 @@ const RootStackScreen = ({ navigation }) => (
           fontWeight: 'bold',
         },
       }}
-      name="FlightPromo"
       component={Flightpromo}
     />
     <RootStack.Screen
+      name="RoundWaySearchResult"
       options={{
         headerTitle: 'Flight Search',
         headerStyle: {
@@ -202,7 +203,6 @@ const RootStackScreen = ({ navigation }) => (
         },
         headerTintColor: COLOR.white,
       }}
-      name="RoundWaySearchResult"
       component={RoundWaySearchResult}
     />
     <RootStack.Screen

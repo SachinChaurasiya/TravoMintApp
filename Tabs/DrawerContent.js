@@ -12,6 +12,7 @@ import { DrawerActions } from '@react-navigation/native';
 // import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FontAwesome5 } from 'react-native-vector-icons';
 import { Fontisto } from 'react-native-vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Title,
   Text,
@@ -20,6 +21,7 @@ import {
   Drawer,
 } from 'react-native-paper';
 import COLOR from '../assets/consts/colors';
+import { useNavigation } from '@react-navigation/native';
 
 // Image
 import Logo from '../assets/Image/Travomint.png';
@@ -28,8 +30,21 @@ import Logo from '../assets/Image/Travomint.png';
 import { AuthContext } from '../Context';
 
 const DrawerContent = (props) => {
-  const { signOut } = useContext(AuthContext);
+  const navigation = useNavigation();
+  const [userId, setUserId] = useState(null);
+
+  AsyncStorage.getItem('userId').then((token) => {
+    // console.log(token);
+    setUserId(token);
+    console.log(userId);
+  });
+  // const { signOut } = useContext(AuthContext);
   const Separator = () => <View style={styles.separator}></View>;
+
+  const signOut = async () => {
+    await AsyncStorage.removeItem('userId');
+    navigation.navigate('SignInScreen');
+  };
 
   const [isDarkTheme, setIsDarkTheme] = useState(false);
 
@@ -133,7 +148,7 @@ const DrawerContent = (props) => {
 
           <Separator />
 
-          <DrawerItem
+          {/* <DrawerItem
             icon={({ color, size }) => (
               <View
                 style={{
@@ -148,7 +163,7 @@ const DrawerContent = (props) => {
             )}
             onPress={() => props.navigation.navigate('SignInScreen')}
             label="Sign In"
-          />
+          /> */}
 
           <DrawerItem
             icon={({ color, size }) => (
@@ -208,24 +223,46 @@ const DrawerContent = (props) => {
             }}
             label="Support"
           />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <View
-                style={{
-                  backgroundColor: COLOR.whitesmoke,
-                  padding: 10,
-                  borderRadius: 10,
-                  elevation: 8,
-                }}
-              >
-                <FontAwesome5 name="headset" size={14} color={COLOR.blue} />
-              </View>
-            )}
-            onPress={() => {
-              signOut();
-            }}
-            label="SignOut"
-          />
+
+          {userId ? (
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.whitesmoke,
+                    padding: 10,
+                    borderRadius: 10,
+                    elevation: 8,
+                  }}
+                >
+                  <FontAwesome5 name="headset" size={14} color={COLOR.blue} />
+                </View>
+              )}
+              onPress={() => {
+                signOut();
+              }}
+              label="SignOut"
+            />
+          ) : (
+            <DrawerItem
+              icon={({ color, size }) => (
+                <View
+                  style={{
+                    backgroundColor: COLOR.whitesmoke,
+                    padding: 10,
+                    borderRadius: 10,
+                    elevation: 8,
+                  }}
+                >
+                  <FontAwesome5 name="headset" size={14} color={COLOR.blue} />
+                </View>
+              )}
+              onPress={() => {
+                navigation.navigate('SignInScreen');
+              }}
+              label="Sign In"
+            />
+          )}
         </Drawer.Section>
 
         <Drawer.Section title="Preferences">

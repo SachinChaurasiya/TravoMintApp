@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,8 @@ import * as Animatable from 'react-native-animatable';
 // import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 
 // color
 import COLOR from '../assets/consts/colors';
@@ -23,97 +25,189 @@ import { AuthContext } from '../Context';
 
 // import Users from '../model/users';
 
-const SignInScreen = ({ navigation }) => {
-  const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-  });
+const SignInScreen = () => {
+  const navigation = useNavigation();
+  // console.log(navigation);
+  // const [data, setData] = React.useState({
+  //   username: '',
+  //   password: '',
+  //   check_textInputChange: false,
+  //   secureTextEntry: true,
+  //   isValidUser: true,
+  //   isValidPassword: true,
+  // });
 
+  // const { signIn } = useContext(AuthContext);
+
+  // const textInputChange = (val) => {
+  //   if (val.trim().length >= 4) {
+  //     setData({
+  //       ...data,
+  //       username: val,
+  //       check_textInputChange: true,
+  //       isValidUser: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       username: val,
+  //       check_textInputChange: false,
+  //       isValidUser: false,
+  //     });
+  //   }
+  // };
+
+  // const handlePasswordChange = (val) => {
+  //   if (val.trim().length >= 8) {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: false,
+  //     });
+  //   }
+  // };
+
+  // const updateSecureTextEntry = () => {
+  //   setData({
+  //     ...data,
+  //     secureTextEntry: !data.secureTextEntry,
+  //   });
+  // };
+
+  // const handleValidUser = (val) => {
+  //   if (val.trim().length >= 4) {
+  //     setData({
+  //       ...data,
+  //       isValidUser: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       isValidUser: false,
+  //     });
+  //   }
+  // };
+
+  // const loginHandle = (userName, password) => {
+  //   // const foundUser = Users.filter( item => {
+  //   //     return userName == item.username && password == item.password;
+  //   // } );
+
+  //   // if ( data.username.length == 0 || data.password.length == 0 ) {
+  //   //     Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+  //   //         {text: 'Okay'}
+  //   //     ]);
+  //   //     return;
+  //   // }
+
+  //   // if ( foundUser.length == 0 ) {
+  //   //     Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+  //   //         {text: 'Okay'}
+  //   //     ]);
+  //   //     return;
+  //   // }
+  //   // signIn(foundUser);
+  //   signIn(userName, password);
+  // };
+
+  const [username, setUsername] = useState();
+  const [password, setPassword] = useState();
+  const [userData, setUserData] = useState({});
+  const [errorMsg, setErrorMsg] = useState('');
   const { colors } = useTheme();
 
-  const { signIn } = useContext(AuthContext);
-
-  const textInputChange = (val) => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: false,
-        isValidUser: false,
-      });
+  const SetUserId = async (userId) => {
+    try {
+      await AsyncStorage.setItem('userId', userId);
+    } catch (error) {
+      console.log('AsyncError' + error);
     }
   };
 
-  const handlePasswordChange = (val) => {
-    if (val.trim().length >= 8) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true,
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false,
-      });
+  const GetUserId = async () => {
+    try {
+      const getUserIdDb = await AsyncStorage.getItem('userId');
+      return getUserIdDb;
+    } catch (error) {
+      console.log('AsyncError' + error);
     }
   };
 
-  const updateSecureTextEntry = () => {
-    setData({
-      ...data,
-      secureTextEntry: !data.secureTextEntry,
+  const removeUserId = async () => {
+    try {
+      await AsyncStorage.removeItem('userId');
+      console.log('removed');
+    } catch (error) {
+      console.log('AsyncError' + error);
+      4;
+    }
+  };
+
+  const loginHandle = async () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+
+    var raw = JSON.stringify({
+      user_email: username,
+      password: password,
     });
-  };
 
-  const handleValidUser = (val) => {
-    if (val.trim().length >= 4) {
-      setData({
-        ...data,
-        isValidUser: true,
-      });
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    const preFetch = await fetch(
+      'http://staging.nobelmail.net/user/login-travel?authcode=Trav3103s987876',
+      requestOptions
+    );
+    const ApiData = await preFetch.json();
+    const loginValidCheck = await ApiData.baseResponse.status;
+    const loginUserId = await ApiData.response.user_id;
+    //console.log('val:' + useridfromapi);
+    if (loginValidCheck !== 0) {
+      SetUserId(loginUserId.toString());
+      console.log('in useridfromapi');
+      //  console.log('in useridfromapi', useridfromapi);
+      const getLoginUserId = await GetUserId();
+      if (getLoginUserId !== undefined && getLoginUserId !== null) {
+        navigation.navigate('MainTabScreens');
+      }
+      // console.log('in db', duid);
     } else {
-      setData({
-        ...data,
-        isValidUser: false,
-      });
+      setErrorMsg('Invalid Login Details');
     }
+    //removeUserId();
+
+    // const status_code = ApiData.baseResponse.status;
+    // console.log(status_code);
+    // try {
+    //   if (status_code === 1) {
+    //     navigation.navigate('Root');
+    //   } else {
+    //     alert('Error');
+    //   }
+    // } catch (err) {
+    //   console.log('err');
+    // }
   };
 
-  const loginHandle = (userName, password) => {
-    // const foundUser = Users.filter( item => {
-    //     return userName == item.username && password == item.password;
-    // } );
+  // let userIdDb;
+  //const userIdDb = userData.response.user_id;
+  // console.log('1:', userIdDb);
+  // //SetUserId(userIdDb);
+  // userIdDb = GetUserId(userIdDb);
 
-    // if ( data.username.length == 0 || data.password.length == 0 ) {
-    //     Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
-    //         {text: 'Okay'}
-    //     ]);
-    //     return;
-    // }
-
-    // if ( foundUser.length == 0 ) {
-    //     Alert.alert('Invalid User!', 'Username or password is incorrect.', [
-    //         {text: 'Okay'}
-    //     ]);
-    //     return;
-    // }
-    // signIn(foundUser);
-    signIn(userName, password);
-  };
-
+  // //removeUserId(userIdDb);
+  // console.log('2:', userIdDb);
   return (
     <View style={styles.container}>
       {/* <StatusBar backgroundColor={COLOR.primary} barStyle="light-content"/> */}
@@ -151,22 +245,22 @@ const SignInScreen = ({ navigation }) => {
               },
             ]}
             autoCapitalize="none"
-            onChangeText={(val) => textInputChange(val)}
-            onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
+            onChangeText={(username) => setUsername(username)}
+            value={username}
           />
-          {data.check_textInputChange ? (
+          {/* {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
               <Feather name="check-circle" color="green" size={20} />
             </Animatable.View>
-          ) : null}
+          ) : null} */}
         </View>
-        {data.isValidUser ? null : (
+        {/* {data.isValidUser ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>
               Username must be 4 characters long.
             </Text>
           </Animatable.View>
-        )}
+        )} */}
 
         <Text
           style={[
@@ -184,7 +278,7 @@ const SignInScreen = ({ navigation }) => {
           <TextInput
             placeholder="Your Password"
             placeholderTextColor={COLOR.placeholderColor}
-            secureTextEntry={data.secureTextEntry ? true : false}
+            // secureTextEntry={data.secureTextEntry ? true : false}
             style={[
               styles.textInput,
               {
@@ -192,23 +286,24 @@ const SignInScreen = ({ navigation }) => {
               },
             ]}
             autoCapitalize="none"
-            onChangeText={(val) => handlePasswordChange(val)}
+            onChangeText={(password) => setPassword(password)}
+            value={password}
           />
-          <TouchableOpacity onPress={updateSecureTextEntry}>
+          {/* <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
               <Feather name="eye-off" color="grey" size={20} />
             ) : (
               <Feather name="eye" color="grey" size={20} />
             )}
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
-        {data.isValidPassword ? null : (
+        {/* {data.isValidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.errorMsg}>
               Password must be 8 characters long.
             </Text>
           </Animatable.View>
-        )}
+        )} */}
 
         <TouchableOpacity>
           <Text style={{ color: COLOR.primary, marginTop: 15 }}>
@@ -227,9 +322,7 @@ const SignInScreen = ({ navigation }) => {
             ]}
             // onPress={() => {loginHandle( data.username, data.password )}}
             // onPress={() => navigation.navigate('MainTabScreens')}
-            onPress={() => {
-              loginHandle(data.username, data.password);
-            }}
+            onPress={() => loginHandle()}
           >
             {/* <LinearGradient
                     colors={['#08d4c4', '#01ab9d']}
@@ -300,6 +393,7 @@ const SignInScreen = ({ navigation }) => {
               Skip
             </Text>
           </TouchableOpacity>
+          <Text style={{ color: 'red' }}> {errorMsg}</Text>
         </View>
       </Animatable.View>
     </View>

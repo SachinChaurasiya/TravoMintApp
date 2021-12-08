@@ -45,83 +45,92 @@ import FlightSearchtwo from './Screens/FlightSearchtwo';
 import Roundwaysearchresult from './Screens/RoundWaySearchResult';
 import PayNow from './Screens/PayNow';
 import TravelInfo from './Screens/TravelInfo';
+import SignInScreen from './Screens/SignInScreen';
+import SignUpScreen from './Screens/SignUpScreen';
+// import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function App({ navigation }) {
-  // const [isloading, setIsloading] = useState(true);
-  // const [userToken, setUserToken] = useState(null);
+  const [isloading, setIsloading] = useState(true);
+  const [userToken, setUserToken] = useState(null);
+  const [userId, setUserId] = useState(null);
 
-  const initialLoginState = {
-    isLoading: true,
-    userName: null,
-    userToken: null,
-  };
+  AsyncStorage.getItem('userId').then((token) => {
+    // console.log(token);
+    setUserId(token);
+    console.log(userId);
+  });
 
-  const loginReducer = (prevState, action) => {
-    switch (action.type) {
-      case 'RETRIEVE_TOKEN':
-        return {
-          ...prevState,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case 'LOGIN':
-        return {
-          ...prevState,
-          userName: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-      case 'LOGOUT':
-        return {
-          ...prevState,
-          userName: null,
-          userToken: null,
-          isLoading: false,
-        };
-      case 'REGISTER':
-        return {
-          ...prevState,
-          userName: action.id,
-          userToken: action.token,
-          isLoading: false,
-        };
-    }
-  };
+  // const initialLoginState = {
+  //   isLoading: true,
+  //   userName: null,
+  //   userToken: null,
+  // };
 
-  const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
+  // const loginReducer = (prevState, action) => {
+  //   switch (action.type) {
+  //     case 'RETRIEVE_TOKEN':
+  //       return {
+  //         ...prevState,
+  //         userToken: action.token,
+  //         isLoading: false,
+  //       };
+  //     case 'LOGIN':
+  //       return {
+  //         ...prevState,
+  //         userName: action.id,
+  //         userToken: action.token,
+  //         isLoading: false,
+  //       };
+  //     case 'LOGOUT':
+  //       return {
+  //         ...prevState,
+  //         userName: null,
+  //         userToken: null,
+  //         isLoading: false,
+  //       };
+  //     case 'REGISTER':
+  //       return {
+  //         ...prevState,
+  //         userName: action.id,
+  //         userToken: action.token,
+  //         isLoading: false,
+  //       };
+  //   }
+  // };
 
-  const authContext = useMemo(
-    () => ({
-      signIn: (userName, password) => {
-        // setUserToken('dffd');
-        // setIsloading(false);
-        // let userToken;
-        const userToken = null;
-        if (userName == 'user' && password == 'pass') {
-          userToken = 'sdsd';
-        } else dispatch({ type: 'LOGIN', id: userName, token: userToken });
-      },
-      signOut: () => {
-        // setUserToken(null);
-        // setIsloading(false);
-        dispatch({ type: 'LOGOUT' });
-      },
-      signUp: () => {
-        setUserToken('dffd');
-        setIsloading(false);
-      },
-    }),
-    []
-  );
+  // const [loginState, dispatch] = useReducer(loginReducer, initialLoginState);
 
+  // const authContext = useMemo(
+  //   () => ({
+  //     signIn: () => {
+  //       setUserToken('dffd');
+  //       setIsloading(false);
+  //       // let userToken;
+  //       // const userToken = null;
+  //       // if (userName == 'user' && password == 'pass') {
+  //       //   userToken = 'sdsd';
+  //       // } else dispatch({ type: 'LOGIN', id: userName, token: userToken });
+  //     },
+  //     signOut: () => {
+  //       setUserToken(null);
+  //       setIsloading(false);
+  //       // dispatch({ type: 'LOGOUT' });
+  //     },
+  //     signUp: () => {
+  //       setUserToken('dffd');
+  //       setIsloading(false);
+  //     },
+  //   }),
+  //   []
+  // );
   useEffect(() => {
     setTimeout(() => {
-      // setIsloading(false);
-      dispatch({ type: 'REGISTER', token: 'ddfef' });
+      setIsloading(false);
+      // dispatch({ type: 'REGISTER', token: 'ddfef' });
     }, 4000);
   }, []);
 
-  if (loginState.isloading) {
+  if (isloading) {
     return (
       <View
         style={{
@@ -144,115 +153,123 @@ export default function App({ navigation }) {
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={COLOR.primary} barStyle="light-content" />
-        <AuthContext.Provider value={authContext}>
-          <NavigationContainer>
-            {loginState.userToken !== null ? (
-              <Stack.Navigator>
-                <Stack.Screen
-                  name="Root"
-                  options={{ headerShown: false }}
-                  component={DrawerScreen}
-                />
-                <Stack.Screen
-                  name="FlightSearch"
-                  options={{
-                    headerTitle: 'Book Your Flight',
-                    headerStyle: {
-                      backgroundColor: COLOR.primary,
-                    },
-                    headerTintColor: COLOR.white,
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                    },
-                    headerRight: () => (
-                      <View>
-                        <TouchableOpacity>
-                          <FontAwesome5
-                            name="hand-holding-usd"
-                            size={20}
-                            style={{ marginRight: 5 }}
-                            color={COLOR.white}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    ),
-                  }}
-                  component={Flightsearch}
-                ></Stack.Screen>
-                <Stack.Screen
-                  name="FlightSearchtwo"
-                  options={{
-                    headerTitle: 'Flight Result',
-                    headerStyle: { backgroundColor: COLOR.primary },
-                    headerTintColor: COLOR.white,
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                    },
-                    headerRight: () => (
-                      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <NavigationContainer>
+          {userId ? (
+            <Stack.Navigator>
+              <Stack.Screen
+                name="Root"
+                options={{ headerShown: false }}
+                component={DrawerScreen}
+              />
+              <Stack.Screen
+                name="FlightSearch"
+                options={{
+                  headerTitle: 'Book Your Flight',
+                  headerStyle: {
+                    backgroundColor: COLOR.primary,
+                  },
+                  headerTintColor: COLOR.white,
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                  headerRight: () => (
+                    <View>
+                      <TouchableOpacity>
                         <FontAwesome5
-                          name="user-edit"
+                          name="hand-holding-usd"
                           size={20}
-                          style={{ marginRight: 10 }}
+                          style={{ marginRight: 5 }}
                           color={COLOR.white}
                         />
                       </TouchableOpacity>
-                    ),
-                  }}
-                  component={FlightSearchtwo}
-                />
-                <Stack.Screen
-                  name="FlightSearchResult"
-                  options={{
-                    headerTitle: 'Flight Search',
-                    headerStyle: {
-                      backgroundColor: '#f15b2f',
-                    },
-                    headerTintColor: COLOR.white,
-                  }}
-                  component={Flightsearchresult}
-                />
-                <Stack.Screen
-                  options={{
-                    headerTitle: 'Flight Search',
-                    headerStyle: {
-                      backgroundColor: COLOR.blue,
-                    },
-                    headerTintColor: COLOR.white,
-                  }}
-                  name="RoundWaySearchResult"
-                  component={Roundwaysearchresult}
-                />
-                <Stack.Screen
-                  options={{
-                    headerTitle: 'Pay Now',
-                    headerStyle: { backgroundColor: COLOR.primary },
-                    headerTintColor: COLOR.white,
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  name="PayNow"
-                  component={PayNow}
-                />
-                <Stack.Screen
-                  options={{
-                    headerTitle: 'Travel Information',
-                    headerStyle: { backgroundColor: COLOR.primary },
-                    headerTintColor: COLOR.white,
-                    headerTitleStyle: {
-                      fontWeight: 'bold',
-                    },
-                  }}
-                  name="TravelInfo"
-                  component={TravelInfo}
-                />
-              </Stack.Navigator>
-            ) : (
-              <RootStackScreen />
-            )}
-          </NavigationContainer>
-        </AuthContext.Provider>
+                    </View>
+                  ),
+                }}
+                component={Flightsearch}
+              ></Stack.Screen>
+              <Stack.Screen
+                name="FlightSearchtwo"
+                options={{
+                  headerTitle: 'Flight Result',
+                  headerStyle: { backgroundColor: COLOR.primary },
+                  headerTintColor: COLOR.white,
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                  headerRight: () => (
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                      <FontAwesome5
+                        name="user-edit"
+                        size={20}
+                        style={{ marginRight: 10 }}
+                        color={COLOR.white}
+                      />
+                    </TouchableOpacity>
+                  ),
+                }}
+                component={FlightSearchtwo}
+              />
+              <Stack.Screen
+                name="FlightSearchResult"
+                options={{
+                  headerTitle: 'Flight Search',
+                  headerStyle: {
+                    backgroundColor: '#f15b2f',
+                  },
+                  headerTintColor: COLOR.white,
+                }}
+                component={Flightsearchresult}
+              />
+              <Stack.Screen
+                name="RoundWaySearchResult"
+                options={{
+                  headerTitle: 'Flight Search',
+                  headerStyle: {
+                    backgroundColor: COLOR.blue,
+                  },
+                  headerTintColor: COLOR.white,
+                }}
+                component={Roundwaysearchresult}
+              />
+              <Stack.Screen
+                name="PayNow"
+                options={{
+                  headerTitle: 'Pay Now',
+                  headerStyle: { backgroundColor: COLOR.primary },
+                  headerTintColor: COLOR.white,
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+                component={PayNow}
+              />
+              <Stack.Screen
+                name="TravelInfo"
+                options={{
+                  headerTitle: 'Travel Information',
+                  headerStyle: { backgroundColor: COLOR.primary },
+                  headerTintColor: COLOR.white,
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }}
+                component={TravelInfo}
+              />
+              <Stack.Screen
+                name="SignInScreen"
+                options={{ headerShown: false }}
+                component={SignInScreen}
+              />
+              <Stack.Screen
+                name="SignUpScreen"
+                options={{ headerShown: false }}
+                component={SignUpScreen}
+              />
+            </Stack.Navigator>
+          ) : (
+            <RootStackScreen />
+          )}
+        </NavigationContainer>
       </SafeAreaView>
     </Provider>
   );
